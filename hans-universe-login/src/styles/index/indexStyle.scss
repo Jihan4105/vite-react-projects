@@ -1,0 +1,102 @@
+@use "mixins" as *;
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+#login-root {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/login/login-background.jpg");
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: grid;
+  place-items: center;
+
+  .login-form {
+    background-color: white;
+    padding: 2rem 2rem;
+    width: 350px;
+    border-radius: 15px;
+    display: grid;
+
+    .login-title {
+      letter-spacing: 2px;
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .email-label {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .email-input-box {
+      @include input-style();
+    }
+
+    .email-error {
+      @include error-text();
+      
+      margin-bottom: 0.8rem;
+      margin-inline: auto;
+      width: 90%;
+    }
+    
+    .password-label {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+
+      span {
+        font-size: 0.8rem;
+        color: #ccc;
+        cursor: pointer;
+      }
+    }
+
+    .password-input-box {
+      @include input-style();
+    }
+
+    .password-error {
+      @include error-text();
+      
+      margin-bottom: 1.5rem;
+      margin-inline: auto;
+      width: 90%;
+    }
+
+    .login-btn {
+      width: 70%;
+      justify-self: center;
+      padding: 0.5rem 0.75rem;
+      font-size: 1.2rem;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 19px;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+
+    .orsignup-text {
+      text-align: center;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .google-sign-up {
+      
+    }
+  }
+}
+
+
+
