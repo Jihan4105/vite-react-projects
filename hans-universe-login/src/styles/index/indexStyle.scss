@@ -10,7 +10,7 @@
 
 
 #login-root {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/login/login-background.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/login/login-background.jpg");
   width: 100vw;
   height: 100vh;
   background-repeat: no-repeat;
@@ -92,9 +92,9 @@
       font-size: 0.9rem;
     }
 
-    .google-sign-up {
-      
-    }
+    // .google-sign-up {
+
+    // }
   }
 }
 
