@@ -1,8 +1,14 @@
 import { useState } from "react"
-import InputField from "./InputField.jsx"
-import { getUser } from "../services/fetchData.js"
+import InputField from "../InputField.jsx"
+import { getUser } from "../../services/fetchData.js"
+import PropTypes from "prop-types"
 
-export default function LoginContents() {
+LoginContents.propTypes = {
+  contentType: PropTypes.string.isRequired,
+  setContentType: PropTypes.func.isRequired
+}
+
+export default function LoginContents({ contentType,setContentType }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [whichIsWrong, setWhichIsWrong] = useState("")
@@ -12,6 +18,7 @@ export default function LoginContents() {
       <h1 className="login-title">Login</h1>
       <p className="email-label">Email</p>
       <InputField 
+        contentType={contentType}
         type="email"
         state={email}
         setState={setEmail}
@@ -26,8 +33,9 @@ export default function LoginContents() {
       >
         no such user exsit
       </p>
-      <p className="password-label">Password <span className="login-forgot">Forgot password?</span></p>
+      <p className="password-label" onClick={() => {setContentType("forgot")}}>Password <span className="login-forgot">Forgot password?</span></p>
       <InputField
+        contentType={contentType}
         type="password" 
         state={password}
         setState={setPassword}
@@ -48,7 +56,7 @@ export default function LoginContents() {
         <ion-icon className="google-icon" name="logo-google"></ion-icon>
       </div>
       <p className="orsignup-text">Or Sign Up Using</p>
-      <span className="sign-up">SIGN UP</span>
+      <span className="sign-up" onClick={() => setContentType("signup")}>SIGN UP</span>
     </>
   )
 }

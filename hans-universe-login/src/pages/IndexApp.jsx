@@ -1,5 +1,6 @@
 import { useState } from "react"
-import LoginContents from "../components/LoginContents"
+import LoginContents from "../components/contents/LoginContents"
+import SignUpContents from "../components/contents/SignupConents"
 
 export default function IndexApp() {
   const [contentType, setContentType] = useState("login")
@@ -8,10 +9,15 @@ export default function IndexApp() {
   // debugger
   switch(contentType) {
     case "login" :
-      content = <LoginContents />
+      content = <LoginContents 
+        contentType={contentType}
+        setContentType={setContentType}
+      />
       break;
     case "signup" :
-      content = "signup"
+      content = <SignUpContents 
+        contentType={contentType}
+      />
       break;
     case "forgot" :
       content = "forgot"

@@ -1,6 +1,6 @@
-@mixin input-style () {
+@mixin input-style ($width: 90%, $letterSpacing: 1px) {
   border-bottom: 1px solid #ccc;
-  width: 90%;
+  width: $width;
   justify-self: center;
   display: flex;
   align-items: center;
@@ -14,7 +14,7 @@
     outline: none;
     padding: 0.2rem;
     width: 80%;
-    letter-spacing: 1px;
+    letter-spacing: $letterSpacing;
     border: none;
   }
 

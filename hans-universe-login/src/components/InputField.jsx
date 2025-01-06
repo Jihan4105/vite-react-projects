@@ -1,7 +1,16 @@
 import PropTypes from "prop-types"
 
-export default function InputField({ type, state, setState, placeholder, iconName }) {
-  const inputID = "login-" + type
+InputField.propTypes = {
+  contentType: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  state: PropTypes.string.isRequired,
+  setState: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  iconName: PropTypes.string.isRequired
+}
+
+export default function InputField({ contentType, type, state, setState, placeholder, iconName }) {
+  const inputID = contentType + "-" + type
   
   return (
     <div className="input-box">
@@ -17,12 +26,4 @@ export default function InputField({ type, state, setState, placeholder, iconNam
       />
     </div>
   )
-}
-
-InputField.propTypes = {
-  type: PropTypes.string.isRequired,
-  state: PropTypes.string.isRequired,
-  setState: PropTypes.func.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  iconName: PropTypes.string.isRequired
 }
