@@ -17,6 +17,7 @@ export default function IndexApp() {
     case "signup" :
       content = <SignUpContents 
         contentType={contentType}
+        setContentType={setContentType}
       />
       break;
     case "forgot" :

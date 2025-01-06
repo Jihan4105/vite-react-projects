@@ -23,6 +23,7 @@
     width: 350px;
     border-radius: 15px;
     display: grid;
+    position: relative;
 
     //Login Contents
 
@@ -127,6 +128,27 @@
     // SignUp Contents
 
     &.signup {
+      .return-btn {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        height: 2.5rem;
+        width: 2.5rem;
+        display: grid;
+        place-items: center;
+        background-color: transparent;
+        border-radius: 50%;
+        font-size: 1.6rem;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.2s ease-in;
+
+        &:hover {
+          background-color: #ccc;
+        }
+
+      }
+
       .signup-title {
         @include title()
       }
@@ -283,9 +305,35 @@
         margin-bottom: 1rem;
       }
       
+      #signup-password-check {
+        outline: none;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        letter-spacing: 1px;
+        padding: 0.4rem 0.7rem;
+        margin-right: 1rem;
+
+        &:focus{
+          border-color: black;
+        }
+      }
+
+      .password-check-wrong {
+        @include error-text();
+      }
+
+      .signup-btn {
+        width: 70%;
+        justify-self: center;
+        padding: 0.5rem 0.75rem;
+        font-size: 1.2rem;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 19px;
+        margin-top: 2.5rem;
+        cursor: pointer;
+      }
     }
   }
 }
-
-
-

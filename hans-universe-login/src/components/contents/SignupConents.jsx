@@ -1,12 +1,14 @@
 import { useState } from "react";
 import InputField from "../InputField";
 import PropTypes from "prop-types";
+import emailjs from "@emailjs/browser"
 
 SignUpContents.propTypes = {
-  contentType: PropTypes.string.isRequired
+  contentType: PropTypes.string.isRequired,
+  setContentType: PropTypes.func.isRequired
 }
 
-export default function SignUpContents({ contentType }) {
+export default function SignUpContents({ contentType, setContentType }) {
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
@@ -16,6 +18,7 @@ export default function SignUpContents({ contentType }) {
 
   return (
     <>
+      <button className="return-btn" title="return to login" onClick={(e) => {returnBtnClick(e, setContentType)}}><ion-icon name="return-down-back-outline" /></button>
       <h1 className="signup-title">Sign Up</h1>
       <p className="username-label">User Name</p>
       <div className="username-group">
@@ -24,7 +27,7 @@ export default function SignUpContents({ contentType }) {
           <input 
             type="text" 
             id="signup-firstname" 
-            name="signup-firsname"
+            name="signup-firstname"
             placeholder="firstname"
             spellCheck="false"
             value={firstName}
@@ -59,7 +62,7 @@ export default function SignUpContents({ contentType }) {
             onChange={(e) => {setEmail(e.target.value)}}  
           />
         </div>
-        <button className="send-code-btn">Send code</button>
+        <button className="send-code-btn" onClick={(e) => sendEmailBtnClick(e)}>Send code</button>
       </div>
       <p className="send-code-text">error text</p>
       <div className="code-box">
@@ -67,7 +70,7 @@ export default function SignUpContents({ contentType }) {
           type="text" 
           id="signup-code" 
           name="signup-code"
-          placeholder="Enter code"
+          placeholder="Code"
           spellCheck="false"
           maxLength={6}
           value={code}
@@ -97,7 +100,27 @@ export default function SignUpContents({ contentType }) {
         onChange={(e) => {setPasswordCheck(e.target.value)}}  
       />
       <p className="error-text password-check-wrong">error text</p>
-      <button className="btn signup-btn">Sign Up</button>
+      <button className="btn signup-btn" onClick={(e) => {signUpBtnClick(e)}}>Sign Up</button>
     </>
   )
+}
+
+function returnBtnClick(e, setContentType) {
+  e.preventDefault()
+  
+  setContentType("login")
+}
+
+function sendEmailBtnClick(e) {
+  e.preventDefault()
+  console.log(e.target.parentElement.parentElement)
+
+
+  emailjs.sendForm("service_ilc4owv", "template_if1t7pa", e.target.parentElement.parentElement, "JLoXopf6tYXQJm4fk")
+
+  alert("Email Succesfully Sended!")
+}
+
+function signUpBtnClick(e) {
+  e.preventDefault()
 }
