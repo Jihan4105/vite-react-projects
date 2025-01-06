@@ -2,6 +2,7 @@ import { useState } from "react";
 import InputField from "../InputField";
 import PropTypes from "prop-types";
 import emailjs from "@emailjs/browser"
+let verifyCode
 
 SignUpContents.propTypes = {
   contentType: PropTypes.string.isRequired,
@@ -62,7 +63,16 @@ export default function SignUpContents({ contentType, setContentType }) {
             onChange={(e) => {setEmail(e.target.value)}}  
           />
         </div>
-        <button className="send-code-btn" onClick={(e) => sendEmailBtnClick(e)}>Send code</button>
+        <button 
+          className="send-code-btn" 
+          onClick={(e) => sendEmailBtnClick(e, {
+            firstName: firstName,
+            lastName: lastName, 
+            email: email
+          })}
+        >
+          Send code
+        </button>
       </div>
       <p className="send-code-text">error text</p>
       <div className="code-box">
@@ -111,14 +121,19 @@ function returnBtnClick(e, setContentType) {
   setContentType("login")
 }
 
-function sendEmailBtnClick(e) {
+function sendEmailBtnClick(e, templateParams) {
   e.preventDefault()
-  console.log(e.target.parentElement.parentElement)
+  verifyCode = Math.ceil(Math.random() * 1000000)
+  templateParams = {...templateParams, code: verifyCode}
 
-
-  emailjs.sendForm("service_ilc4owv", "template_if1t7pa", e.target.parentElement.parentElement, "JLoXopf6tYXQJm4fk")
-
-  alert("Email Succesfully Sended!")
+  emailjs.send("service_ilc4owv", "template_if1t7pa", templateParams, "JLoXopf6tYXQJm4fk").then(
+    (response) => {
+      console.log('SUCCESS!', response.status, response.text);
+    },
+    (error) => {
+      console.log('FAILED...', error);
+    },
+  );
 }
 
 function signUpBtnClick(e) {
