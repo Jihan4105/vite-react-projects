@@ -1,7 +1,12 @@
-import { useState } from "react";
-import InputField from "../InputField";
+import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import emailjs from "@emailjs/browser"
+
+import InputField from "../InputField";
+
+import { OverlayContext } from "../../contexts/OverlayContext.js";
+import { getElement } from "../../utils/utils.js";
+
 let verifyCode
 
 SignUpContents.propTypes = {
@@ -10,12 +15,14 @@ SignUpContents.propTypes = {
 }
 
 export default function SignUpContents({ contentType, setContentType }) {
+  const { setOverlayContext } = useContext(OverlayContext) 
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [code, setCode] = useState("")
   const [password, setPassword] = useState("")
   const [passwordCheck, setPasswordCheck] = useState("")
+  const [verifyStatusText, setVerifyStatus] = useState("")
 
   return (
     <>
@@ -31,6 +38,7 @@ export default function SignUpContents({ contentType, setContentType }) {
             name="signup-firstname"
             placeholder="firstname"
             spellCheck="false"
+            autoComplete="off"
             value={firstName}
             onChange={(e) => {setFirstName(e.target.value)}}  
           />
@@ -41,6 +49,7 @@ export default function SignUpContents({ contentType, setContentType }) {
           name="signup-lastname"
           placeholder="lastname"
           spellCheck="false"
+          autoComplete="off"
           value={lastName}
           onChange={(e) => {setLastName(e.target.value)}}  
         />
@@ -59,22 +68,23 @@ export default function SignUpContents({ contentType, setContentType }) {
             name="signup-email"
             placeholder="Type your Email"
             spellCheck="false"
+            autoComplete="off"
             value={email}
             onChange={(e) => {setEmail(e.target.value)}}  
           />
         </div>
         <button 
           className="send-code-btn" 
-          onClick={(e) => sendEmailBtnClick(e, {
+          onClick={(e) => sendEmailBtnClick(e, setOverlayContext, setVerifyStatus, {
             firstName: firstName,
             lastName: lastName, 
             email: email
           })}
         >
-          Send code
+          Send Code
         </button>
       </div>
-      <p className="send-code-text">error text</p>
+      <p className="send-code-text">{verifyStatusText}</p>
       <div className="code-box">
         <input 
           type="text" 
@@ -82,6 +92,7 @@ export default function SignUpContents({ contentType, setContentType }) {
           name="signup-code"
           placeholder="Code"
           spellCheck="false"
+          autoComplete="off"
           maxLength={6}
           value={code}
           onChange={(e) => {setCode(e.target.value)}}  
@@ -121,17 +132,32 @@ function returnBtnClick(e, setContentType) {
   setContentType("login")
 }
 
-function sendEmailBtnClick(e, templateParams) {
+function sendEmailBtnClick(e, setOverlayContext, setVerifyStatus, templateParams) {
   e.preventDefault()
+
+  const firstNameInput = getElement("#signup-firstname")
+  const lastNameInput = getElement("#signup-lastname")
+  const emailInput = getElement("#signup-email")
+  const sendCodeText = getElement(".send-code-text")
   verifyCode = Math.ceil(Math.random() * 1000000)
   templateParams = {...templateParams, code: verifyCode}
+  setOverlayContext(true)
+  setVerifyStatus("...Sending")
 
   emailjs.send("service_ilc4owv", "template_if1t7pa", templateParams, "JLoXopf6tYXQJm4fk").then(
     (response) => {
       console.log('SUCCESS!', response.status, response.text);
+      setOverlayContext(false)
+      setVerifyStatus("Verification Email Sent!")
+      sendCodeText.classList.add("success-text")
+      firstNameInput.disabled = true;
+      lastNameInput.disabled = true;
+      emailInput.disabled = true;
     },
     (error) => {
       console.log('FAILED...', error);
+      sendCodeText.classList.add("error-text")
+      setVerifyStatus("FAILED...")
     },
   );
 }

@@ -1,9 +1,11 @@
 import { useState } from "react"
 import LoginContents from "../components/contents/LoginContents"
 import SignUpContents from "../components/contents/SignupConents"
+import { OverlayContext } from "../contexts/OverlayContext"
 
 export default function IndexApp() {
   const [contentType, setContentType] = useState("login")
+  const [overlayContext, setOverlayContext] = useState(false)
   let content
 
   // debugger
@@ -29,8 +31,13 @@ export default function IndexApp() {
   }
   
   return (
-    <form className={`login-form ${contentType}`}>
-      {content}
-    </form>
+    <>
+      <form className={`login-form ${contentType}`}>
+        <OverlayContext.Provider value={{ setOverlayContext }}>
+          {content}
+        </OverlayContext.Provider>
+      </form>
+      {overlayContext && <div className="overlay"></div>}
+    </>
   )
 }

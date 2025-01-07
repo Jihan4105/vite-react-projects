@@ -226,6 +226,8 @@
             color: white;
             background-color: black;
           }
+
+          @include loading-circle(15px)
         }
       }
 
@@ -334,6 +336,19 @@
         margin-top: 2.5rem;
         cursor: pointer;
       }
+
+      .overlay {
+        position: fixed;
+        min-width: 100vw;
+        min-height: 100vh;
+      }
     }
+  }
+
+  .overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
   }
 }
