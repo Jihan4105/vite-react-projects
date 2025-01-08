@@ -283,11 +283,24 @@
         }
       }
 
-      .code-wrong {
+      .code-text {
         @include error-text();
 
         line-height: 0.5;
         margin-bottom: 1.5rem;
+        visibility: hidden;
+
+        &.show {
+          visibility: visible;
+        }
+        
+        &.error-text {
+          color: red;
+        }
+
+        &.success-text {
+          color: #59B259;
+        }
       }
 
       .password-label {

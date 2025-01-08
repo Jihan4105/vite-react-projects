@@ -23,10 +23,11 @@ export default function SignUpContents({ contentType, setContentType }) {
   const [code, setCode] = useState("")
   const [password, setPassword] = useState("")
   const [passwordCheck, setPasswordCheck] = useState("")
-  const [verifyStatusText, setVerifyStatus] = useState("")
-  const [count, setCount] = useState(210)
+  const [verifyStatusText, setVerifyStatusText] = useState("")
+  const [verifyStatus, setVerifyStatus] = useState("unVerified")
+  const [count, setCount] = useState(0)
 
-  useTimer(count, setCount, [count])
+  useTimer(count, setCount, verifyStatus)
 
   return (
     <>
@@ -78,7 +79,7 @@ export default function SignUpContents({ contentType, setContentType }) {
         </div>
         <button 
           className="send-code-btn" 
-          onClick={(e) => sendEmailBtnClick(e, setOverlayContext, setVerifyStatus,  setCount, {
+          onClick={(e) => sendEmailBtnClick(e, setOverlayContext, setVerifyStatusText,  setCount, {
             firstName: firstName,
             lastName: lastName, 
             email: email
@@ -103,9 +104,9 @@ export default function SignUpContents({ contentType, setContentType }) {
         <div className="remain-time">
           {parseInt(count / 60)} : {(count % 60).toString().padStart(2, "0")}
         </div>
-        <button className="verify-btn">Verify</button>
+        <button className="verify-btn" onClick={(e) => verifyBtnClick(e, code, setVerifyStatus)}>Verify</button>
       </div>
-      <p className="error-text code-wrong">wrong code</p>
+      <p className="code-text">wrong code</p>
       <p className="password-label">Password</p>
       <InputField 
         contentType={contentType}
@@ -133,38 +134,63 @@ export default function SignUpContents({ contentType, setContentType }) {
 
 function returnBtnClick(e, setContentType) {
   e.preventDefault()
-  
   setContentType("login")
 }
 
-function sendEmailBtnClick(e, setOverlayContext, setVerifyStatus, setCount, templateParams) {
+function sendEmailBtnClick(e, setOverlayContext, setVerifyStatusText, setCount, templateParams) {
   e.preventDefault()
 
-  const firstNameInput = getElement("#signup-firstname")
-  const lastNameInput = getElement("#signup-lastname")
-  const emailInput = getElement("#signup-email")
   const sendCodeText = getElement(".send-code-text")
   verifyCode = Math.ceil(Math.random() * 1000000)
   templateParams = {...templateParams, code: verifyCode}
   setOverlayContext(true)
+  setVerifyStatusText("...Sending")
+  sendCodeText.classList.remove("success-text")
 
   emailjs.send("service_ilc4owv", "template_if1t7pa", templateParams, "JLoXopf6tYXQJm4fk").then(
     (response) => {
       console.log('SUCCESS!', response.status, response.text);
       setOverlayContext(false)
-      setVerifyStatus("Verification Email Sent!")
+      setVerifyStatusText("Verification Email Sent!")
       sendCodeText.classList.add("success-text")
-      firstNameInput.disabled = true;
-      lastNameInput.disabled = true;
-      emailInput.disabled = true;
-      setCount(c => c - 1)
+      setCount(210)
     },
     (error) => {
       console.log('FAILED...', error);
       sendCodeText.classList.add("error-text")
-      setVerifyStatus("FAILED...")
+      setVerifyStatusText("FAILED...")
     },
   );
+}
+
+function verifyBtnClick(e, code, setVerifyStatus) {
+  e.preventDefault()
+
+  const firstNameInput = getElement("#signup-firstname")
+  const lastNameInput = getElement("#signup-lastname")
+  const emailInput = getElement("#signup-email")
+  const sendCodeBtn = getElement(".send-code-btn")
+  const codeInput = getElement("#signup-code")
+  const verifyBtn = getElement(".verify-btn")
+  const codeText = getElement(".code-text")
+
+  if( parseInt(code) === verifyCode) {
+    firstNameInput.disabled = true
+    lastNameInput.disabled = true
+    emailInput.disabled = true
+    sendCodeBtn.disabled = true
+    codeInput.disabled = true
+    verifyBtn.disabled = true
+
+    codeText.textContent = "Verified!"
+    codeText.classList.add("show")
+    codeText.classList.add("success-text")
+    setVerifyStatus("verified")
+  } else {
+    codeText.textContent = "Wrong code"
+    codeText.classList.add("show")
+    codeText.classList.add("error-text")
+  }
 }
 
 function signUpBtnClick(e) {

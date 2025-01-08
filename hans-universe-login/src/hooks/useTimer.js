@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export default function useTimer(state, setState, dependencies) {
+export default function useTimer(state, setState, verifyStatus) {
   const isMountingRef = useRef(false)
 
   useEffect(() => {
@@ -9,18 +9,22 @@ export default function useTimer(state, setState, dependencies) {
 
   useEffect(() => {
     if(!isMountingRef.current) {
-      if(state > 0) {
-        const id = setInterval(() => {
-          setState(c => c - 1)
-        }, 1000)
-        return () => {
-          clearInterval(id)
+      if(verifyStatus === "unVerified") {
+        if(state > 0) {
+          const id = setInterval(() => {
+            setState(c => c - 1)
+          }, 1000)
+          return () => {
+            clearInterval(id)
+          }
+        } else {
+          alert("Times UP!")
         }
       } else {
-        alert("Times UP!")
+        alert("Verified!")
       }
     } else {
       isMountingRef.current = false;
     }
-  }, dependencies)
+  }, [state])
 }
