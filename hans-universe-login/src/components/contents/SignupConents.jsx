@@ -9,6 +9,7 @@ import { getElement } from "../../utils/utils.js";
 import useTimer from "../../hooks/useTimer.js";
 
 let verifyCode
+let passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
 
 SignUpContents.propTypes = {
   contentType: PropTypes.string.isRequired,
@@ -58,10 +59,6 @@ export default function SignUpContents({ contentType, setContentType }) {
           value={lastName}
           onChange={(e) => {setLastName(e.target.value)}}  
         />
-      </div>
-      <div className="username-error-box">
-        <p className="error-text firstname-error">error text</p>
-        <p className="error-text lastname-error">error text</p>
       </div>
       <p className="email-label">Email</p>
       <div className="email-input-group">
@@ -116,7 +113,7 @@ export default function SignUpContents({ contentType, setContentType }) {
         placeholder="Type your password"
         iconName="lock-closed-outline"
       />
-      <p className="error-text password-wrong">error text</p>
+      <p className="error-text password-wrong">Chracter, Number include 8 letters up</p>
       <input 
         type="password" 
         id="signup-password-check" 
@@ -126,10 +123,22 @@ export default function SignUpContents({ contentType, setContentType }) {
         value={passwordCheck}
         onChange={(e) => {setPasswordCheck(e.target.value)}}  
       />
-      <p className="error-text password-check-wrong">error text</p>
+      <p className="error-text password-check-wrong">Doesn't match</p>
       <button className="btn signup-btn" onClick={(e) => {signUpBtnClick(e)}}>Sign Up</button>
     </>
   )
+}
+
+function pwdChangeHandler(value, setPassword) {
+  const passwordErrorText = getElement('.password-wrong')
+
+  if(!passwordRegex.test(value)) {
+    passwordErrorText.style.visibility = "visible"
+  } else {
+    passwordErrorText.style.visibility = "hidden"
+  }
+
+  setPassword(value)
 }
 
 function returnBtnClick(e, setContentType) {
