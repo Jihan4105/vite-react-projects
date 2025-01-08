@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, } from "react";
 import PropTypes from "prop-types";
 import emailjs from "@emailjs/browser"
 
@@ -6,6 +6,7 @@ import InputField from "../InputField";
 
 import { OverlayContext } from "../../contexts/OverlayContext.js";
 import { getElement } from "../../utils/utils.js";
+import useTimer from "../../hooks/useTimer.js";
 
 let verifyCode
 
@@ -23,6 +24,9 @@ export default function SignUpContents({ contentType, setContentType }) {
   const [password, setPassword] = useState("")
   const [passwordCheck, setPasswordCheck] = useState("")
   const [verifyStatusText, setVerifyStatus] = useState("")
+  const [count, setCount] = useState(210)
+
+  useTimer(count, setCount, [count])
 
   return (
     <>
@@ -68,14 +72,13 @@ export default function SignUpContents({ contentType, setContentType }) {
             name="signup-email"
             placeholder="Type your Email"
             spellCheck="false"
-            autoComplete="off"
             value={email}
             onChange={(e) => {setEmail(e.target.value)}}  
           />
         </div>
         <button 
           className="send-code-btn" 
-          onClick={(e) => sendEmailBtnClick(e, setOverlayContext, setVerifyStatus, {
+          onClick={(e) => sendEmailBtnClick(e, setOverlayContext, setVerifyStatus,  setCount, {
             firstName: firstName,
             lastName: lastName, 
             email: email
@@ -97,7 +100,9 @@ export default function SignUpContents({ contentType, setContentType }) {
           value={code}
           onChange={(e) => {setCode(e.target.value)}}  
         />
-        <span className="remain-time">03:34</span>
+        <div className="remain-time">
+          {parseInt(count / 60)} : {(count % 60).toString().padStart(2, "0")}
+        </div>
         <button className="verify-btn">Verify</button>
       </div>
       <p className="error-text code-wrong">wrong code</p>
@@ -132,7 +137,7 @@ function returnBtnClick(e, setContentType) {
   setContentType("login")
 }
 
-function sendEmailBtnClick(e, setOverlayContext, setVerifyStatus, templateParams) {
+function sendEmailBtnClick(e, setOverlayContext, setVerifyStatus, setCount, templateParams) {
   e.preventDefault()
 
   const firstNameInput = getElement("#signup-firstname")
@@ -142,7 +147,6 @@ function sendEmailBtnClick(e, setOverlayContext, setVerifyStatus, templateParams
   verifyCode = Math.ceil(Math.random() * 1000000)
   templateParams = {...templateParams, code: verifyCode}
   setOverlayContext(true)
-  setVerifyStatus("...Sending")
 
   emailjs.send("service_ilc4owv", "template_if1t7pa", templateParams, "JLoXopf6tYXQJm4fk").then(
     (response) => {
@@ -153,6 +157,7 @@ function sendEmailBtnClick(e, setOverlayContext, setVerifyStatus, templateParams
       firstNameInput.disabled = true;
       lastNameInput.disabled = true;
       emailInput.disabled = true;
+      setCount(c => c - 1)
     },
     (error) => {
       console.log('FAILED...', error);
