@@ -2,8 +2,6 @@ import { useContext, useState, } from "react";
 import PropTypes from "prop-types";
 import emailjs from "@emailjs/browser"
 
-import InputField from "../InputField";
-
 import { OverlayContext } from "../../contexts/OverlayContext.js";
 import { getElement } from "../../utils/utils.js";
 import useTimer from "../../hooks/useTimer.js";
@@ -12,11 +10,10 @@ let verifyCode
 let passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
 
 SignUpContents.propTypes = {
-  contentType: PropTypes.string.isRequired,
   setContentType: PropTypes.func.isRequired
 }
 
-export default function SignUpContents({ contentType, setContentType }) {
+export default function SignUpContents({ setContentType }) {
   const { setOverlayContext } = useContext(OverlayContext) 
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -105,14 +102,18 @@ export default function SignUpContents({ contentType, setContentType }) {
       </div>
       <p className="code-text">wrong code</p>
       <p className="password-label">Password</p>
-      <InputField 
-        contentType={contentType}
-        type="password"
-        state={password}
-        setState={setPassword}
-        placeholder="Type your password"
-        iconName="lock-closed-outline"
-      />
+      <div className="input-box">
+        <label htmlFor="signup-password"><ion-icon name="lock-closed-outline"></ion-icon></label>
+        <input 
+          type="password" 
+          id="signup-password" 
+          name="signup-password" 
+          placeholder="Type your password" 
+          spellCheck="false" 
+          value={password}
+          onChange={(e) => {pwdChangeHandler(e.target.value, setPassword)}}
+        />
+      </div>
       <p className="error-text password-wrong">Chracter, Number include 8 letters up</p>
       <input 
         type="password" 
@@ -121,9 +122,9 @@ export default function SignUpContents({ contentType, setContentType }) {
         placeholder="Rewrite your password"
         spellCheck="false"
         value={passwordCheck}
-        onChange={(e) => {setPasswordCheck(e.target.value)}}  
+        onChange={(e) => {pwdCheckChangeHandler(password, e.target.value, setPasswordCheck)}}  
       />
-      <p className="error-text password-check-wrong">Doesn't match</p>
+      <p className="error-text password-check-wrong">Doesn&apos;t match</p>
       <button className="btn signup-btn" onClick={(e) => {signUpBtnClick(e)}}>Sign Up</button>
     </>
   )
@@ -139,6 +140,18 @@ function pwdChangeHandler(value, setPassword) {
   }
 
   setPassword(value)
+}
+
+function pwdCheckChangeHandler(password, value, setPasswordCheck)  {
+  const checkErrorText = getElement(".password-check-wrong")
+
+  if(value === password) {
+    checkErrorText.style.visibility = "hidden"
+  } else {
+    checkErrorText.style.visibility = "visible"
+  }
+
+  setPasswordCheck(value)
 }
 
 function returnBtnClick(e, setContentType) {

@@ -2,6 +2,7 @@ import { useState } from "react"
 import LoginContents from "../components/contents/LoginContents"
 import SignUpContents from "../components/contents/SignupConents"
 import { OverlayContext } from "../contexts/OverlayContext"
+import ForgotContents from "../components/contents/ForgotContents"
 
 export default function IndexApp() {
   const [contentType, setContentType] = useState("login")
@@ -18,12 +19,14 @@ export default function IndexApp() {
       break;
     case "signup" :
       content = <SignUpContents 
-        contentType={contentType}
         setContentType={setContentType}
       />
       break;
     case "forgot" :
-      content = "forgot"
+      content = <ForgotContents 
+        contentType={contentType}
+        setContentType={setContentType}
+      />
       break;
     case "reset" :
       content = "reset"
