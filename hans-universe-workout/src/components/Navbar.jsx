@@ -6,7 +6,7 @@ import logoImage from "../assets/workout/logo-black.png"
 export default function Navbar() {
   return (
     <nav id="nav">
-      <div className="nav-container">
+      <div className="container-jh">
         <a href="#LadingPage" className="logo-link">
           <img src={logoImage} alt="logo" />
         </a>
@@ -27,9 +27,9 @@ export default function Navbar() {
             align="end"
             variant="transparent"
             title={
-              <div className="bell-group">
+              <div className="notifications-btn icon-btn">
                 <ion-icon name="notifications-outline" />
-                <span className="notification-number">9+</span>
+                <span className="notifications-number">9+</span>
               </div>
             }
           >
@@ -64,8 +64,10 @@ export default function Navbar() {
               </div>
             </Dropdown.Item>
           </DropdownButton>
-
           <span className="user-name">John Doe</span>
+          <div className="menu-btn icon-btn">
+            <ion-icon name="menu-outline" />
+          </div>
         </div>
       </div>
     </nav>

@@ -1,14 +1,22 @@
 import Navbar from "../components/Navbar"
-import WorkoutHero from "../components/WorkoutHero"
+import WorkoutContents from "../components/WorkoutContents"
+import Header from "../components/Header"
+import BlogList from "../components/BlogList"
 
 function WorkoutApp() {
   return (
     <>
       <Navbar />
 
-      <WorkoutHero />
+      <Header 
+        type="workout"
+      />
 
+      <WorkoutContents />
       
+      <BlogList 
+        type="workout"
+      />
     </>
   )
 }
