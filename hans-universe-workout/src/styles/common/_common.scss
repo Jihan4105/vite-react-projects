@@ -1,0 +1,65 @@
+// Colors
+$lavander-mist : #E3E6F3;
+
+$grey-1: #D5D5D5;
+$grey-2: #C1C1C1;
+$grey-3: #AAAAAA;
+$grey-4: #808080;
+$grey-5: #6B6B6B;
+$grey-6: #565656;
+$cool-gray: hsl(244, 17%, 61%);
+$independence: hsl(245, 17%, 27%);
+$ghost-white: #F8F8FF;
+
+/* Typrography */
+$fs-1: 30px;
+$fs-2: 28px;
+$fs-3: 25px;
+$fs-4: 20px;
+$fs-5: 16px;
+$fs-6: 14px;
+$fs-7: 11px;
+
+$fw-500: 500;
+$fw-600: 600;
+$fw-700: 700;
+$fw-800: 800;
+$fw-900: 900;
+
+/* Transition */
+$transition: all 0.3s ease;
+
+/* Spacing */
+$section-padding: 80px;
+
+/* Shadows */
+$shadow-1: 1px 1px 29px 9px rgba(100, 100, 111, 0.2);
+$shadow-2: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+/* radius */
+$radius: 5px;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", "Poppins", sans-serif;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.section-title {
+  font-size: $fs-1;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 20px;
+}

@@ -21,7 +21,7 @@ export default function Navbar() {
           </ul>
 
           <DropdownButton
-            key="down"
+            key="bell-dropdown"
             id="bell-dropdown-btn"
             drop="down"
             align="end"
@@ -32,6 +32,9 @@ export default function Navbar() {
                 <span className="notifications-number">9+</span>
               </div>
             }
+            style={{
+              width: "fit-content",
+            }}
           >
             <Dropdown.Item eventKey="1">Action</Dropdown.Item>
             <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
@@ -40,7 +43,7 @@ export default function Navbar() {
           </DropdownButton>
 
           <DropdownButton  
-            key="down"
+            key="profile-dropdown"
             id="profile-dropdown-btn"
             drop="down"
             variant="transparent"
@@ -49,6 +52,9 @@ export default function Navbar() {
                 <img src="https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg" alt="image" className="user-img" width={90}/>
               </div>
             }
+            style={{
+              width: "fit-content",
+            }}
           >
             <Dropdown.Item eventKey="1">
               <div className="user-logout-group">

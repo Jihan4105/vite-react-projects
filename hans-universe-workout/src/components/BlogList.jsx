@@ -1,18 +1,71 @@
-import { capitalize } from "@mui/material"
-import PropTypes from "prop-types"
+import { Pagination } from "@mui/material"
 
-BlogList.propTypes = {
-  type: PropTypes.string.isRequired
-}
-
-export default function BlogList({ type }) {
-  return (
-    <section id={`${type}-blog`}>
-      <div className="container-jh">
-        <h1 className="section-title">My {capitalize(type)} Blog</h1>
-
-        <div className="sarch-box blog-searchbox"></div>
-      </div>
-    </section>
+export default function BlogList() {
+  return(
+    <>
+      <ul className="blog-list">
+        <li className="blog-item-wrapper">
+          <div className="blog-item">
+            <div className="blog-title-group">
+              <p className="blog-title">
+                Lorem Ipsum
+              </p>
+              <ion-icon name="chatbox-outline"></ion-icon>
+              <span className="comment-number">(5)</span>
+            </div>
+            <span className="blog-date">2020-04-05</span>
+          </div>
+        </li>
+        <li className="blog-item-wrapper">
+          <div className="blog-item">
+            <div className="blog-title-group">
+              <p className="blog-title">
+                Lorem Ipsum
+              </p>
+              <ion-icon name="chatbox-outline"></ion-icon>
+              <span className="comment-number">(5)</span>
+            </div>
+            <span className="blog-date">2020-04-05</span>
+          </div>
+        </li>
+        <li className="blog-item-wrapper">
+          <div className="blog-item">
+            <div className="blog-title-group">
+              <p className="blog-title">
+                Lorem Ipsum
+              </p>
+              <ion-icon name="chatbox-outline"></ion-icon>
+              <span className="comment-number">(5)</span>
+            </div>
+            <span className="blog-date">2020-04-05</span>
+          </div>
+        </li>
+        <li className="blog-item-wrapper">
+          <div className="blog-item">
+            <div className="blog-title-group">
+              <p className="blog-title">
+                Lorem Ipsum
+              </p>
+              <ion-icon name="chatbox-outline"></ion-icon>
+              <span className="comment-number">(5)</span>
+            </div>
+            <span className="blog-date">2020-04-05</span>
+          </div>
+        </li>
+        <li className="blog-item-wrapper">
+          <div className="blog-item">
+            <div className="blog-title-group">
+              <p className="blog-title">
+                Lorem Ipsum
+              </p>
+              <ion-icon name="chatbox-outline"></ion-icon>
+              <span className="comment-number">(5)</span>
+            </div>
+            <span className="blog-date">2020-04-05</span>
+          </div>
+        </li>
+      </ul>
+      <Pagination count={10} color="primary" />
+    </>
   )
 }

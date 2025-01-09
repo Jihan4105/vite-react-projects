@@ -1,7 +1,8 @@
 import Navbar from "../components/Navbar"
 import WorkoutContents from "../components/WorkoutContents"
 import Header from "../components/Header"
-import BlogList from "../components/BlogList"
+import Blog from "../components/Blog"
+import Footer from "../components/Footer"
 
 function WorkoutApp() {
   return (
@@ -14,9 +15,12 @@ function WorkoutApp() {
 
       <WorkoutContents />
       
-      <BlogList 
+      <Blog 
         type="workout"
+        dropdownItems={["Title", "Content", "Title + Content"]}
       />
+
+      <Footer />
     </>
   )
 }
