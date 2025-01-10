@@ -13,11 +13,11 @@ export default function Navbar() {
         <div className="nav-box">
 
           <ul className="nav-links">
-            <li className="skills-link"><a href="#skills">Skills</a></li>
-            <li className="workout-link"><a href="#workout">Workout</a></li>
-            <li className="books-link"><a href="#books">Books</a></li>
-            <li className="thoughts-link"><a href="#thoughts">Thoughts</a></li>
-            <li className="profile-link"><a href="#profile">Profile</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#workout">Workout</a></li>
+            <li><a href="#books">Books</a></li>
+            <li><a href="#thoughts">Thoughts</a></li>
+            <li><a href="#profile">Profile</a></li>
           </ul>
 
           <DropdownButton
@@ -32,14 +32,31 @@ export default function Navbar() {
                 <span className="notifications-number">9+</span>
               </div>
             }
-            style={{
-              width: "fit-content",
-            }}
           >
-            <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-            <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-            <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
-            <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
+            <Dropdown.Item eventKey="1">
+              <div className="notification-item">
+                <div className="notification-profile"></div>
+                <p className="notification-text">Semen Doe reply to your comment in &quot;Subject Lorem Ipusm&quot;</p>
+              </div>
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="2">
+              <div className="notification-item">
+                <div className="notification-profile"></div>
+                <p className="notification-text">Semen Doe reply to your comment in &quot;Subject Lorem Ipusm&quot;</p>
+              </div>
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="3">
+              <div className="notification-item">
+                <div className="notification-profile"></div>
+                <p className="notification-text">Semen Doe reply to your comment in &quot;Subject Lorem Ipusm&quot;</p>
+              </div>
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="4">
+              <div className="notification-item">
+                <div className="notification-profile"></div>
+                <p className="notification-text">Semen Doe reply to your comment in &quot;Subject Lorem Ipusm&quot;</p>
+              </div>
+            </Dropdown.Item>
           </DropdownButton>
 
           <DropdownButton  
@@ -48,13 +65,8 @@ export default function Navbar() {
             drop="down"
             variant="transparent"
             title={
-              <div className="user-img-wrapper">
-                <img src="https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg" alt="image" className="user-img" width={90}/>
-              </div>
+              <div className="user-img-wrapper"></div>
             }
-            style={{
-              width: "fit-content",
-            }}
           >
             <Dropdown.Item eventKey="1">
               <div className="user-logout-group">

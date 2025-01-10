@@ -1,0 +1,148 @@
+@use "../abstracts" as *;
+
+#nav {
+  // position: fixed;
+  background-color: $ghost-white;
+  width: 100%;
+  
+  .container-jh {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .nav-box {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+
+      .nav-links {
+        display: flex;
+        gap: 1.5rem;
+
+        li a {
+          transition: $transition;
+
+          &:hover {
+            color: $grey-5;
+          }
+        }
+      }
+
+      #bell-dropdown-btn {
+        border-color: transparent;
+        border-radius: 50%;
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: 0;
+        
+        &:hover {
+          background-color: $grey-1;
+        }
+
+        .notifications-btn {
+          display: grid;
+          place-items: center;
+          position: relative;
+
+          ion-icon {
+            font-size: 24px
+          }
+
+          .notifications-number {
+            position: absolute;
+            top: -6px;
+            right: -4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            width: 1.2rem;
+            height: 1.2rem;
+            color: white;
+            background-color: #F70125;
+            border-radius: 50%;
+            box-shadow: 0px 0px 0px 3px rgb(255, 255, 255);
+          }
+        }
+        
+        & + .dropdown-menu {
+          width: 480px;
+          box-shadow: $dropdown-shadow;
+
+          .notification-item {
+            padding-block: 0.3rem;
+            display: flex;
+            gap: 1rem;
+            
+            .notification-profile {
+              min-width: 48px;
+              height: 48px;
+              border-radius: 50%;
+              background-image: url("https://cdn.prod.website-files.com/6600e1eab90de089c2d9c9cd/662c092880a6d18c31995dfd_66236531e8288ee0657ae7a7_Business%2520Professional.webp");
+              background-size: cover;
+            }
+
+            .notification-text {
+              text-wrap: wrap;
+            }
+          }
+        }
+        
+      }
+
+      #profile-dropdown-btn {
+        border-color: transparent;
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        overflow: hidden;
+        padding: 0;
+
+        background-image: url("https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        & + .dropdown-menu {
+          box-shadow: $dropdown-shadow;
+
+          a div{
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            
+            ion-icon {
+              font-size: $fs-4;
+            }
+          }
+        }
+      }
+
+      .menu-btn {
+        width: 2.5rem;
+        height: 2.5rem;
+        display: grid;
+        place-items: center;
+        position: relative;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: $transition;
+
+        &:hover {
+          background-color: $grey-1;
+        }
+
+        ion-icon {
+          font-size: 24px
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+.dropdown-toggle::after {
+  display: none !important;
+}
