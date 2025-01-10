@@ -1,0 +1,29 @@
+@use "../abstracts" as *;
+
+#workout-contents .container-jh {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+
+  .body-profile-box {
+    display: grid;
+    position: relative;
+
+    img {
+      object-fit: cover;
+      object-position: top;
+      border-radius: 5px;
+    }
+  }
+
+  .workout-article {
+    .article-title-box {
+      display: flex;
+      gap: 1rem;
+
+      ion-icon {
+        font-size: $fs-2;
+      }
+    }
+  }
+}

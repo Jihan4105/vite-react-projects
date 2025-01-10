@@ -24,6 +24,15 @@ a {
   color: black;
 }
 
+img {
+  width: 100%;
+  height: auto; 
+}
+
+section {
+  padding-block: 80px;
+}
+
 .section-title {
   font-size: $fs-1;
   font-weight: 600;
@@ -33,4 +42,13 @@ a {
 
 .container-jh {
   margin: 0 10%;
+}
+
+.motto {
+  margin: 0;
+  position: absolute;
+  top: -1.8rem;
+  color: $grey-1;
+  font-style: italic;
+  text-decoration: underline;
 }

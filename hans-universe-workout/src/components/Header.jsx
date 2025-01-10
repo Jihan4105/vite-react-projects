@@ -8,10 +8,10 @@ Header.propTypes = {
 
 export default function Header({ type }) {
   return (
-    <header id={`${type}-header`}>
+    <section id={`${type}-header`}>
       <div className="container-jh">
         <h1 className="header-title">{capitalize(type)} makes Me</h1>
       </div>
-    </header>
+    </section>
   )
 }
