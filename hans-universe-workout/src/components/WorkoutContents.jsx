@@ -58,7 +58,7 @@ export default function WorkoutContents() {
             xAxis={[{
               label: "mass (kg)"
             }]}
-            height={250}
+            height={200}
           >
             <linearGradient id="GlobalGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0" stopColor="rgba(98,98,98,1)" />

@@ -6,7 +6,6 @@
   gap: 4rem;
 
   @media(max-width: 1200px) {
-    gap: 1rem;
     grid-template-columns: 1fr 1fr;
   }
 
@@ -18,10 +17,10 @@
   .body-profile-box {
     img {
       object-fit: cover;
-      height: 100%;
       object-position: top;
       border-radius: 5px;
       width: 100%;
+      height: fit-content;
     }
 
     @media(max-width: 968px) {
@@ -34,7 +33,7 @@
     }
     
     @media(max-width: 568px) {
-      width: 100%;
+      width: 90%;
     }
   }
 
