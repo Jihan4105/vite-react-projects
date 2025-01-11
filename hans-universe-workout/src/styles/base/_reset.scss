@@ -41,12 +41,22 @@ section {
 
 .container-jh {
   margin: 0 10%;
+
+  @media(max-width: 1200px) {
+    margin: 0 5%;
+  }
+
+  @media(max-width: 968px) {
+    margin: 0 2%;
+  }
+
+  @media(max-width: 768px) {
+    margin: 0 10px;
+  } 
 }
 
 .motto {
   margin: 0;
-  position: absolute;
-  top: -1.8rem;
   color: $grey-1;
   font-style: italic;
   text-decoration: underline;

@@ -3,11 +3,14 @@ import WorkoutContents from "../components/WorkoutContents"
 import Header from "../components/Header"
 import Blog from "../components/Blog"
 import Footer from "../components/Footer"
+import Sidebar from "../components/Sidebar"
 
 function WorkoutApp() {
   return (
     <>
       <Navbar />
+      
+      <Sidebar />
 
       <Header 
         type="workout"

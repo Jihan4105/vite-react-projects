@@ -5,16 +5,36 @@
   grid-template-columns: 1fr 2fr;
   gap: 4rem;
 
-  .body-profile-box {
-    display: grid;
-    position: relative;
+  @media(max-width: 1200px) {
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+  }
 
+  @media(max-width: 968px) {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .body-profile-box {
     img {
       object-fit: cover;
       height: 100%;
       object-position: top;
       border-radius: 5px;
-      min-width: $imgMaxWidth;
+      width: 100%;
+    }
+
+    @media(max-width: 968px) {
+      justify-self: center;
+      width: 50%;
+    }
+
+    @media(max-width: 768px) {
+      width: 70%;
+    }
+    
+    @media(max-width: 568px) {
+      width: 100%;
     }
   }
 

@@ -1,0 +1,73 @@
+/* SIDE BAR */
+@use "../abstracts/" as *;
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-content: end;
+  z-index: -1;
+  transition: $transition;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+  z-index: 200;
+}
+
+.sidebar {
+  width: 90vw;
+  height: 100vh;
+  max-width: 300px;
+  background-color: white;
+  box-shadow: $shadow-2;
+  padding: 62px 10px 10px 10px;
+  transform: translateX(100%);
+  transition: $transition;
+}
+
+.show .sidebar {
+  transform: translateX(0%);
+}
+
+.sidebar-close {
+  font-size: 2rem;
+  background-color: transparent;
+  border-color: transparent;
+  color: $grey-5;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.sidebar-links {
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.sidebar-link {
+  display: inline-block;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  color: $grey-1;
+  transition: $transition;
+
+  &:hover {
+    color: #808080;
+    transform: translateX(3px)
+  }
+}
+
+.sidebar-link ion-icon {
+  color: $grey-5;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}

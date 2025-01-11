@@ -14,14 +14,14 @@ export default function WorkoutContents() {
         <article className="workout-article">
           <div className="article-title-box">
             <ion-icon name="bicycle-outline" />
-            <h3 className="article-title">Daily Workout</h3>
+            <h2 className="article-title">Daily Workout</h2>
           </div>
           <p className="description">
             I had nothing to do with sports before I went to the army. So I had a hard time in the early days of my military life and decided that I should exercise, and now exercise is a big driving force in my life.
           </p>
           <div className="article-title-box">
             <ion-icon name="accessibility-outline" />
-            <h3 className="article-title">InBody</h3>
+            <h2 className="article-title">InBody</h2>
             <span className="bodyprofile-date">(As of January 01, 2025)</span>
           </div>
           <BarChart 
