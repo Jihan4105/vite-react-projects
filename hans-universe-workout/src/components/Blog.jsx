@@ -17,6 +17,7 @@ export default function Blog({ type, dropdownItems }) {
         <div className="search-box">
           <DropdownButton
             key={`${type}-dropdown`}
+            id={`${type}-blog-dropdown`}
             drop="down"
             align="end"
             variant="transparent"
@@ -26,20 +27,17 @@ export default function Blog({ type, dropdownItems }) {
                 <span className="filter-status">Title</span>
               </div>
             }
-            style={{
-              border: "1px solid black",
-              borderRadius: "5px",
-              width: "fit-content",
-              outline: "none"
-            }}
           >
             {dropdownItems.map((item, index) => {
               return (
-                <Dropdown.Item key={index} eventKey={index}>{item}</Dropdown.Item>
+                <>
+                  <Dropdown.Item key={index} eventKey={index}>{item}</Dropdown.Item>
+                  {index != dropdownItems.length - 1 && <Dropdown.Divider />}
+                </>
               )
             })}
           </DropdownButton>
-          <div className="serach-group">
+          <div className="search-group">
             <ion-icon name="search-outline"></ion-icon>
             <input 
               type="text" 
@@ -47,8 +45,8 @@ export default function Blog({ type, dropdownItems }) {
               spellCheck="false"
             />
           </div>
-          {type === "books" || <BlogList />}
         </div>
+        {type === "books" || <BlogList />}
       </div>
     </section>
   )

@@ -1,3 +1,5 @@
 @use "../abstracts" as *;
 
-@include headerStyle("workout","../../assets/workout/workout-header.jpg");
+#workout-header {
+  @include headerStyle("../../assets/workout/workout-header.jpg");
+}

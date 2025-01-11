@@ -64,8 +64,12 @@ export default function BlogList() {
             <span className="blog-date">2020-04-05</span>
           </div>
         </li>
+        <Pagination 
+          count={10} 
+          color="primary" 
+          size="large"
+        />
       </ul>
-      <Pagination count={10} color="primary" />
     </>
   )
 }

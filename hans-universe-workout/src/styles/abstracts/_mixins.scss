@@ -1,15 +1,127 @@
-@mixin headerStyle($type, $url) {
-  ##{$type}-header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/assets/workout/workout-header.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
+@use "./variables" as *;
 
-    .container-jh {
-      padding-block: 3rem;
-      text-align: center;
+@mixin headerStyle($url) {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/assets/workout/workout-header.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 
-      .header-title {
-        color: white;
+  .container-jh {
+    padding-block: 3rem;
+    text-align: center;
+
+    .header-title {
+      color: white;
+      font-size: 50px;
+    }
+  }
+}
+
+@mixin articleStyle() {
+  display: grid;
+  padding: 2rem;
+  border-radius: 5px;
+
+  .article-title-box {
+    display: flex;
+
+    ion-icon {
+      font-size: 37px;
+    }
+
+    .article-title {
+      margin-left: 1rem;
+      font-size: 35px;
+    }
+  }
+
+  .description {
+    font-size: $fs-4;
+    padding-top: 0.5rem;
+    padding-left: 1.2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@mixin blogListStyle($type) {
+  .search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.5rem;
+
+    ##{$type}-blog-dropdown {
+      border: 1px solid black;
+      margin-right: 1.4rem;
+
+      .dropdown-filter {
+        display: flex;
+        align-items: center;
+
+        ion-icon {
+          font-size: 1.4rem;
+          margin-right: 0.2rem;
+        }
+
+        .filter-status {
+          font-size: 20px;
+        }
+      }
+
+      & + div {
+        font-size: 17px;
+      }
+    }
+  }
+
+  .search-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: $radius;
+    padding: 0.438rem;
+
+    ion-icon {
+      font-size: 1.6rem;
+    }
+
+    .search-input {
+      border: none;
+      outline: none;
+    }
+  }
+
+  // BlogList
+  @if($type != "books") {
+    .blog-list {
+      display: grid;
+      justify-content: center;
+      margin-top: 1.5rem;
+
+      .blog-item-wrapper {
+        border-bottom: 1px solid #ccc;
+        padding: 1rem;
+        width: 700px;
+
+        .blog-item {
+          display: flex;
+          justify-content: space-between;
+          
+          .blog-title-group {
+            display: flex;
+            align-items: center;
+
+            .blog-title {
+              margin-right: 0.5rem;
+            }
+          }
+        }
+      }
+
+      // Pagination
+      nav {
+        margin-top: 1.2rem;
+        justify-self: center;
       }
     }
   }

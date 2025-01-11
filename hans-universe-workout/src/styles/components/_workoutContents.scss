@@ -2,7 +2,7 @@
 
 #workout-contents .container-jh {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
   gap: 4rem;
 
   .body-profile-box {
@@ -11,19 +11,19 @@
 
     img {
       object-fit: cover;
+      height: 100%;
       object-position: top;
       border-radius: 5px;
+      min-width: $imgMaxWidth;
     }
   }
 
   .workout-article {
-    .article-title-box {
-      display: flex;
-      gap: 1rem;
+    @include articleStyle();
 
-      ion-icon {
-        font-size: $fs-2;
-      }
+    .bodyprofile-date {
+      align-self: center;
+      font-size: $fs-4;
     }
   }
 }

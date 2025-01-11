@@ -1,0 +1,5 @@
+@use "../abstracts" as *;
+
+#workout-blog .container-jh{
+  @include blogListStyle("workout");
+}

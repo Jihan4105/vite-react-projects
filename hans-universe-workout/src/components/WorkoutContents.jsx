@@ -22,7 +22,7 @@ export default function WorkoutContents() {
           <div className="article-title-box">
             <ion-icon name="accessibility-outline" />
             <h3 className="article-title">InBody</h3>
-            <span className="bodyprofile-date">(As of October 22, 2024)</span>
+            <span className="bodyprofile-date">(As of January 01, 2025)</span>
           </div>
           <BarChart 
             dataset={inbodyDataset}
@@ -31,17 +31,40 @@ export default function WorkoutContents() {
               dataKey: "type",
               disableTicks: true,
             }]}
-            series={[{ dataKey: 'value', label: "mass", valueFormatter }]}
+            sx={{
+              "--my-custom-gradient": "url(#GlobalGradient)"
+            }}
+            slotProps={{
+              popper: {
+                sx: {
+                  '--my-custom-gradient': 'linear-gradient(90deg, rgba(98,98,98,1) 0%, rgba(0,0,0,1) 100%);',
+                },
+              },
+              legend: {
+                hidden: true
+              }
+            }}
+            series={[{ 
+              dataKey: 'value', 
+              label: "mass", valueFormatter,
+              color: "var(--my-custom-gradient, rgba(98,98,98,1))"
+            }]}
             layout="horizontal"
             grid={{vertical: true}}
-            colors={["black"]}
+            margin={{
+              left: 120
+            }}
             borderRadius={50}
             xAxis={[{
               label: "mass (kg)"
             }]}
-            height={200}
-            width={500}
-          />
+            height={250}
+          >
+            <linearGradient id="GlobalGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0" stopColor="rgba(98,98,98,1)" />
+              <stop offset="1" stopColor="rgba(0,0,0,1)" />
+            </linearGradient>
+          </BarChart>
         </article>
       </div>
     </section>
