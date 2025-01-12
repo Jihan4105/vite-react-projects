@@ -156,6 +156,12 @@
         border-bottom: 1px solid #ccc;
         padding: 1rem;
         width: 700px;
+        transition: $transition;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $ghost-white;
+        }
 
         @media(max-width: 768px) {
           width: 100%;

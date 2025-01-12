@@ -2,6 +2,7 @@ import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
 
 import logoImage from "../assets/workout/logo-black.png"
+import { sidebarToggle } from "../utils/utils.js"
 
 export default function Navbar() {
   return (
@@ -81,7 +82,7 @@ export default function Navbar() {
             </Dropdown.Item>
           </DropdownButton>
           <span className="user-name">John Doe</span>
-          <div className="menu-btn icon-btn">
+          <div className="menu-btn icon-btn" onClick={() => {sidebarToggle()}}>
             <ion-icon name="menu-outline" />
           </div>
         </div>

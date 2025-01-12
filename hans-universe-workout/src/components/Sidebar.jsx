@@ -1,8 +1,10 @@
+import { sidebarToggle } from "../utils/utils"
+
 export default function Sidebar() {
   return (
     <div className="sidebar-overlay">
       <aside className="sidebar">
-        <button className="sidebar-close">
+        <button className="sidebar-close" onClick={() => {sidebarToggle()}}>
         <ion-icon name="close-outline"></ion-icon>
         </button>
         <ul className="sidebar-links">

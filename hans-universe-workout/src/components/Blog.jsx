@@ -3,6 +3,7 @@ import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/esm/DropdownButton"
 import PropTypes from "prop-types"
 import BlogList from "./BlogList"
+import { useState } from "react"
 
 Blog.propTypes = {
   type: PropTypes.string.isRequired,
@@ -10,13 +11,15 @@ Blog.propTypes = {
 }
 
 export default function Blog({ type, dropdownItems }) {
+  const [searchValue, setSearchValue] = useState("")
+  const [filterValue, setFilterValue] = useState("Title")
+
   return (
     <section id={`${type}-blog`}>
       <div className="container-jh">
         <h1 className="section-title">My {capitalize(type)} Blog</h1>
         <div className="search-box">
           <DropdownButton
-            // key={`${type}-dropdown`}
             id={`${type}-dropdown-btn`}
             drop="down"
             align="end"
@@ -24,13 +27,13 @@ export default function Blog({ type, dropdownItems }) {
             title={
               <div className="dropdown-filter">
                 <ion-icon name="chevron-down-outline"></ion-icon>
-                <span className="filter-status">Title</span>
+                <span className="filter-status">{filterValue}</span>
               </div>
             }
           >
             {dropdownItems.map((item, index) => {
               return (
-                <div key={index}>
+                <div key={index} onClick={(e) => {setFilterValue(e.target.textContent)}}>
                   <Dropdown.Item eventKey={index}>{item}</Dropdown.Item>
                   {index != dropdownItems.length - 1 && <Dropdown.Divider />}
                 </div>
@@ -45,10 +48,12 @@ export default function Blog({ type, dropdownItems }) {
               type="text" 
               className="search-input" 
               spellCheck="false"
+              value={searchValue}
+              onChange={(e) => {setSearchValue(e.target.value)}}
             />
           </div>
         </div>
-        {type === "books" || <BlogList />}
+        {type === "books" || <BlogList searchValue={searchValue} filterValue={filterValue} />}
       </div>
     </section>
   )

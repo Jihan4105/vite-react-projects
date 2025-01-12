@@ -20,9 +20,8 @@ export default function Footer() {
           </div>
         </div>
         <div className="verticle-line"></div>
-        <div className="footer-links">
-          <div className="footer-line"></div>
-          <ul>
+        <div>
+          <ul className="footer-links">
             <li><a href="#skills">Skills</a></li>
             <li><a href="#workout">Workout</a></li>
             <li><a href="#books">Books</a></li>
