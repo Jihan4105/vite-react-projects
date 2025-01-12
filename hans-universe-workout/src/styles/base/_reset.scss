@@ -60,4 +60,8 @@ section {
   color: $grey-1;
   font-style: italic;
   text-decoration: underline;
+
+  @media(max-width: 500px) {
+    font-size: $fs-4;
+  }
 }

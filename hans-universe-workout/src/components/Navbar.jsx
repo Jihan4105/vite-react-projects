@@ -21,7 +21,6 @@ export default function Navbar() {
           </ul>
 
           <DropdownButton
-            key="bell-dropdown"
             id="bell-dropdown-btn"
             drop="down"
             align="end"
@@ -59,8 +58,7 @@ export default function Navbar() {
             </Dropdown.Item>
           </DropdownButton>
 
-          <DropdownButton  
-            key="profile-dropdown"
+          <DropdownButton
             id="profile-dropdown-btn"
             drop="down"
             variant="transparent"

@@ -1,6 +1,6 @@
 export default function Sidebar() {
   return (
-    <div className="sidebar-overlay show">
+    <div className="sidebar-overlay">
       <aside className="sidebar">
         <button className="sidebar-close">
         <ion-icon name="close-outline"></ion-icon>

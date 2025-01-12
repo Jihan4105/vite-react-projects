@@ -1,9 +1,22 @@
-import { BarChart } from "@mui/x-charts/BarChart"
+import { useState, useEffect } from "react"
 
 import bodyProfileImg from "../assets/workout/body-profile.jpg"
-import { inbodyDataset, valueFormatter } from "../data/chartData"
+import VerticalChart from "./verticalChart"
 
 export default function WorkoutContents() {
+  const [windowWidth, setwindowWidth] = useState(window.innerWidth)
+
+  const detectSize = () => {
+    setwindowWidth(window.innerWidth)
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", detectSize)
+    return () => {
+      window.removeEventListener("resize", detectSize)
+    }
+  }, [windowWidth])
+
   return(
     <section id="workout-contents">
       <div className="container-jh">
@@ -24,7 +37,8 @@ export default function WorkoutContents() {
             <h2 className="article-title">InBody</h2>
             <span className="bodyprofile-date">(As of January 01, 2025)</span>
           </div>
-          <BarChart 
+          {windowWidth > 500 && <VerticalChart />}
+          {/* <BarChart 
             dataset={inbodyDataset}
             yAxis={[{
               scaleType: "band",
@@ -64,7 +78,7 @@ export default function WorkoutContents() {
               <stop offset="0" stopColor="rgba(98,98,98,1)" />
               <stop offset="1" stopColor="rgba(0,0,0,1)" />
             </linearGradient>
-          </BarChart>
+          </BarChart> */}
         </article>
       </div>
     </section>

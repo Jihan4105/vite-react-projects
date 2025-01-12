@@ -16,8 +16,8 @@ export default function Blog({ type, dropdownItems }) {
         <h1 className="section-title">My {capitalize(type)} Blog</h1>
         <div className="search-box">
           <DropdownButton
-            key={`${type}-dropdown`}
-            id={`${type}-blog-dropdown`}
+            // key={`${type}-dropdown`}
+            id={`${type}-dropdown-btn`}
             drop="down"
             align="end"
             variant="transparent"
@@ -31,15 +31,17 @@ export default function Blog({ type, dropdownItems }) {
             {dropdownItems.map((item, index) => {
               return (
                 <>
-                  <Dropdown.Item key={index} eventKey={index}>{item}</Dropdown.Item>
-                  {index != dropdownItems.length - 1 && <Dropdown.Divider />}
+                  <Dropdown.Item eventKey={index}>{item}</Dropdown.Item>
+                  {index != dropdownItems.length - 1 && <Dropdown.Divider key={`divider-${index}`} />}
                 </>
               )
             })}
           </DropdownButton>
           <div className="search-group">
-            <ion-icon name="search-outline"></ion-icon>
-            <input 
+            <label htmlFor={`${type}-search`}><ion-icon name="search-outline"></ion-icon></label>
+            <input  
+              id={`${type}-search`}
+              name={`${type}-search`}
               type="text" 
               className="search-input" 
               spellCheck="false"
