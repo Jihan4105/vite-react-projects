@@ -89,20 +89,17 @@
   }
 }
 
-@media (max-width: 500px) {
-
-}
 
 @media (max-width: 400px) {
   #footer {
     font-size: 14px;
   }
 
-  .footer-container .verticle-line {
+  .verticle-line {
     margin: 0 8px;
   }
 
-  .footer-content img {
-    height: 50px;
+  #footer .footer-content img {
+    width: 200px;
   }
 }

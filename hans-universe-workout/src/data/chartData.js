@@ -5,7 +5,7 @@ export const inbodyDataset = [
   },
   {
     value: 36.5,
-    type: 'Skeletal Muscle',
+    type: 'Muscle',
   },
   {
     value: 7.5,

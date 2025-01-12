@@ -1,7 +1,13 @@
+import { useContext } from "react"
 import { Pagination } from "@mui/material"
+
+import { WindowContext } from "../contexts/WindowContext"
+
 import blogDatas from "../data/blogDatas" 
 
 export default function BlogList() {
+  const windowWidth = useContext(WindowContext)
+
   return(
     <>
       <ul className="blog-list">
@@ -22,9 +28,9 @@ export default function BlogList() {
           )
         })}
         <Pagination 
-          count={5} 
+          count={10} 
           color="primary" 
-          size="large"
+          size={windowWidth > 500 ? "large" : windowWidth > 380 ? "medium" : "small"}
         />
       </ul>
     </>

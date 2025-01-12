@@ -30,10 +30,10 @@ export default function Blog({ type, dropdownItems }) {
           >
             {dropdownItems.map((item, index) => {
               return (
-                <>
+                <div key={index}>
                   <Dropdown.Item eventKey={index}>{item}</Dropdown.Item>
-                  {index != dropdownItems.length - 1 && <Dropdown.Divider key={`divider-${index}`} />}
-                </>
+                  {index != dropdownItems.length - 1 && <Dropdown.Divider />}
+                </div>
               )
             })}
           </DropdownButton>

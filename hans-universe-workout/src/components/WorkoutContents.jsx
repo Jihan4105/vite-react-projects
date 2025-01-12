@@ -1,21 +1,12 @@
-import { useState, useEffect } from "react"
-
+import { useContext } from "react"
 import bodyProfileImg from "../assets/workout/body-profile.jpg"
+import HorizontalChart from "./HorizontalChart"
 import VerticalChart from "./verticalChart"
 
+import { WindowContext } from "../contexts/WindowContext"
+
 export default function WorkoutContents() {
-  const [windowWidth, setwindowWidth] = useState(window.innerWidth)
-
-  const detectSize = () => {
-    setwindowWidth(window.innerWidth)
-  }
-
-  useEffect(() => {
-    window.addEventListener("resize", detectSize)
-    return () => {
-      window.removeEventListener("resize", detectSize)
-    }
-  }, [windowWidth])
+  const windowWidth = useContext(WindowContext)
 
   return(
     <section id="workout-contents">
@@ -37,7 +28,8 @@ export default function WorkoutContents() {
             <h2 className="article-title">InBody</h2>
             <span className="bodyprofile-date">(As of January 01, 2025)</span>
           </div>
-          {windowWidth > 500 && <VerticalChart />}
+          {windowWidth > 500 && <HorizontalChart />}
+          {windowWidth <= 500 && <VerticalChart />}
           {/* <BarChart 
             dataset={inbodyDataset}
             yAxis={[{

@@ -84,6 +84,10 @@
           width: 480px;
           box-shadow: $dropdown-shadow;
 
+          @media(max-width: 500px) {
+            width: 100vw;
+          }
+
           .notification-item {
             padding-block: 0.3rem;
             display: flex;
