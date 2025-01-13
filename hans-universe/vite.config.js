@@ -11,8 +11,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve('index.html'),
-        thoughts: resolve('src/html/thoughts.html'),
+        main: resolve(__dirname, 'index.html'),
+        thoughts: resolve(__dirname, 'src', 'html', 'thoughts.html'),
       },
     },
   },
