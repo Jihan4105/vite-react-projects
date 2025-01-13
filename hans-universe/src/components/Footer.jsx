@@ -23,9 +23,9 @@ export default function Footer() {
         <div>
           <ul className="footer-links">
             <li><a href="#skills">Skills</a></li>
-            <li><a href="#workout">Workout</a></li>
+            <li><a href="/index.html">Workout</a></li>
             <li><a href="#books">Books</a></li>
-            <li><a href="/thoughts.html">Thoughts</a></li>
+            <li><a href="/src/html/thoughts.html">Thoughts</a></li>
             <li><a href="#profile">Profile</a></li>
           </ul>
         </div>
