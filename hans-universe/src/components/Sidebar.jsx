@@ -9,43 +9,43 @@ export default function Sidebar() {
         </button>
         <ul className="sidebar-links">
           <li>
-            <a href="index.html" className="sidebar-link">
+            <a href="#skills" className="sidebar-link">
               <ion-icon name="code-outline"></ion-icon>
               Skills
             </a>
           </li>
           <li>
-            <a href="index.html" className="sidebar-link">
+            <a href="/src/html/workout.html" className="sidebar-link">
               <ion-icon name="barbell-outline"></ion-icon>
               Workout
             </a>
           </li>
           <li>
-            <a href="about.html" className="sidebar-link">
+            <a href="#books" className="sidebar-link">
               <ion-icon name="book-outline"></ion-icon>
               Books
             </a>
           </li>
           <li>
-            <a href="about.html" className="sidebar-link">
+            <a href="/src/html/thoughts.html" className="sidebar-link">
               <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
               Thoughts
             </a>
           </li>
           <li>
-            <a href="about.html" className="sidebar-link">
+            <a href="#profile" className="sidebar-link">
               <ion-icon name="body-outline"></ion-icon>
               Profile
             </a>
           </li>
           <li>
-            <a href="about.html" className="sidebar-link">
+            <a href="#editprofile" className="sidebar-link">
               <ion-icon name="create-outline"></ion-icon>
               Edit Profile
             </a>
           </li>
           <li>
-            <a href="about.html" className="sidebar-link">
+            <a href="#logout" className="sidebar-link">
               <ion-icon name="log-out-outline"></ion-icon>
               Logout
             </a>

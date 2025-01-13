@@ -1,8 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import "../styles/main.scss"
 import IndexApp from './IndexApp.jsx'
 
+// Mystyles
+import "../styles/main.scss"
 
 createRoot(document.getElementById('login-root')).render(
   <StrictMode>

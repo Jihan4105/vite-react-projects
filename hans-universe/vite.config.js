@@ -12,6 +12,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
+        workout: resolve(__dirname, 'src/html/workout.html'),
         thoughts: resolve(__dirname, 'src/html/thoughts.html'),
       },
     },
