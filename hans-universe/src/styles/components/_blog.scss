@@ -3,3 +3,7 @@
 #workout-blog .container-jh{
   @include blogStyle("workout");
 }
+
+#thoughts-blog .container-jh {
+  @include blogStyle("thoughts")
+}

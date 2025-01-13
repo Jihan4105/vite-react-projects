@@ -53,7 +53,7 @@ export default function Blog({ type, dropdownItems }) {
             />
           </div>
         </div>
-        {type === "books" || <BlogList searchValue={searchValue} filterValue={filterValue} />}
+        {type === "books" || <BlogList type={type} searchValue={searchValue} filterValue={filterValue} />}
       </div>
     </section>
   )

@@ -6,7 +6,7 @@ import WorkoutApp from './WorkoutApp.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // MyStyles
-import "../styles/workoutStyles.scss"
+import "../styles/main.scss"
 
 createRoot(document.getElementById('workout-root')).render(
   <StrictMode>

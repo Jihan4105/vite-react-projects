@@ -1,14 +1,14 @@
-const blogDatas = [
+const thoughtsBlogDatas = [
   {
     id: 1,
-    title: "KoKorono Naka Hibiku Mono",
+    title: "What makes Me",
     content: "Hello World",
     date: "2020-05-08",
     commentsNumber: "5"
   },
   {
     id: 2,
-    title: "Senakani Aru Mono",
+    title: "Thoughts about me",
     content: "Hello World",
     date: "2021-04-03",
     commentsNumber: "10"
@@ -71,4 +71,4 @@ const blogDatas = [
   },
 ]
 
-export default blogDatas
+export default thoughtsBlogDatas

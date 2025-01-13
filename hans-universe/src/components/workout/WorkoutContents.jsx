@@ -1,9 +1,9 @@
 import { useContext } from "react"
-import bodyProfileImg from "../assets/workout/body-profile.jpg"
+import bodyProfileImg from "../../assets/workout/body-profile.jpg"
 import HorizontalChart from "./HorizontalChart"
-import VerticalChart from "./verticalChart"
+import VerticalChart from "./VerticalChart"
 
-import { WindowContext } from "../contexts/WindowContext"
+import { WindowContext } from "../../contexts/WindowContext"
 
 export default function WorkoutContents() {
   const windowWidth = useContext(WindowContext)

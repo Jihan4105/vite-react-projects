@@ -25,7 +25,7 @@ export default function Footer() {
             <li><a href="#skills">Skills</a></li>
             <li><a href="#workout">Workout</a></li>
             <li><a href="#books">Books</a></li>
-            <li><a href="#thoughts">Thoughts</a></li>
+            <li><a href="/thoughts.html">Thoughts</a></li>
             <li><a href="#profile">Profile</a></li>
           </ul>
         </div>

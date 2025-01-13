@@ -1,6 +1,6 @@
 import { BarChart } from "@mui/x-charts/BarChart"
 
-import { inbodyDataset, valueFormatter } from "../data/chartData"
+import { inbodyDataset, valueFormatter } from "../../data/chartData"
 
 export default function VerticalChart() {
   return (

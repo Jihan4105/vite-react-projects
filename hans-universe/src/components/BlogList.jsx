@@ -4,16 +4,29 @@ import PropTypes from "prop-types"
 
 import { WindowContext } from "../contexts/WindowContext"
 
-import blogDatas from "../data/blogDatas" 
+import workoutBlogDatas from "../data/workoutBlogDatas" 
+import thoughtsBlogDatas from "../data/thoughtsBlogDatas"
 
 BlogList.propTypes = {
+  type: PropTypes.string.isRequired,
   searchValue: PropTypes.string.isRequired,
   filterValue: PropTypes.string.isRequired
 }
 
-export default function BlogList({ searchValue, filterValue}) {
+export default function BlogList({ type, searchValue, filterValue}) {
+
   const [selectedPage, setSelectedPage] = useState("1")
   const windowWidth = useContext(WindowContext)
+  let blogDatas
+
+  switch(type) {
+    case "workout" :
+      blogDatas = workoutBlogDatas
+      break;
+    case "thoughts" :
+      blogDatas = thoughtsBlogDatas
+      break;
+  } 
   
   const filteredDatas = blogDatas.filter((blogData) => {
     if(filterValue === "Title + Content") {

@@ -1,7 +1,13 @@
 @use "./variables" as *;
 
-@mixin headerStyle($url) {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/assets/workout/workout-header.jpg");
+@mixin headerStyle($url, $type) {
+  @if($type == "workout") {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url($url);
+  }
+  @else if($type == "thoughts") {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url($url);
+    background-position: center;
+  }
   background-size: cover;
   background-repeat: no-repeat;
 

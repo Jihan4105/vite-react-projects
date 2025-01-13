@@ -1,27 +1,22 @@
 import Navbar from "../components/Navbar"
-import WorkoutContents from "../components/WorkoutContents"
+import WorkoutContents from "../components/workout/WorkoutContents.jsx"
 import Header from "../components/Header"
 import Blog from "../components/Blog"
 import Footer from "../components/Footer"
 import Sidebar from "../components/Sidebar"
 
 import { WindowContext } from "../contexts/WindowContext"
+import useWindow from "../hooks/useWindow.js"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 function WorkoutApp() {
-  const [windowWidth, setwindowWidth] = useState(window.innerWidth)
+  const [windowSize, setWindowSize] = useState({
+    innerWidth: window.innerWidth,
+    innerHeight: window.innerHeight
+  })
 
-    const detectSize = () => {
-      setwindowWidth(window.innerWidth)
-    }
-
-    useEffect(() => {
-      window.addEventListener("resize", detectSize)
-      return () => {
-        window.removeEventListener("resize", detectSize)
-      }
-    }, [windowWidth])
+  useWindow(windowSize, setWindowSize)
 
   return (
     <>
@@ -33,7 +28,7 @@ function WorkoutApp() {
         type="workout"
       />
 
-      <WindowContext.Provider value={windowWidth}>  
+      <WindowContext.Provider value={windowSize.innerWidth}>  
         <WorkoutContents />
         
         <Blog 
