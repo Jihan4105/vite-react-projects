@@ -1,9 +1,12 @@
-// import { useContext } from "react"
 import thoughtsContentImg from "../../assets/thoughts/thoughts-content.jpg"
-// import { WindowContext } from "../../contexts/WindowContext"
+import thoughtsBlogDatas from "../../data/thoughtsBlogDatas"
 
 export default function ThoughtsContent() {
-  // const windowWidth = useContext(WindowContext)
+  const copiedBlogDatas = [...thoughtsBlogDatas]
+  const sortedDatas = copiedBlogDatas.sort((itemPrevious, itemNext) => {
+    return itemNext.commentsNumber - itemPrevious.commentsNumber
+  })
+  sortedDatas.splice(3, sortedDatas.length)
 
   return(
     <section id="thoughts-contents">
@@ -25,7 +28,22 @@ export default function ThoughtsContent() {
             <h2 className="article-title">The Most discussed topic</h2>
           </div>
           <ul className="article-list">
-            <li className="article-list-item-wrapper" key={1}>
+            {sortedDatas.map((item, index) => {
+              return (
+                <li className="article-list-item-wrapper" key={index}>
+                  <div className="article-list-item">
+                    <p className="article-list-title">
+                      {item.title}
+                    </p>
+                    <div className="comment-group">
+                      <ion-icon name="chatbox-outline"></ion-icon>
+                      <span className="comment-number">{item.commentsNumber}</span>
+                    </div>
+                  </div>
+                </li>
+              )
+            })}
+            {/* <li className="article-list-item-wrapper" key={1}>
               <div className="article-list-item">
                 <p className="article-list-title">
                   What makes Me
@@ -57,7 +75,7 @@ export default function ThoughtsContent() {
                   <span className="comment-number">10 Comments</span>
                 </div>
               </div>
-            </li>
+            </li> */}
           </ul>
         </article>
       </div>

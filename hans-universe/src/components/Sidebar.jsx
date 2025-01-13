@@ -15,7 +15,7 @@ export default function Sidebar() {
             </a>
           </li>
           <li>
-            <a href="products.html" className="sidebar-link">
+            <a href="index.html" className="sidebar-link">
               <ion-icon name="barbell-outline"></ion-icon>
               Workout
             </a>
