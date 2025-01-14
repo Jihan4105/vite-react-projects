@@ -68,5 +68,5 @@ function loginBtnClicked(e, email, password, setState) {
 
   if(!userdata) { setState("email-wrong") } 
   else if(userdata.password != password) { setState("password-wrong")}
-  else {window.location.href = "/src/html/workout.html"}
+  else {window.location.href = "/src/html/landing.html"}
 }

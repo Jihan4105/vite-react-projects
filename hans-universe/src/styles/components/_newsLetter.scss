@@ -68,6 +68,10 @@
   gap: 5px;
 }
 
+.news-meta span ion-icon {
+  font-size: 1.2rem;
+}
+
 .news-title {
   font-size: $fs-3;
   color: var(--independence);
@@ -99,14 +103,23 @@
 
 @media (max-width: 992px) {
   .news-list {
+    justify-self: center;
+    width: 70%;
     grid-template-columns: 1fr;
     padding: 0 50px;
     gap: 60px;
   }
 }
 
+@media (max-width: 768px) {
+  .news-list {
+    width: 80%;
+  }
+}
+
 @media (max-width: 576px) {
   .news-list {
     padding: 0;
+    width: 90%;
   }
 }

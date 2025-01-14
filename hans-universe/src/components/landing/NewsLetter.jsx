@@ -5,7 +5,7 @@ import thirdNewsBannerImg from "@assets/landing/news-banner-3.jpg";
 export default function NewsLetter() {
   return (
     <section id="news">
-      <div className="news-container container-md">
+      <div className="news-container container-jh">
         <h2 className="section-title">My Latest News</h2>
         <p className="section-text">
           Check my latest news and share me what you think!
@@ -21,7 +21,7 @@ export default function NewsLetter() {
                 <div className="news-meta">
                   <span>
                     <ion-icon name="calendar-outline"></ion-icon>
-                    <time datetime="2024-10-01">2024-10-01</time>
+                    <time dateTime="2024-10-01">2024-10-01</time>
                   </span>
                 </div>
                 <h3 className="news-title">Best Traveling Place</h3>
@@ -47,7 +47,7 @@ export default function NewsLetter() {
                 <div className="news-meta">
                   <span>
                     <ion-icon name="calendar-outline"></ion-icon>
-                    <time datetime="2024-10-01">2024-10-01</time>
+                    <time dateTime="2024-10-01">2024-10-01</time>
                   </span>
                 </div>
                 <h3 className="news-title">Private Metting Room</h3>
@@ -73,7 +73,7 @@ export default function NewsLetter() {
                 <div className="news-meta">
                   <span>
                     <ion-icon name="calendar-outline"></ion-icon>
-                    <time datetime="2024-10-01">2024-10-01</time>
+                    <time dateTime="2024-10-01">2024-10-01</time>
                   </span>
                 </div>
                 <h3 className="news-title">The Best Business Ideas</h3>

@@ -1,23 +1,27 @@
 import Navbar from "../components/Navbar"
-import Header from "../components/Header"
-import ThoughtsContent from "../components/thoughts/ThoughtsContent"
-import Blog from "../components/Blog"
+import Hero from "../components/landing/Hero"
+import NewsLetter from "@/components/landing/NewsLetter"
+import Contact from "@/components/landing/Contact"
 import Footer from "../components/Footer"
 import Sidebar from "../components/Sidebar"
 
-function WorkoutApp() {
+function LandingApp() {
 
   return (
     <>
       <Navbar />
       
       <Sidebar />
-
       
+      <Hero />
+
+      <NewsLetter />
+
+      <Contact />
       
       <Footer />
     </>
   )
 }
 
-export default WorkoutApp
+export default LandingApp

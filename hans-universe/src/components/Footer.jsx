@@ -5,7 +5,7 @@ export default function Footer() {
     <footer id="footer">
       <div className="container-jh">
         <div className="footer-content">
-          <a href="#">
+          <a href="/src/html/landing.html">
             <img src={LogoImg} alt="Logo" />
           </a>
           <p><span>Address:</span> Pusan Dongnaegu Munhwaroo 15</p>

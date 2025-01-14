@@ -24,11 +24,6 @@ a {
   color: black;
 }
 
-img {
-  width: 100%;
-  height: auto; 
-}
-
 section {
   padding-block: 80px;
 }
@@ -41,6 +36,13 @@ section {
   @media(max-width: 500px) {
     font-size: $fs-1;
   }
+}
+
+.section-text {
+  color: var(--cool-gray);
+  font-size: var(--fs-5);
+  line-height: 1.7;
+  text-align: center;
 }
 
 .container-jh {

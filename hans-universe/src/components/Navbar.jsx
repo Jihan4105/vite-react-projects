@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <nav id="nav">
       <div className="container-jh">
-        <a href="#LadingPage" className="logo-link">
+        <a href="/src/html/landing.html" className="logo-link">
           <img src={logoImage} alt="logo" />
         </a>
         <div className="nav-box">
