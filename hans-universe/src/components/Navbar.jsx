@@ -1,7 +1,7 @@
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
 
-import logoImage from "../assets/workout/logo-black.png"
+import logoImage from "../assets/logo-black.png"
 import { sidebarToggle } from "../utils/utils.js"
 
 export default function Navbar() {

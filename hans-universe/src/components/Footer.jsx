@@ -1,4 +1,4 @@
-import LogoImg from "../assets/workout/logo-black.png"
+import LogoImg from "../assets/logo-black.png"
 
 export default function Footer() {
   return (

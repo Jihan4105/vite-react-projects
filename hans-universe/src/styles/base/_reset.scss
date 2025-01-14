@@ -69,3 +69,46 @@ section {
     font-size: $fs-4;
   }
 }
+
+/* ANIMATIONS------------------------ */
+
+.gravity-moving {
+  -webkit-animation: gravity-moving 5s ease-in-out infinite both;
+  animation: gravity-moving 5s ease-out infinite both;
+}
+
+@-webkit-keyframes gravity-moving {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  
+  50% {
+    -webkit-transform: translateY(-40px);
+    transform: translateY(-40px);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+
+}
+
+@keyframes gravity-moving {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  50% {
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
