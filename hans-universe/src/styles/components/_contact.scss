@@ -31,6 +31,19 @@
           border-radius: 1.5px;
         }
 
+        @media (max-width: 768px) {
+          .underline {
+            min-width: 242px;
+            width: 50%;
+          } 
+        }
+
+        @media (max-width: 400px) {
+          .underline {
+            min-width: 200px;
+          }
+        }
+
         .getin-box {
           .getin-details {
             h3 {
@@ -45,6 +58,7 @@
               display: flex;
               gap: 15px;
               margin-bottom: 33px;
+              user-select: text;
 
               ion-icon {
                 font-size: 1.3rem;
@@ -68,6 +82,20 @@
             &:hover {
               color: $grey-4;
             }
+          }
+        }
+
+        @media (max-width: 768px) {
+          .getin-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 30px;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .getin-box {
+            grid-template-columns: 1fr;
           }
         }
       }
@@ -95,6 +123,18 @@
             border: 1px solid transparent;
             padding: 20px 30px;
             margin-bottom: 20px;
+          }
+
+          @media (max-width: 992px) {
+            input {
+              width: 100%;
+            }
+          }
+        }
+
+        @media (max-width: 992px) {
+          .form-row {
+            flex-direction: column;
           }
         }
 
@@ -144,63 +184,47 @@
               margin-right: 0.5rem;
             }
           }
+
+          @media (max-width: 576px) {
+            textarea {
+              max-height: 300px;
+            }
+          }
         }
 
         & :is(input, textarea)::placeholder {
           color: $grey-2;
         }
       }
+
+      @media (max-width: 576px) {
+        .form {
+          padding: 25px;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .contact-box {
+        grid-template-columns: 1fr;
+        gap:20px
+      }
+    }
+
+    @media (max-width: 576px) {
+      .contact-box {
+        padding: 40px;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .contact-box {
+        padding: 25px;
+      }
     }
   }
 }
-
-@media (max-width: 992px) {
-  .form .form-row {
-    flex-direction: column;
-  }
-
-  .form .form-row input {
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .contact-box {
-    grid-template-columns: 1fr;
-    gap:20px
-  }
-
-  .getin .underline {
-    min-width: 242px;
-    width: 50%;
-  }
-
-  .getin .getin-box {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 30px;
-  }
-}
-
-@media (max-width: 576px) {
-  .contact-box {
-    padding: 40px;
-    gap: 40px;
-  }
-  
-  .getin .getin-box {
-    grid-template-columns: 1fr;
-  }
-
-  .form .form-col textarea {
-    max-height: 300px;
-  }
-
-  .form {
-    padding: 25px;
-  }
-}
-
 @media (max-width: 400px) {
   .contact-box {
     padding: 25px;

@@ -1,4 +1,11 @@
+import { useState } from "react"
+
 export default function Contact() {
+  const [contactName, setContactName] = useState("")
+  const [contactEmail, setContactEmail] = useState("")
+  const [contactSubject, setContactSubject] = useState("")
+  const [contactText, setContactText] = useState("")
+
   return (
     <section id="contact">
       <div className="container-jh">
@@ -46,17 +53,50 @@ export default function Contact() {
           <div className="form">
             <h3>Send Message</h3>
             <div className="form-row">
-              <input type="text" placeholder="Your Name" name="contact-name" id="contact-name" />
-              <input type="text" placeholder="Your Email" name="contact-email" id="contact-email" />
+              <input 
+                type="text" 
+                placeholder="Your Name" 
+                name="contact-name" 
+                id="contact-name" 
+                value={contactName}
+                onChange={(e) => setContactName(e.target.value)}
+              />
+              <input 
+                type="text" 
+                placeholder="Your Email" 
+                name="contact-email" 
+                id="contact-email" 
+                value={contactEmail}
+                onChange={(e) => setContactEmail(e.target.value)}
+              />
             </div>
             <div className="form-col">
-              <input type="text" placeholder="Subject" name="contact-subject" id="contact-subject" />
+              <input 
+                type="text" 
+                placeholder="Subject" 
+                name="contact-subject" 
+                id="contact-subject" 
+                value={contactSubject}
+                onChange={(e) => setContactSubject(e.target.value)}
+              />
             </div>
             <div className="form-col">
-              <textarea cols="30" placeholder="What you want to say?" name="contact-textarea" id="contact-textarea"></textarea>
+              <textarea 
+                cols="30" 
+                placeholder="What you want to say?" 
+                name="contact-textarea" 
+                id="contact-textarea"
+                value={contactText}
+                onChange={(e) => setContactText(e.target.value)}
+              ></textarea>
             </div>
             <div className="form-col">
-              <button>
+              <button onClick={() => {contactBtnClicked(
+                contactName, 
+                contactEmail, 
+                contactSubject, 
+                contactText
+              )}}>
                 <ion-icon name="paper-plane-outline"></ion-icon>
                 <span>Send Message</span>
               </button>

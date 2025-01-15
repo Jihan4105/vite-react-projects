@@ -171,14 +171,12 @@ function sendEmailBtnClick(e, setOverlayContext, setVerifyStatusText, setCount, 
 
   emailjs.send("service_ilc4owv", "template_if1t7pa", templateParams, "JLoXopf6tYXQJm4fk").then(
     (response) => {
-      console.log('SUCCESS!', response.status, response.text);
       setOverlayContext(false)
       setVerifyStatusText("Verification Email Sent!")
       sendCodeText.classList.add("success-text")
       setCount(210)
     },
     (error) => {
-      console.log('FAILED...', error);
       sendCodeText.classList.add("error-text")
       setVerifyStatusText("FAILED...")
     },
