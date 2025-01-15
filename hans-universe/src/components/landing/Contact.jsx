@@ -4,11 +4,11 @@ export default function Contact() {
       <div className="container-jh">
         <h1 className="section-title">Let's Contact</h1>
         <p className="section-text">I look forward to communicating with you</p>
-        <div className="contact-container">
+        <div className="contact-box">
           <div className="getin">
             <h3>Get In Touch</h3>
             <div className="underline"></div>
-            <div className="getin-container">
+            <div className="getin-box">
               <div className="getin-details">
                 <h3>Adress</h3>
                 <div className="getin-information">

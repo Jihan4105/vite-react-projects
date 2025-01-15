@@ -17,7 +17,7 @@ export default function Hero() {
 
   return (
     <section id="hero">
-      <div className="hero-container container-jh">
+      <div className="container-jh">
         <div className="planet-box">
           <img className="profile-planet" src={profilePlanetImg} alt="planet" />
           <a className="profile" title="Clck ME!"></a>

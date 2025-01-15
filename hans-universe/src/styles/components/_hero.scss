@@ -2,258 +2,263 @@
   background-image: url("/src/assets/landing/hero-background.png");
   background-size: cover;
   background-repeat: no-repeat;
-}
 
-.hero-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.planet-box {
-  position: relative;
-  display: grid;
-  place-items: center;
-}
-
-.planet-box .profile-planet{
-  width: 350px;
-}
-
-.planet-box .profile {
-  background: url("/src/assets/landing/hero-profile.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transform: translateY(10%);
-  width: 270px;
-  height: 270px;
-  border-radius: 50%;
-  position: absolute;
-  cursor: pointer;
-}
-
-.astronaut-box {
-  text-align: center;
-}
-
-.astronaut-box h1 {
-  color: #ffff;
-}
-
-.astronaut-box .astronaut {
-  position: relative;
-}
-
-.workout-planet {
-  position: absolute;
-  top: 0;
-  left: -40px;
-}
-
-.books-planet {
-  position: absolute;
-  right: -30px;
-  top: 12px;
-}
-
-.skills-planet {
-  position: absolute;
-  left: -20px;
-  bottom: -40px;
-}
-
-.thoughts-planet {
-  position: absolute;
-  right: -10px;
-  bottom: -50px;
-}
-
-@media(max-width: 1600px) {
-  .books-planet {
-    right: -50px;
-  }
-
-  .skills-planet {
-    left: -40px;
-  }
-}
-
-@media (max-width: 1400px) {
-  .workout-planet{
-    top: -10px;
-  }
-
-  .books-planet {
-    right: -80px;
-  }
-
-  .skills-planet {
-    left: -70px;
-  }
-
-  .thoughts-planet {
-    right: 20px;
-  }
-
-}
-
-@media (max-width: 1300px) {
-  .hero-container {
-    grid-template-columns: 0.7fr 1fr;
-  }
-  .books-planet {
-    right: -70px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .hero-container{
-    grid-template-columns: auto;
-  }
-
-  .planet-box {
-    display: none;
-  }
-
-  .workout-planet {
-    left: 120px;
-  }
-  
-  .books-planet {
-    right: 100px;
-  }
-  
-  .skills-planet {
-    left: 100px;
-  }
-
-  .thoughts-planet {
-    right: 170px;
-  }
-}
-
-@media(max-width: 992px) {
-  .hero-container {
-    max-width: 100%;
-  }
-}
-
-@media(max-width: 920px) {
-  .workout-planet{
-    left: 70px;
-  }
-
-  .books-planet {
-    right: 50px;
-  }
-
-  .skills-planet{
-    left: 50px;
-  }
-
-  .thoughts-planet {
-    right: 120px;
-  }
-}
-
-@media(max-width: 820px) {
-  .workout-planet{
-    left: 50px;
-  }
-
-  .books-planet {
-    right: 30px;
-  }
-
-  .skills-planet{
-    left: 30px;
-  }
-  .thoughts-planet {
-    right: 100px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-container {
-    height: 100%;
-  }
-
-  .astronaut-box {
+  .container-jh {
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr 1fr;
+
+    .planet-box {
+      position: relative;
+      display: grid;
+      place-items: center;
+
+      .profile-planet{
+        width: 350px;
+      }
+
+      .profile {
+        background: url("/src/assets/landing/hero-profile.jpg");
+        background-size: cover;
+        background-position-y: 40%;
+        background-repeat: no-repeat;
+        transform: translateY(10%);
+        width: 270px;
+        height: 270px;
+        border-radius: 50%;
+        position: absolute;
+        cursor: pointer;
+      }
+    }
+
+    @media(max-width: 1200px) {
+      .planet-box {
+        display: none;
+      }
+    }
+    
+    .astronaut-box {
+      text-align: center;
+
+      h1 {
+        color: #ffff;
+      }
+
+      .astronaut {
+        position: relative;
+
+        .workout-planet {
+          position: absolute;
+          top: 0;
+          left: -40px;
+        }
+
+        .books-planet {
+          position: absolute;
+          right: -30px;
+          top: 12px;
+        }
+
+        .skills-planet {
+          position: absolute;
+          left: -20px;
+          bottom: -40px;
+        }
+
+        .thoughts-planet {
+          position: absolute;
+          right: -10px;
+          bottom: -50px;
+        }
+
+        @media(max-width: 1600px) {
+          .books-planet {
+            right: -50px;
+          }
+        
+          .skills-planet {
+            left: -40px;
+          }
+        }
+
+        @media (max-width: 1400px) {
+          .workout-planet{
+            top: -10px;
+          }
+        
+          .books-planet {
+            right: -80px;
+          }
+        
+          .skills-planet {
+            left: -70px;
+          }
+        
+          .thoughts-planet {
+            right: 20px;
+          }
+          
+          @media (max-width: 1300px) {
+            .books-planet {
+              right: -70px;
+            }
+          }
+
+          @media (max-width: 1200px) {
+            .workout-planet {
+              left: 120px;
+            }
+            
+            .books-planet {
+              right: 100px;
+            }
+            
+            .skills-planet {
+              left: 100px;
+            }
+          
+            .thoughts-planet {
+              right: 170px;
+            }
+          }
+        }
+
+        @media(max-width: 920px) {
+          .workout-planet{
+            left: 70px;
+          }
+        
+          .books-planet {
+            right: 50px;
+          }
+        
+          .skills-planet{
+            left: 50px;
+          }
+        
+          .thoughts-planet {
+            right: 120px;
+          }
+        }
+
+        @media(max-width: 820px) {
+          .workout-planet{
+            left: 50px;
+          }
+        
+          .books-planet {
+            right: 30px;
+          }
+        
+          .skills-planet{
+            left: 30px;
+          }
+          .thoughts-planet {
+            right: 100px;
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .astronaut-img {
+            min-width: 300px;
+            width: 60%;
+          }
+        
+          .workout-planet, .books-planet, .skills-planet, .thoughts-planet {
+            width: 150px;
+          }
+          
+          .workout-planet {
+            left: 5px;
+          }
+        
+          .books-planet {
+            right: 10px;
+          }
+        
+          .skills-planet {
+            bottom: -70px;
+            left: 29px;
+          }
+        
+          .thoughts-planet {
+            bottom: -70px;
+            right: 29px;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .workout-planet,
+          .books-planet,
+          .skills-planet,
+          .thoughts-planet {
+            width: 100px;
+          }
+        
+          .workout-planet {
+            left: 0;
+            top: 0;
+          }
+        
+          .skills-planet {
+            left: 0;
+            bottom: -10px;
+          }
+        
+          .books-planet {
+            top: 0;
+            right: 0;
+          }
+        
+          .thoughts-planet {
+            right: 0;
+            bottom: -10px;
+          }
+        }
+      }
+
+      @media(max-width: 768px) {
+        .astronaut {
+          align-content: center;
+        }
+      }
+    }
+    
+    @media(max-width: 768px) {
+      .astronaut-box {
+        display: grid;
+        grid-template-rows: auto 1fr;
+      }
+    }
   }
 
-  .astronaut {
-    align-content: center;
+  @media(max-width: 1300px) {
+    .container-jh {
+      grid-template-columns: 0.7fr 1fr;
+    }
   }
 
-  .workout-planet, .books-planet, .skills-planet, .thoughts-planet {
-    width: 150px;
+  @media(max-width: 1200px) {
+    .container-jh{
+      grid-template-columns: auto;
+    }
   }
 
-  .astronaut-img {
-    min-width: 300px;
-    width: 60%;
+  @media(max-width: 992px) {
+    .container-jh {
+      max-width: 100%;
+    }
   }
 
-  .workout-planet {
-    left: 5px;
-  }
-
-  .books-planet {
-    right: 10px;
-  }
-
-  .skills-planet {
-    bottom: -70px;
-    left: 29px;
-  }
-
-  .thoughts-planet {
-    bottom: -70px;
-    right: 29px;
+  @media(max-width: 768px) {
+    .container-jh {
+      height: 100%;
+    }
   }
 }
 
-@media (max-width: 576px) {
+@media(max-width: 576px) {
   #hero {
     height: auto;
     background-position-y: 60%;
   }
-
-  .workout-planet,
-  .books-planet,
-  .skills-planet,
-  .thoughts-planet {
-    width: 100px;
-  }
-
-  .workout-planet {
-    left: 0;
-    top: 0;
-  }
-
-  .skills-planet {
-    left: 0;
-    bottom: -10px;
-  }
-
-  .books-planet {
-    top: 0;
-    right: 0;
-  }
-
-  .thoughts-planet {
-    right: 0;
-    bottom: -10px;
-  }
 }
-
-// @media(max-width: 450px) {
-//   .workout-planet,
-//   .books-planet,
-//   .skills-planet,
-//   .thoughts-planet {
-//     display: none;
-//   }
-// }

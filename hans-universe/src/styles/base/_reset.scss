@@ -9,6 +9,14 @@
   font-family: "Montserrat", "Poppins", sans-serif;
 }
 
+body {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  scroll-behavior: smooth;
+}
+
 ul,
 p {
   margin: 0;
@@ -22,6 +30,14 @@ li {
 a {
   text-decoration: none;
   color: black;
+}
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-select: none;
 }
 
 section {
@@ -69,6 +85,78 @@ section {
 
   @media(max-width: 500px) {
     font-size: $fs-4;
+  }
+}
+
+.card {
+  border-radius: $radius;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: $transition;
+
+  .banner {
+    margin-bottom: 20px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+  }
+
+  .content {
+    padding: 0 20px 20px 20px;
+
+    .meta {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 20px;
+      font-size: $fs-6;
+      text-transform: uppercase;
+      color: $grey-4;
+      margin-bottom: 10px;
+
+      .span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        ion-icon {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .title {
+      font-size: $fs-3;
+      color: $independence;
+    }
+
+    .text {
+      color: $grey-4;
+      font-size: $fs-6;
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+
+    .link-btn {
+      width: 111px;
+      display: flex;
+      align-items: center;
+      color: $grey-2;
+      font-weight: $fw-600;
+      transition: $transition;
+
+      &:hover {
+        color: $grey-5;
+      }
+
+      span {
+        margin-right: 5px;
+      }
+    }
   }
 }
 
