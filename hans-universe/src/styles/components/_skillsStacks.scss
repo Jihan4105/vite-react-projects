@@ -1,0 +1,114 @@
+@use "../abstracts" as *;
+
+#skills-stack {
+  .container-jh {
+    .section-text {
+      margin-bottom: 25px;
+    }
+
+    .stack-box {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      // gap: 2rem;
+      justify-items: center;
+      max-width: 1100px;
+      margin-inline: auto;
+      margin-bottom: 3rem;
+
+      .skills-card {
+        border-radius: $radius;
+        padding: 3rem;
+        background: rgb(60,60,60);
+        background: linear-gradient(45deg, rgba(60,60,60,1) 0%, rgba(156,156,156,1) 100%);
+        color: white;
+        box-shadow: $shadow-1;
+        width: 300px;
+
+        ion-icon {
+          font-size: 2.4rem;
+          margin-bottom: 0.7rem;
+        }
+
+        .card-title {
+          margin-bottom: 1.6rem;
+        }
+        
+        .card-item-list {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+
+          .card-item {
+            display: flex;
+            font-size: 1.2rem;
+            align-items: center;
+
+            ion-icon {
+              font-size: 1.2rem;
+              margin: 0;
+            }
+          }
+        }
+      }
+
+      @media(max-width: 1200px) {
+        gap: 3rem;
+
+        .skills-card {
+          width: 100%;
+        }
+      }
+
+      @media(max-width: 776px) {
+        grid-template-columns: 1fr;
+        width: 50%;
+        margin-inline: 0;
+        justify-self: center;
+      }
+
+      @media(max-width: 576px) {
+        width: 70%;
+      }
+
+      @media(max-width: 400px) {
+        width: 85%;
+      }
+    }
+
+    .skills-astronaut-box {
+      margin-bottom: 80px;
+      cursor: pointer;
+
+      .skills-astronaut-group {
+        position: relative;
+        justify-self: center;
+
+        img {
+          position: absolute;
+          left: -152px;
+          
+          @media(max-width: 450px) {
+            width: 130px;
+            left: -130px;
+          }
+        }
+
+        a {
+          position: absolute;
+          left: 152px;
+          img {
+            width: 92px;
+
+            @media(max-width: 450px) {
+              width: 72px;
+            }
+          }
+          
+          @media(max-width: 450px) {
+            left: 132px;
+          }
+        } 
+      }
+    }
+  }
+}

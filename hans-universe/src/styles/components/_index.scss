@@ -1,8 +1,14 @@
+// Common
+@forward "./blog";
+
 // Landing
 @forward "./hero";
 @forward "./newsLetter";
 @forward "./contact";
 
+// Workout
 @forward "./workoutContents";
-@forward "./blog";
 
+//Skills
+@forward "./skillsStacks";
+@forward "./portfolio";

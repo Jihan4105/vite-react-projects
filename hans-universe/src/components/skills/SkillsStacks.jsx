@@ -26,8 +26,12 @@ export default function SkillsStacks() {
           />
         </div>
         <div className="skills-astronaut-box">
-          <img src={skillsAstronautImg} alt="" />
-          <img src={githubPlanetImg} alt="" />
+          <div className="skills-astronaut-group">
+            <img src={skillsAstronautImg} alt="" />
+            <a href="https://github.com/Jihan4105">
+              <img className="gravity-moving" src={githubPlanetImg} alt=""/>
+            </a>
+          </div>
         </div>
       </div>
     </section>

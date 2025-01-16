@@ -3,6 +3,7 @@ import Header from "@components/Header"
 import Footer from "@components/Footer"
 import Sidebar from "@components/Sidebar"
 import SkillsStacks from "@components/skills/SkillsStacks"
+import Portfolio from "@components/skills/Portfolio"
 
 function WorkoutApp() {
   return (
@@ -16,6 +17,8 @@ function WorkoutApp() {
       />
       
       <SkillsStacks />
+
+      <Portfolio />
       
       <Footer />
     </>
