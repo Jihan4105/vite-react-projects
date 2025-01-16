@@ -11,3 +11,7 @@
 #skills-header {
   @include headerStyle("/src/assets/skills/skills-header.jpg", "skills")
 }
+
+#books-header {
+  @include headerStyle("/src/assets/books/books-header.jpg", "books")
+}

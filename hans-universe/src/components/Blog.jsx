@@ -12,7 +12,7 @@ Blog.propTypes = {
 
 export default function Blog({ type, dropdownItems }) {
   const [searchValue, setSearchValue] = useState("")
-  const [filterValue, setFilterValue] = useState("Title")
+  const [filterValue, setFilterValue] = useState(type != "books" ? "title" : "Genre1")
 
   return (
     <section id={`${type}-blog`}>

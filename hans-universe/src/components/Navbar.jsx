@@ -16,7 +16,7 @@ export default function Navbar() {
           <ul className="nav-links">
             <li><a href="/src/html/skills.html">Skills</a></li>
             <li><a href="/src/html/workout.html">Workout</a></li>
-            <li><a href="#books">Books</a></li>
+            <li><a href="/src/html/books.html">Books</a></li>
             <li><a href="/src/html/thoughts.html">Thoughts</a></li>
             <li><a href="#profile">Profile</a></li>
           </ul>

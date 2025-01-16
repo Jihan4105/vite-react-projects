@@ -5,5 +5,9 @@
 }
 
 #thoughts-blog .container-jh {
-  @include blogStyle("thoughts")
+  @include blogStyle("thoughts");
+}
+
+#books-blog .container-jh {
+  @include blogStyle("books");
 }

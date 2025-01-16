@@ -21,7 +21,7 @@ export default function Sidebar() {
             </a>
           </li>
           <li>
-            <a href="#books" className="sidebar-link">
+            <a href="/src/html/books.html" className="sidebar-link">
               <ion-icon name="book-outline"></ion-icon>
               Books
             </a>
