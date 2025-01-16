@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
 import emailjs from "@emailjs/browser"
 
-import { OverlayContext } from "../../../contexts/OverlayContext";
-import { getUser } from "../../../services/fetchUserDatas";
+import { OverlayContext } from "@contexts/OverlayContext";
+import { getUser } from "@services/fetchUserDatas";
 import InputField from "../InputField";
 import PropTypes from "prop-types";
-import { getElement } from "../../../utils/utils";
+import { getElement } from "@utils/utils";
 
 
 ForgotContents.propTypes = {

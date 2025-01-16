@@ -1,5 +1,5 @@
-import thoughtsContentImg from "../../assets/thoughts/thoughts-content.jpg"
-import thoughtsBlogDatas from "../../data/thoughtsBlogDatas"
+import thoughtsContentImg from "@assets/thoughts/thoughts-content.jpg"
+import thoughtsBlogDatas from "@data/thoughtsBlogDatas"
 
 export default function ThoughtsContent() {
   const copiedBlogDatas = [...thoughtsBlogDatas]
@@ -43,39 +43,6 @@ export default function ThoughtsContent() {
                 </li>
               )
             })}
-            {/* <li className="article-list-item-wrapper" key={1}>
-              <div className="article-list-item">
-                <p className="article-list-title">
-                  What makes Me
-                </p>
-                <div className="comment-group">
-                  <ion-icon name="chatbox-outline"></ion-icon>
-                  <span className="comment-number">20 Comments</span>
-                </div>
-              </div>
-            </li>
-            <li className="article-list-item-wrapper" key={2}>
-              <div className="article-list-item">
-                <p className="article-list-title">
-                  What makes human continue their things
-                </p>
-                <div className="comment-group">
-                  <ion-icon name="chatbox-outline"></ion-icon>
-                  <span className="comment-number">15 Comments</span>
-                </div>
-              </div>
-            </li>
-            <li className="article-list-item-wrapper" key={3}>
-              <div className="article-list-item">
-                <p className="article-list-title">
-                  Lorem Ipsum Lorem
-                </p>
-                <div className="comment-group">
-                  <ion-icon name="chatbox-outline"></ion-icon>
-                  <span className="comment-number">10 Comments</span>
-                </div>
-              </div>
-            </li> */}
           </ul>
         </article>
       </div>

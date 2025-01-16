@@ -1,8 +1,8 @@
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
 
-import logoImage from "../assets/logo-black.png"
-import { sidebarToggle } from "../utils/utils.js"
+import logoImage from "@assets/logo-black.png"
+import { sidebarToggle } from "@utils/utils.js"
 
 export default function Navbar() {
   return (
@@ -14,7 +14,7 @@ export default function Navbar() {
         <div className="nav-box">
 
           <ul className="nav-links">
-            <li><a href="#skills">Skills</a></li>
+            <li><a href="/src/html/skills.html">Skills</a></li>
             <li><a href="/src/html/workout.html">Workout</a></li>
             <li><a href="#books">Books</a></li>
             <li><a href="/src/html/thoughts.html">Thoughts</a></li>

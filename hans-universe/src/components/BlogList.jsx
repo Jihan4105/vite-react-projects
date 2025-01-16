@@ -2,10 +2,10 @@ import { useContext, useState } from "react"
 import { Pagination } from "@mui/material"
 import PropTypes from "prop-types"
 
-import { WindowContext } from "../contexts/WindowContext"
+import { WindowContext } from "@contexts/WindowContext"
 
-import workoutBlogDatas from "../data/workoutBlogDatas" 
-import thoughtsBlogDatas from "../data/thoughtsBlogDatas"
+import workoutBlogDatas from "@data/workoutBlogDatas" 
+import thoughtsBlogDatas from "@data/thoughtsBlogDatas"
 
 BlogList.propTypes = {
   type: PropTypes.string.isRequired,

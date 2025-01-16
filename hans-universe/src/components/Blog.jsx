@@ -2,7 +2,7 @@ import { capitalize } from "@mui/material"
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/esm/DropdownButton"
 import PropTypes from "prop-types"
-import BlogList from "./BlogList"
+import BlogList from "@components/BlogList"
 import { useState } from "react"
 
 Blog.propTypes = {

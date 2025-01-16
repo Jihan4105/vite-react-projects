@@ -1,4 +1,4 @@
-import LogoImg from "../assets/logo-black.png"
+import LogoImg from "@assets/logo-black.png"
 
 export default function Footer() {
   return (
@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="verticle-line"></div>
         <div>
           <ul className="footer-links">
-            <li><a href="#skills">Skills</a></li>
+            <li><a href="/src/html/skills.html">Skills</a></li>
             <li><a href="/src/html/workout.html">Workout</a></li>
             <li><a href="#books">Books</a></li>
             <li><a href="/src/html/thoughts.html">Thoughts</a></li>

@@ -1,4 +1,4 @@
-import { sidebarToggle } from "../utils/utils"
+import { sidebarToggle } from "@utils/utils"
 
 export default function Sidebar() {
   return (
@@ -9,7 +9,7 @@ export default function Sidebar() {
         </button>
         <ul className="sidebar-links">
           <li>
-            <a href="#skills" className="sidebar-link">
+            <a href="/src/html/skills.html" className="sidebar-link">
               <ion-icon name="code-outline"></ion-icon>
               Skills
             </a>

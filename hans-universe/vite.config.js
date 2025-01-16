@@ -15,6 +15,7 @@ export default defineConfig({
         landing: resolve(__dirname, "src/html/landing.html"),
         workout: resolve(__dirname, 'src/html/workout.html'),
         thoughts: resolve(__dirname, 'src/html/thoughts.html'),
+        skills: resolve(__dirname, 'src/html/skills.html')
       },
     },
   },

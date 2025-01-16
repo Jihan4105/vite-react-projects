@@ -1,12 +1,12 @@
-import Navbar from "../components/Navbar"
-import WorkoutContents from "../components/workout/WorkoutContents.jsx"
-import Header from "../components/Header"
-import Blog from "../components/Blog"
-import Footer from "../components/Footer"
-import Sidebar from "../components/Sidebar"
+import Navbar from "@components/Navbar"
+import WorkoutContents from "@components/workout/WorkoutContents.jsx"
+import Header from "@components/Header"
+import Blog from "@components/Blog"
+import Footer from "@components/Footer"
+import Sidebar from "@components/Sidebar"
 
-import { WindowContext } from "../contexts/WindowContext"
-import useWindow from "../hooks/useWindow.js"
+import { WindowContext } from "@contexts/WindowContext"
+import useWindow from "@hooks/useWindow.js"
 
 import { useState } from "react"
 

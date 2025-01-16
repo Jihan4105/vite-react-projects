@@ -7,3 +7,7 @@
 #thoughts-header {
   @include headerStyle("/src/assets/thoughts/thoughts-header.jpg", "thoughts")
 }
+
+#skills-header {
+  @include headerStyle("/src/assets/skills/skills-header.jpg", "skills")
+}

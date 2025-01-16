@@ -2,7 +2,13 @@ import workoutPlanetImg from "@assets/landing/workout.png"
 import booksPlanetImg from "@assets/landing/books.png"
 import skillsPlanetImg from "@assets/landing/skills.png"
 import thoughtsPlanetImg from "@assets/landing/thoughts.png"
+import PropTypes from "prop-types"
 
+Planet.propTypes = {
+  windowSize: PropTypes.object.isRequired,
+  planetName: PropTypes.string.isRequired,
+  coords: PropTypes.array.isRequired
+}
 
 export default function Planet({ windowSize, planetName, coords }) {
 

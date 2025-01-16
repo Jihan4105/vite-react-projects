@@ -1,7 +1,6 @@
 import { useState } from "react"
 
 import Planet from "./Planet"
-
 import astronautImg from "@assets/landing/astronaut.png"
 import profilePlanetImg from "@assets/landing/planet.png"
 import useWindow from "@/hooks/useWindow"

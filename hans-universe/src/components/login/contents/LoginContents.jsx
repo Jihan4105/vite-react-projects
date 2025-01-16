@@ -1,6 +1,6 @@
 import { useState } from "react"
 import InputField from "../InputField.jsx"
-import { getUser } from "../../../services/fetchUserDatas.js"
+import { getUser } from "@services/fetchUserDatas.js"
 import PropTypes from "prop-types"
 
 LoginContents.propTypes = {
@@ -8,7 +8,7 @@ LoginContents.propTypes = {
   setContentType: PropTypes.func.isRequired
 }
 
-export default function LoginContents({ contentType,setContentType }) {
+export default function LoginContents({ contentType, setContentType }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [whichIsWrong, setWhichIsWrong] = useState("")

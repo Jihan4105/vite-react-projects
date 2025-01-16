@@ -1,3 +1,13 @@
+import PropTypes from "prop-types"
+
+Card.propTypes = {
+  bannerImg: PropTypes.string.isRequired,
+  dateTime: PropTypes.string.isRequired,
+  cardTitle: PropTypes.string.isRequired,
+  cardText: PropTypes.string.isRequired,
+  redirectURL: PropTypes.string.isRequired,
+}
+
 export default function Card({ bannerImg, dateTime, cardTitle, cardText, redirectURL }) {
   return (
     <div className="card">
