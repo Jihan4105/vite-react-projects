@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import Navbar from "@components/Navbar"
 import Header from "@components/Header"
 import Blog from "@components/Blog"
@@ -5,7 +7,18 @@ import Footer from "@components/Footer"
 import Sidebar from "@components/Sidebar"
 import BooksContent from "@/components/books/BooksContent"
 
+import { WindowContext } from "@contexts/WindowContext"
+import useWindow from "@hooks/useWindow.js"
+
+
 function WorkoutApp() {
+  const [windowSize, setWindowSize] = useState({
+    innerWidth: window.innerWidth,
+    innerHeight: window.innerHeight
+  })
+
+  useWindow(windowSize, setWindowSize)
+  
   return (
     <>
       <Navbar />
@@ -17,11 +30,13 @@ function WorkoutApp() {
       />
 
       <BooksContent />
-        
-      <Blog 
-        type="books"
-        dropdownItems={["Genre1", "Genre2", "Genre3"]}
-      />
+
+      <WindowContext.Provider value={windowSize.innerWidth}>
+        <Blog 
+          type="books"
+          dropdownItems={["Any", "Novel", "Humanities", "Philosophy"]}
+        />
+      </WindowContext.Provider>
 
       <Footer />
     </>

@@ -199,77 +199,75 @@
   }
 
   // BlogList
-  @if($type != "books") {
-    .blog-list {
-      display: grid;
-      justify-content: center;
-      margin-top: 1.5rem;
+  .blog-list {
+    display: grid;
+    justify-content: center;
+    margin-top: 1.5rem;
+
+    @media(max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-item-wrapper {
+      border-bottom: 1px solid #ccc;
+      padding: 1rem;
+      width: 700px;
+      transition: $transition;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $ghost-white;
+      }
 
       @media(max-width: 768px) {
+        width: 100%;
+      }
+
+      .blog-item {
         display: flex;
-        flex-direction: column;
-      }
+        justify-content: space-between;
 
-      .blog-item-wrapper {
-        border-bottom: 1px solid #ccc;
-        padding: 1rem;
-        width: 700px;
-        transition: $transition;
-        cursor: pointer;
-
-        &:hover {
-          background-color: $ghost-white;
+        @media(max-width: 576px) {
+          flex-direction: column;
+          gap: 0.5rem;
         }
-
-        @media(max-width: 768px) {
-          width: 100%;
-        }
-
-        .blog-item {
+        
+        .blog-title-group {
           display: flex;
-          justify-content: space-between;
+          align-items: center;
 
-          @media(max-width: 576px) {
-            flex-direction: column;
-            gap: 0.5rem;
-          }
-          
-          .blog-title-group {
-            display: flex;
-            align-items: center;
-
-            .blog-title {
-              margin-right: 0.5rem;
-              
-              @media(max-width: 450px) {
-                max-width: 249px;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space:nowrap;
-              }
-            }
-
-            ion-icon {
-              min-width: 1rem;
+          .blog-title {
+            margin-right: 0.5rem;
+            
+            @media(max-width: 450px) {
+              max-width: 249px;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space:nowrap;
             }
           }
 
-          .blog-date {
-            color: #ccc;
+          ion-icon {
+            min-width: 1rem;
           }
         }
-      }
 
-      // Pagination
-      nav {
-        margin-top: 1.2rem;
-        justify-self: center;
-
-        @media(max-width: 768px) {
-          display: flex;
-          justify-content: center;
+        .blog-date {
+          color: #ccc;
         }
       }
+    }
+  }  
+
+  // Pagination
+  nav {
+    margin-top: 1.2rem;
+    justify-self: center;
+
+    @media(max-width: 768px) {
+      display: flex;
+      justify-content: center;
     }
   }
 }

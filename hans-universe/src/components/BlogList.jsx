@@ -6,6 +6,7 @@ import { WindowContext } from "@contexts/WindowContext"
 
 import workoutBlogDatas from "@data/workoutBlogDatas" 
 import thoughtsBlogDatas from "@data/thoughtsBlogDatas"
+import booksBlogDatas from "@data/booksBlogDatas"
 
 BlogList.propTypes = {
   type: PropTypes.string.isRequired,
@@ -18,6 +19,7 @@ export default function BlogList({ type, searchValue, filterValue}) {
   const [selectedPage, setSelectedPage] = useState("1")
   const windowWidth = useContext(WindowContext)
   let blogDatas
+  let filteredDatas
 
   switch(type) {
     case "workout" :
@@ -26,21 +28,43 @@ export default function BlogList({ type, searchValue, filterValue}) {
     case "thoughts" :
       blogDatas = thoughtsBlogDatas
       break;
+    case "books" :
+      blogDatas = booksBlogDatas
+      break;
   } 
-  
-  const filteredDatas = blogDatas.filter((blogData) => {
-    if(filterValue === "Title + Content") {
-      return (
-        blogData.title.toLowerCase().includes(searchValue.toLowerCase()) ? 
-        true : 
-          blogData.content.toLowerCase().includes(searchValue.toLowerCase()) ? 
+
+  filteredDatas = blogDatas.filter((blogData) => {
+    if(type === "workout" || type === "thoughts") {
+      if(filterValue === "Title + Content") {
+        return (
+          blogData.title.toLowerCase().includes(searchValue.toLowerCase()) ? 
           true : 
+            blogData.content.toLowerCase().includes(searchValue.toLowerCase()) ? 
+            true : 
+            false
+        )
+      }  
+      else {
+        return (blogData[filterValue.toLowerCase()].toLowerCase().includes(searchValue.toLowerCase()))
+      }
+    }
+    else if( type === "books" ) {
+      if(filterValue === "Any") {
+        return(
+          blogData.title.toLowerCase().includes(searchValue.toLowerCase()) ?
+          true :
           false
-      )
-    } else {
-      return (blogData[filterValue.toLowerCase()].toLowerCase().includes(searchValue.toLowerCase()))
+        )
+      } else {
+        return (
+          blogData.genre === filterValue.toLowerCase() 
+            &&
+          blogData.title.toLowerCase().includes(searchValue.toLowerCase()) 
+        )
+      }
     }
   })
+  
   
   const startIndex = 5 * (selectedPage - 1)
   const endIndex = 5 * selectedPage - 1
@@ -66,13 +90,13 @@ export default function BlogList({ type, searchValue, filterValue}) {
             )
           }
         })}
-        <Pagination 
-          count={filteredDatas.length / 5} 
-          color="primary" 
-          size={windowWidth > 500 ? "large" : windowWidth > 380 ? "medium" : "small"}
-          onChange={(_, page) => {setSelectedPage(page)}}
-        />
       </ul>
+      <Pagination 
+        count={Math.ceil(filteredDatas.length / 5)} 
+        color="primary" 
+        size={windowWidth > 500 ? "large" : windowWidth > 380 ? "medium" : "small"}
+        onChange={(_, page) => {setSelectedPage(page)}}
+      />
     </>
   )
 }

@@ -1,9 +1,11 @@
+import { useState } from "react"
 import { capitalize } from "@mui/material"
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/esm/DropdownButton"
 import PropTypes from "prop-types"
+
 import BlogList from "@components/BlogList"
-import { useState } from "react"
+
 
 Blog.propTypes = {
   type: PropTypes.string.isRequired,
@@ -12,7 +14,7 @@ Blog.propTypes = {
 
 export default function Blog({ type, dropdownItems }) {
   const [searchValue, setSearchValue] = useState("")
-  const [filterValue, setFilterValue] = useState(type != "books" ? "title" : "Genre1")
+  const [filterValue, setFilterValue] = useState(type != "books" ? "title" : "Any")
 
   return (
     <section id={`${type}-blog`}>
@@ -53,7 +55,7 @@ export default function Blog({ type, dropdownItems }) {
             />
           </div>
         </div>
-        {type === "books" || <BlogList type={type} searchValue={searchValue} filterValue={filterValue} />}
+        <BlogList type={type} searchValue={searchValue} filterValue={filterValue} />
       </div>
     </section>
   )

@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import Navbar from "@components/Navbar"
 import WorkoutContents from "@components/workout/WorkoutContents.jsx"
 import Header from "@components/Header"
@@ -8,7 +10,6 @@ import Sidebar from "@components/Sidebar"
 import { WindowContext } from "@contexts/WindowContext"
 import useWindow from "@hooks/useWindow.js"
 
-import { useState } from "react"
 
 function WorkoutApp() {
   const [windowSize, setWindowSize] = useState({
