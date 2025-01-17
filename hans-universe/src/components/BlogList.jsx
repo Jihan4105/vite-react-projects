@@ -84,7 +84,7 @@ export default function BlogList({ type, searchValue, filterValue}) {
                     <ion-icon name="chatbox-outline"></ion-icon>
                     <span className="comment-number">({blogItem.commentsNumber})</span>
                   </div>
-                  <span className="blog-date">{blogItem.date}</span>
+                  <span className="blog-date">{blogItem.modifiedDate}</span>
                 </div>
               </li>
             )

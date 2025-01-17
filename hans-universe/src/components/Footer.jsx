@@ -1,11 +1,15 @@
+import { UserContext } from "@/contexts/UserContext"
 import LogoImg from "@assets/logo-black.png"
+import { useContext } from "react"
 
 export default function Footer() {
+  const user = useContext(UserContext)
+
   return (
     <footer id="footer">
       <div className="container-jh">
         <div className="footer-content">
-          <a href="/src/html/landing.html">
+          <a href={`/src/html/landing.html?userId=${user.id}`}>
             <img src={LogoImg} alt="Logo" />
           </a>
           <p><span>Address:</span> Pusan Dongnaegu Munhwaroo 15</p>
@@ -22,10 +26,10 @@ export default function Footer() {
         <div className="verticle-line"></div>
         <div>
           <ul className="footer-links">
-            <li><a href="/src/html/skills.html">Skills</a></li>
-            <li><a href="/src/html/workout.html">Workout</a></li>
-            <li><a href="/src/html/books.html">Books</a></li>
-            <li><a href="/src/html/thoughts.html">Thoughts</a></li>
+          <li><a href={`/src/html/skills.html?userId=${user.id}`}>Skills</a></li>
+            <li><a href={`/src/html/workout.html?userId=${user.id}`}>Workout</a></li>
+            <li><a href={`/src/html/books.html?userId=${user.id}`}>Books</a></li>
+            <li><a href={`/src/html/thoughts.html?userId=${user.id}`}>Thoughts</a></li>
             <li><a href="#profile">Profile</a></li>
           </ul>
         </div>

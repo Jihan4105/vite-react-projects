@@ -4,7 +4,8 @@ const booksBlogDatas = [
     title: "Book1 Novel",
     booksImg: "/src/assets/books/books-blog.jpg",
     genre: "novel",
-    date: "2025-01-17",
+    wroteDate: "2025-01-17",
+    modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
     commentsNumber: "10"
   },
@@ -13,7 +14,8 @@ const booksBlogDatas = [
     title: "Book2 Novel",
     booksImg: "/src/assets/books/books-blog.jpg",
     genre: "novel",
-    date: "2025-01-17",
+    wroteDate: "2025-01-17",
+    modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
     commentsNumber: "10"
   },
@@ -22,7 +24,8 @@ const booksBlogDatas = [
     title: "Book3 Novel",
     booksImg: "/src/assets/books/books-blog.jpg",
     genre: "novel",
-    date: "2025-01-17",
+    wroteDate: "2025-01-17",
+    modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
     commentsNumber: "10"
   },
@@ -31,7 +34,8 @@ const booksBlogDatas = [
     title: "Book4 Humanities",
     booksImg: "/src/assets/books/books-blog.jpg",
     genre: "humanities",
-    date: "2025-01-17",
+    wroteDate: "2025-01-17",
+    modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
     commentsNumber: "10"
   },
@@ -40,7 +44,8 @@ const booksBlogDatas = [
     title: "Book5 Novel",
     booksImg: "/src/assets/books/books-blog.jpg",
     genre: "novel",
-    date: "2025-01-17",
+    wroteDate: "2025-01-17",
+    modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
     commentsNumber: "10"
   },
@@ -49,7 +54,8 @@ const booksBlogDatas = [
     title: "Book6 Humanities",
     booksImg: "/src/assets/books/books-blog.jpg",
     genre: "humanities",
-    date: "2025-01-17",
+    wroteDate: "2025-01-17",
+    modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
     commentsNumber: "10"
   },
@@ -58,7 +64,8 @@ const booksBlogDatas = [
     title: "Book7 Humanities",
     booksImg: "/src/assets/books/books-blog.jpg",
     genre: "humanities",
-    date: "2025-01-17",
+    wroteDate: "2025-01-17",
+    modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
     commentsNumber: "10"
   },
@@ -67,7 +74,8 @@ const booksBlogDatas = [
     title: "Book8 Philosphy",
     booksImg: "/src/assets/books/books-blog.jpg",
     genre: "philosophy",
-    date: "2025-01-17",
+    wroteDate: "2025-01-17",
+    modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
     commentsNumber: "10"
   },
@@ -76,7 +84,8 @@ const booksBlogDatas = [
     title: "Book9 Humanities",
     booksImg: "/src/assets/books/books-blog.jpg",
     genre: "humanities",
-    date: "2025-01-17",
+    wroteDate: "2025-01-17",
+    modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
     commentsNumber: "10"
   },
@@ -85,7 +94,8 @@ const booksBlogDatas = [
     title: "Book10 Philosphy",
     booksImg: "/src/assets/books/books-blog.jpg",
     genre: "philosophy",
-    date: "2025-01-17",
+    wroteDate: "2025-01-17",
+    modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
     commentsNumber: "10"
   },

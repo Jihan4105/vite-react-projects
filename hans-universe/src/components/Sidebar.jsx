@@ -1,6 +1,10 @@
+import { UserContext } from "@/contexts/UserContext"
 import { sidebarToggle } from "@utils/utils"
+import { useContext } from "react"
 
 export default function Sidebar() {
+  const user = useContext(UserContext)
+
   return (
     <div className="sidebar-overlay">
       <aside className="sidebar">
@@ -9,25 +13,25 @@ export default function Sidebar() {
         </button>
         <ul className="sidebar-links">
           <li>
-            <a href="/src/html/skills.html" className="sidebar-link">
+            <a href={`/src/html/skills.html?userId=${user.id}`} className="sidebar-link">
               <ion-icon name="code-outline"></ion-icon>
               Skills
             </a>
           </li>
           <li>
-            <a href="/src/html/workout.html" className="sidebar-link">
+            <a href={`/src/html/workout.html?userId=${user.id}`} className="sidebar-link">
               <ion-icon name="barbell-outline"></ion-icon>
               Workout
             </a>
           </li>
           <li>
-            <a href="/src/html/books.html" className="sidebar-link">
+            <a href={`/src/html/books.html?userId=${user.id}`} className="sidebar-link">
               <ion-icon name="book-outline"></ion-icon>
               Books
             </a>
           </li>
           <li>
-            <a href="/src/html/thoughts.html" className="sidebar-link">
+            <a href={`/src/html/thoughts.html?userId=${user.id}`} className="sidebar-link">
               <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
               Thoughts
             </a>

@@ -1,23 +1,27 @@
+import { useContext } from "react"
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
 
 import logoImage from "@assets/logo-black.png"
 import { sidebarToggle } from "@utils/utils.js"
+import { UserContext } from "@contexts/UserContext"
 
 export default function Navbar() {
+  const user = useContext(UserContext)
+
   return (
     <nav id="nav">
       <div className="container-jh">
-        <a href="/src/html/landing.html" className="logo-link">
+        <a href={`/src/html/landing.html?userId=${user.id}`} className="logo-link">
           <img src={logoImage} alt="logo" />
         </a>
         <div className="nav-box">
 
           <ul className="nav-links">
-            <li><a href="/src/html/skills.html">Skills</a></li>
-            <li><a href="/src/html/workout.html">Workout</a></li>
-            <li><a href="/src/html/books.html">Books</a></li>
-            <li><a href="/src/html/thoughts.html">Thoughts</a></li>
+            <li><a href={`/src/html/skills.html?userId=${user.id}`}>Skills</a></li>
+            <li><a href={`/src/html/workout.html?userId=${user.id}`}>Workout</a></li>
+            <li><a href={`/src/html/books.html?userId=${user.id}`}>Books</a></li>
+            <li><a href={`/src/html/thoughts.html?userId=${user.id}`}>Thoughts</a></li>
             <li><a href="#profile">Profile</a></li>
           </ul>
 
@@ -64,7 +68,9 @@ export default function Navbar() {
             drop="down"
             variant="transparent"
             title={
-              <div className="user-img-wrapper"></div>
+              <div className="user-img-wrapper">
+                <img src={user.userProfile} alt="" className="user-img" />
+              </div>
             }
           >
             <Dropdown.Item eventKey="1">
@@ -81,7 +87,7 @@ export default function Navbar() {
               </div>
             </Dropdown.Item>
           </DropdownButton>
-          <span className="user-name">John Doe</span>
+          <span className="user-name">{user.userName}</span>
           <div className="menu-btn icon-btn" onClick={() => {sidebarToggle()}}>
             <ion-icon name="menu-outline" />
           </div>

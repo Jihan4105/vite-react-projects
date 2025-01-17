@@ -5,21 +5,30 @@ import Contact from "@components/landing/Contact"
 import Footer from "@components/Footer"
 import Sidebar from "@components/Sidebar"
 
+import { UserContext } from "@contexts/UserContext"
+import { queryStringToObject } from "@utils/utils"
+import { getUserById } from "@services/fetchUserDatas"
+
 function LandingApp() {
+  const url = new URL(`${window.location.href}`)
+  const queryObject = queryStringToObject(url)
+  const user = getUserById(queryObject.userId)
 
   return (
     <>
-      <Navbar />
-      
-      <Sidebar />
-      
-      <Hero />
+      <UserContext.Provider value={user}>
+        <Navbar />
+        
+        <Sidebar />
+        
+        <Hero />
 
-      <NewsLetter />
+        <NewsLetter />
 
-      <Contact />
-      
-      <Footer />
+        <Contact />
+        
+        <Footer />
+      </UserContext.Provider>
     </>
   )
 }

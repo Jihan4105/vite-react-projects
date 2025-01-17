@@ -5,3 +5,9 @@ export function getUser(email) {
 
   return corrrectUser[0]
 }
+
+export function getUserById(userId) {
+  const corrrectUser = userDatas.filter((userData) => userData.id == userId)
+
+  return corrrectUser[0]
+}
