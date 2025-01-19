@@ -3,6 +3,7 @@ import { Pagination } from "@mui/material"
 import PropTypes from "prop-types"
 
 import { WindowContext } from "@contexts/WindowContext"
+import { UserContext } from "@/contexts/UserContext"
 
 import workoutBlogDatas from "@data/workoutBlogDatas" 
 import thoughtsBlogDatas from "@data/thoughtsBlogDatas"
@@ -18,6 +19,7 @@ export default function BlogList({ type, searchValue, filterValue}) {
 
   const [selectedPage, setSelectedPage] = useState("1")
   const windowWidth = useContext(WindowContext)
+  const user = useContext(UserContext)
   let blogDatas
   let filteredDatas
 
@@ -75,7 +77,7 @@ export default function BlogList({ type, searchValue, filterValue}) {
         {filteredDatas.map((blogItem, index) => {
           if(startIndex <= index && index <= endIndex) {
             return (
-              <li className="blog-item-wrapper" key={blogItem.id}>
+              <li className="blog-item-wrapper" key={blogItem.id} onClick={() => {redirectBlogDetail(user.id, type, index)}}>
                 <div className="blog-item">
                   <div className="blog-title-group">
                     <p className="blog-title">
@@ -99,4 +101,9 @@ export default function BlogList({ type, searchValue, filterValue}) {
       />
     </>
   )
+}
+
+function redirectBlogDetail(userId, type, index) {
+
+  window.location.href = `/src/html/singleblog.html?userId=${userId}&type=${type}&blogIndex=${index}`
 }
