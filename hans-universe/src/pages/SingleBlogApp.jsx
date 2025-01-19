@@ -2,7 +2,7 @@ import Navbar from "@components/Navbar"
 import Footer from "@components/Footer"
 import Sidebar from "@components/Sidebar"
 import SingleBlog from "@components/SingleBlog"
-import Comment from "@components/Comment"
+import Comment from "@/components/comment/Comment"
 
 import { UserContext } from "@contexts/UserContext"
 import { queryStringToObject } from "@utils/utils"
