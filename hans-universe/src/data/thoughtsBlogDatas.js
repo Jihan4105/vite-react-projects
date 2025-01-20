@@ -31,7 +31,7 @@ const thoughtsBlogDatas = [
             userId: 3,
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
-            thumbsUp: 2,
+            thumbsUp: 0,
             thumbsDown: 0,
           },
         ]

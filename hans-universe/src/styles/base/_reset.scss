@@ -173,29 +173,16 @@ section {
   }
 }
 
-.comment-box {
-  display: grid;
-
-  .user-profile {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
+.replies-box {
+  margin-left: 3.5rem;
 }
 
-.comment-input-box {
-  display: flex;
+.comment-box {
+  display: flex; 
 
-  .user-profile-wrapper {
-    width: 40px;
-    height: 40px;
+  .user-profile {
+    max-width: 40px;
+    max-height: 40px;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 1.2rem;
@@ -204,6 +191,109 @@ section {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .content-group {
+    display: grid;
+    width: 100%;
+
+    .user-field {
+      display: flex;
+      align-items: center;
+
+      .user-name {
+        font-weight: 600;
+        margin-right: 0.5rem;
+      }
+
+      .date {
+        font-size: 0.75rem;
+      }
+    }
+
+    .text-field {
+      font-weight: $fw-500;
+    }
+
+    .show-details-btn {
+      width: fit-content;
+      color: #606060;
+      background-color: transparent;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .reaction-field {
+      display: flex;
+      align-items: center;
+      
+      ion-icon {
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+        cursor: pointer;
+      }
+
+      .thumbs-up-number {
+        margin-right: 1rem;
+      }
+
+      .reply-btn {
+        height: 36px;
+        margin-right: 0.7rem;
+        padding-inline: 1.1rem;
+        border-radius: 18px;
+        background-color: transparent;
+
+        &:hover {
+          background-color: #E5E5E5;
+        }
+      }
+    }
+
+    .expand-replies {
+      .expand-replies-btn {
+        display: flex;
+        align-items: center;
+        padding-inline: 1.1rem;
+        height: 36px;
+        border-radius: 18px;
+        color: #0D6BF5;
+        background-color: transparent;
+
+        ion-icon {
+          font-size: 1.2rem;
+          margin-right: 0.5rem;
+        }
+
+        &:hover {
+          background-color: #DEF1FF;
+        }
+      }
+    }
+  }
+}
+
+.comment-input-box {
+  display: flex;
+
+  .user-profile-wrapper {
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 1.2rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
   }
 
@@ -216,6 +306,7 @@ section {
       border-bottom: 1px solid black;
 
       textarea {
+        display: flex;
         border: none;
         outline: none;
         width: 100%;
@@ -238,7 +329,7 @@ section {
         background-color: transparent;
 
         &:hover {
-          background-color: #F0F0F0;
+          background-color: #E5E5E5;
         }
       }
 

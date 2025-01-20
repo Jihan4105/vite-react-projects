@@ -20,6 +20,7 @@ export default function CommentInput() {
               autoHeight(e.target)
               setCommentText(e.target.value); 
             }}
+            placeholder="Add a comment..."
           />
         </div>
         <div className="button-group">

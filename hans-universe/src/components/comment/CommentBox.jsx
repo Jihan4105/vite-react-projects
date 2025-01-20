@@ -14,18 +14,18 @@ export default function CommentBox({ replyItem }) {
           <span className="user-name">{user.userName}</span>
           <span className="date">{replyItem.date}</span>
         </div>
-      </div>
-      <div className="text-field">
-        {replyItem.content}
-      </div>
-      <button className="show-details-btn">
-        Show details
-      </button>
-      <div className="reaction-field">
-        <ion-icon name="thumbs-up-outline"></ion-icon>
-        <span className="thumbsUp-number">{replyItem.thumbsUp}</span>
-        <ion-icon name="thumbs-down-outline"></ion-icon>
-        <button className="reply-btn">Reply</button>
+        <div className="text-field">
+          {replyItem.content}
+        </div>
+        <button className="show-details-btn">
+          Show details
+        </button>
+        <div className="reaction-field">
+          <ion-icon name="thumbs-up-outline"></ion-icon>
+          {replyItem.thumbsUp != 0 && <span className="thumbs-up-number">{replyItem.thumbsUp}</span>}
+          <ion-icon name="thumbs-down-outline"></ion-icon>
+          <button className="reply-btn">Reply</button>
+        </div>
         <CommentInput />
       </div>
     </div>
