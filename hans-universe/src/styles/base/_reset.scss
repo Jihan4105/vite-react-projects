@@ -174,11 +174,12 @@ section {
 }
 
 .replies-box {
-  margin-left: 3.5rem;
+  margin-left: 4rem;
 }
 
 .comment-box {
   display: flex; 
+  flex-wrap: nowrap;
 
   .user-profile {
     max-width: 40px;
@@ -214,15 +215,22 @@ section {
     }
 
     .text-field {
-      font-weight: $fw-500;
+      display: -webkit-box;
+      max-width: 100%;
+      word-break: break-word;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
     }
 
     .show-details-btn {
       width: fit-content;
-      color: #606060;
+      color: $grey-2;
       background-color: transparent;
       font-weight: 400;
       margin-bottom: 0.5rem;
+      display: none;
 
       &:hover {
         text-decoration: underline;
@@ -257,6 +265,7 @@ section {
     }
 
     .expand-replies {
+      margin-bottom: 1rem;
       .expand-replies-btn {
         display: flex;
         align-items: center;

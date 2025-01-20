@@ -1,8 +1,9 @@
-import { queryStringToObject } from "@utils/utils"
+import { queryStringToObject, isEllipsisActive } from "@utils/utils"
 import { getBlogItemByIndex } from "@services/fetchBlogItem"
 import { getUserById } from "@services/fetchUserDatas"
 import CommentInput from "./CommentInput"
 import CommentBox from "./CommentBox"
+import { useEffect, useRef, useState } from "react"
 
 export default function Comment() {
   const url = new URL(`${window.location.href}`) 
@@ -17,10 +18,31 @@ export default function Comment() {
         {
           blogItem.commentTree.map((commentItem, index) => {
             const user = getUserById(commentItem.userId)
+            const textArea = useRef(null)
+            
+            useEffect(() => {
+              const observer = new ResizeObserver((entries) => {
+                for (let entry of entries) {
+                  const { width, height } = entry.contentRect;
+
+                  if(isEllipsisActive(textArea.current)) {
+                    textArea.current.nextElementSibling.style.display = "inline-block"
+                  } else {
+                    textArea.current.nextElementSibling.style.display = "none"
+                  }
+                }
+              });
+
+              observer.observe(textArea.current)
+
+              return () => {
+                observer.unobserve(textArea.current)
+              }
+            }, [])
 
             return(
-              <>
-                <div className="comment-box" key={`comment-${index}`}>
+              <div key={`comment-${index}`}>
+                <div className="comment-box">
                   <div className="user-profile">
                     <img src={user.userProfile} />
                   </div>
@@ -29,8 +51,8 @@ export default function Comment() {
                       <span className="user-name">{user.userName}</span>
                       <span className="date">{commentItem.date}</span>
                     </div>
-                    <div className="text-field">
-                      {commentItem.content}
+                    <div className="text-field" ref={textArea}>
+                      {commentItem.content}ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                     </div>
                     <button className="show-details-btn">
                       Show details
@@ -62,7 +84,7 @@ export default function Comment() {
                     )
                   })}
                 </div>
-              </>
+              </div>
             )
           })
         }

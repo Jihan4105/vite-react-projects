@@ -25,3 +25,7 @@ export function queryStringToObject(url) {
     }
   );
 }
+
+export function isEllipsisActive(el) {
+  return el.offsetHeight < el.scrollHeight;
+};
