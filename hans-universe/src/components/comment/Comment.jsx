@@ -19,6 +19,7 @@ export default function Comment() {
           blogItem.commentTree.map((commentItem, index) => {
             const user = getUserById(commentItem.userId)
             const textArea = useRef(null)
+            const [isShowDetailActivate, setIsShowDetailActivate] = useState(false) 
             
             useEffect(() => {
               const observer = new ResizeObserver((entries) => {
@@ -26,9 +27,9 @@ export default function Comment() {
                   const { width, height } = entry.contentRect;
 
                   if(isEllipsisActive(textArea.current)) {
-                    textArea.current.nextElementSibling.style.display = "inline-block"
+                    setIsShowDetailActivate(true)
                   } else {
-                    textArea.current.nextElementSibling.style.display = "none"
+                    setIsShowDetailActivate(false)
                   }
                 }
               });
@@ -54,9 +55,11 @@ export default function Comment() {
                     <div className="text-field" ref={textArea}>
                       {commentItem.content}ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                     </div>
-                    <button className="show-details-btn">
-                      Show details
-                    </button>
+                    {isShowDetailActivate && 
+                      <button className="show-details-btn">
+                        Show details
+                      </button>
+                    }
                     <div className="reaction-field">
                       <ion-icon name="thumbs-up-outline"></ion-icon>
                       <span className="thumbs-up-number">{commentItem.thumbsUp}</span>

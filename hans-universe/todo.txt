@@ -8,3 +8,6 @@ Skills Page 개발시작해야함 내일.
 Books page 개발 이어가야함.
 (구체적으론 books blog card list 개발 시작해야함)
 
+-----------2025-01-20
+
+Single Blog Page 개발 이어가야함, 구체적으론 댓글기능 먼저 구연하고 있었음.
