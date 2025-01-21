@@ -16,27 +16,29 @@ export default function Comment({ blogType, blogIndex }) {
         />
         {
           blogItem.commentTree.map((commentItem, index) => {
-            const [displayExpand, setDisplayExpand] = useState("none")
+            const [isExpandEnabled, setIsExpandEnabled] = useState(false)
 
             return(
               <div key={`comment-${index}`}>
                 <CommentBox 
                   commentItem={commentItem}
                   isReplyExist={true}
-                  displayExpand={displayExpand}
-                  setDisplayExpand={setDisplayExpand}
+                  isExpandEnabled={isExpandEnabled}
+                  setIsExpandEnabled={setIsExpandEnabled}
                 />
-                <div className="replies-box" style={{ display: displayExpand }}>
-                  {commentItem.replies.map((replyItem, index) => {
-                    return(
-                      <CommentBox 
-                        key={index}
-                        commentItem={replyItem}
-                        isReplyExist={false}
-                      />
-                    )
-                  })}
-                </div>
+                {isExpandEnabled &&
+                  <div className="replies-box">
+                    {commentItem.replies.map((replyItem, index) => {
+                      return(
+                        <CommentBox 
+                          key={index}
+                          commentItem={replyItem}
+                          isReplyExist={false}
+                        />
+                      )
+                    })}
+                  </div>
+                }
               </div>
             )
           })

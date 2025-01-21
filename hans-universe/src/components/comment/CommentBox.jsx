@@ -4,7 +4,7 @@ import { isEllipsisActive } from "@/utils/utils"
 import { getUserById } from "@services/fetchUserDatas"
 import CommentInput from "./CommentInput"
 
-export default function CommentBox({ commentItem, isReplyExist = false, displayExpand = undefined, setDisplayExpand = undefined }) {
+export default function CommentBox({ commentItem, isReplyExist = false, isExpandEnabled = undefined, setIsExpandEnabled = undefined }) {
   const user = getUserById(commentItem.userId)
   const textArea = useRef(null)
   const [isShowDetailActivate, setIsShowDetailActivate] = useState(false) 
@@ -70,12 +70,12 @@ export default function CommentBox({ commentItem, isReplyExist = false, displayE
           />
         }
         {commentItem.replyNumber != 0 && isReplyExist && 
-          <div className="expand-replies" onClick={() => { setDisplayExpand( displayExpand === "none" ? "block" : "none") }}>
+          <div className="expand-replies" onClick={() => { setIsExpandEnabled(!isExpandEnabled) }}>
             <button className="expand-replies-btn">
-              {displayExpand === "none" ? 
-                <ion-icon name="chevron-down-outline"></ion-icon> 
-                :
+              {isExpandEnabled ? 
                 <ion-icon name="chevron-up-outline"></ion-icon>
+                :
+                <ion-icon name="chevron-down-outline"></ion-icon> 
               }
               {commentItem.replyNumber} Replies
             </button>
