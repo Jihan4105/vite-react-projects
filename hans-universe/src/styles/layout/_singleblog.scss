@@ -59,10 +59,10 @@
       margin-bottom: 40px;
 
       @media(max-width: 576px) {
-        font-size: 1rem;
+        font-size: 1.1rem;
       }
 
-      @media(max-width: 400px) {
+      @media(max-width: 420px) {
         flex-direction: column;
         gap: 0;
       }
@@ -88,6 +88,221 @@
 
         div{
           font-size: 40px;
+
+          @media(max-width: 576px) {
+            font-size: 35px;
+          }
+        }
+      }
+    }
+  }
+}
+
+#comment {
+  .container-jh {
+    .comment-number {
+      margin-bottom: 1rem;
+    }
+
+    .comment-box {
+      display: flex; 
+      flex-wrap: nowrap;
+    
+      .user-profile {
+        min-width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 1.2rem;
+    
+        img {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    
+      .content-group {
+        display: grid;
+        width: 100%;
+    
+        .user-field {
+          display: flex;
+          align-items: center;
+    
+          .user-name {
+            font-weight: 600;
+            margin-right: 0.5rem;
+          }
+    
+          .date {
+            font-size: 0.75rem;
+          }
+        }
+    
+        .text-field {
+          display: -webkit-box;
+          max-width: 100%;
+          word-break: break-word;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+        }
+    
+        .show-details-btn {
+          width: fit-content;
+          color: $grey-2;
+          background-color: transparent;
+          font-weight: 400;
+          margin-bottom: 0.5rem;
+    
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+    
+        .reaction-field {
+          display: flex;
+          align-items: center;
+          
+          ion-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+          }
+    
+          .thumbs-up-number, .thumbs-down-number {
+            margin-right: 1rem;
+          }
+    
+          .reply-btn {
+            height: 36px;
+            margin-right: 0.7rem;
+            padding-inline: 1.1rem;
+            border-radius: 18px;
+            background-color: transparent;
+    
+            &:hover {
+              background-color: #E5E5E5;
+            }
+          }
+        }
+    
+        .spacing {
+          margin-bottom: 1.2rem;
+        }
+    
+        .expand-replies {
+          margin-bottom: 1rem;
+    
+          .expand-replies-btn {
+            display: flex;
+            align-items: center;
+            padding-inline: 1.1rem;
+            height: 36px;
+            border-radius: 18px;
+            color: #0D6BF5;
+            background-color: transparent;
+    
+            ion-icon {
+              font-size: 1.2rem;
+              margin-right: 0.5rem;
+            }
+    
+            &:hover {
+              background-color: #DEF1FF;
+            }
+          }
+        }
+      }
+    }
+
+    .replies-box {
+      margin-left: 4rem;
+    
+      @media(max-width: 500px) {
+        margin-left: 2rem;
+      }
+    }
+    
+    .comment-input-box {
+      display: flex;
+      min-height: 55px;
+    
+      .user-profile-wrapper {
+        max-width: 40px;
+        max-height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 1.2rem;
+    
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    
+      .input-group {
+        display: flex;
+        flex-direction: column;
+    
+        .input-wrapper {
+          width: 100%;
+          border-bottom: 1px solid #909090;
+    
+          textarea {
+            display: flex;
+            border: none;
+            outline: none;
+            width: 100%;
+            height: 1.5rem;
+            resize: none;
+            overflow: hidden;
+    
+          }
+    
+          &:has(textarea:focus) {
+            border-bottom: 1.95px solid #0F0F0F;
+          }
+        }
+    
+        .button-group {
+          display: flex;
+          justify-content: flex-end;
+          margin-top: 0.5rem;
+    
+          .cancel-btn {
+            height: 36px;
+            margin-right: 0.7rem;
+            padding-inline: 1.1rem;
+            border-radius: 18px;
+            background-color: transparent;
+    
+            &:hover {
+              background-color: #E5E5E5;
+            }
+          }
+    
+          .submit-btn {
+            height: 36px;
+            margin-right: 0.7rem;
+            padding-inline: 1.1rem;
+            border-radius: 18px;
+    
+            &:is(:disabled) {
+              background-color: #F2F2F2;
+              color: $grey-2;
+            }
+    
+            &:not(:disabled) {
+              background-color: black;
+              color: white;
+            }
+          }
         }
       }
     }

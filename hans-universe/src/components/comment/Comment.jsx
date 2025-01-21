@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import { queryStringToObject } from "@utils/utils"
 import { getBlogItemByIndex } from "@services/fetchBlogItem"
 import CommentInput from "./CommentInput"
@@ -17,13 +19,17 @@ export default function Comment() {
         />
         {
           blogItem.commentTree.map((commentItem, index) => {
+            const [displayExpand, setDisplayExpand] = useState("none")
+
             return(
               <div key={`comment-${index}`}>
                 <CommentBox 
                   commentItem={commentItem}
                   isReplyExist={true}
+                  displayExpand={displayExpand}
+                  setDisplayExpand={setDisplayExpand}
                 />
-                <div className="replies-box">
+                <div className="replies-box" style={{ display: displayExpand }}>
                   {commentItem.replies.map((replyItem, index) => {
                     return(
                       <CommentBox 
