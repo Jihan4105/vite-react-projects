@@ -9,7 +9,7 @@ export default function Footer() {
     <footer id="footer">
       <div className="container-jh">
         <div className="footer-content">
-          <a href={`/src/html/landing.html?userId=${user.id}`}>
+          <a onClick={() => {JSXdispatch({ docType: "landing" })}}>
             <img src={LogoImg} alt="Logo" />
           </a>
           <p><span>Address:</span> Pusan Dongnaegu Munhwaroo 15</p>
@@ -26,10 +26,10 @@ export default function Footer() {
         <div className="verticle-line"></div>
         <div>
           <ul className="footer-links">
-          <li><a href={`/src/html/skills.html?userId=${user.id}`}>Skills</a></li>
-            <li><a href={`/src/html/workout.html?userId=${user.id}`}>Workout</a></li>
-            <li><a href={`/src/html/books.html?userId=${user.id}`}>Books</a></li>
-            <li><a href={`/src/html/thoughts.html?userId=${user.id}`}>Thoughts</a></li>
+            <li><a onClick={() => {JSXdispatch({ docType: "skills" })}}>Skills</a></li>
+            <li><a onClick={() => {JSXdispatch({ docType: "workout" })}}>Workout</a></li>
+            <li><a onClick={() => {JSXdispatch({ docType: "books" })}}>Books</a></li>
+            <li><a onClick={() => {JSXdispatch({ docType: "thoughts" })}}>Thoughts</a></li>
             <li><a href="#profile">Profile</a></li>
           </ul>
         </div>

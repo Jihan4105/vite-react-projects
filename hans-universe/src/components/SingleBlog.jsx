@@ -1,14 +1,15 @@
-import { queryStringToObject } from "@utils/utils"
-import { getBlogItemByIndex } from "@services/fetchBlogItem"
+import { useContext } from "react"
 
-export default function SingleBlog() {
-  const url = new URL(`${window.location.href}`) 
-  const { userId, type, blogIndex } = queryStringToObject(url)
-  const blogItem = getBlogItemByIndex(type, blogIndex)
+import { getBlogItemByIndex } from "@services/fetchBlogItem"
+import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
+
+export default function SingleBlog({ blogType, blogIndex }) {
+  const blogItem = getBlogItemByIndex(blogType, blogIndex)
+  const JSXdispatch = useContext(JSXDispatchContext)
 
   return(
     <section id="single-blog">
-      <div className="icon-btn return-btn" title="Return to page" onClick={() => returnPageBtnClick(type, userId)}>
+      <div className="icon-btn return-btn" title="Return to page" onClick={() => {JSXdispatch({ docType: blogType })}}>
         <ion-icon name="return-down-back-outline"></ion-icon>
       </div>
       <div className="container-jh">
@@ -46,8 +47,4 @@ export default function SingleBlog() {
       </div>
     </section>
   )
-}
-
-function returnPageBtnClick(type, userId) {
-  window.location.href = `/src/html/${type}.html?userId=${userId}`
 }

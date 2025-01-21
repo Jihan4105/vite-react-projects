@@ -21,7 +21,7 @@ export default function NewsLetter() {
               cardText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores dolor, obcaecati eveniet officia
                   provident ea
                   non illo. Natus, debitis omnis."
-              redirectURL="workout.html"
+              docType="workout"
             />
           </li>
           <li key={2}>
@@ -33,7 +33,7 @@ export default function NewsLetter() {
               cardText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores dolor, obcaecati eveniet officia
                   provident ea
                   non illo. Natus, debitis omnis."
-              redirectURL="books.html"
+              docType="book"
             />
           </li>
           <li key={3}>
@@ -45,7 +45,7 @@ export default function NewsLetter() {
               cardText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores dolor, obcaecati eveniet officia
                   provident ea
                   non illo. Natus, debitis omnis."
-              redirectURL="thoughts.html"
+              docType="thoughts"
             />
           </li>
         </ul>

@@ -11,11 +11,12 @@ export default function CommentBox({ commentItem, isReplyExist = false, displayE
   const [isReplyBtnClicked, setIsReplyBtnClicked] = useState(false)
   
   useEffect(() => {
+    const textAreaDOM = textArea.current
     const observer = new ResizeObserver((entries) => {
       for (let entry of entries) {
         const { width, height } = entry.contentRect;
 
-        if(isEllipsisActive(textArea.current)) {
+        if(isEllipsisActive(textAreaDOM)) {
           setIsShowDetailActivate(true)
         } else {
           setIsShowDetailActivate(false)
@@ -23,10 +24,10 @@ export default function CommentBox({ commentItem, isReplyExist = false, displayE
       }
     });
 
-    observer.observe(textArea.current)
+    observer.observe(textAreaDOM)
 
     return () => {
-      observer.unobserve(textArea.current)
+      observer.unobserve(textAreaDOM)
     }
   }, [])
 

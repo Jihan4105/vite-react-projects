@@ -1,13 +1,19 @@
+import { useContext } from "react"
 import PropTypes from "prop-types"
+
+import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
 
 Card.propTypes = {
   bannerImg: PropTypes.string.isRequired,
   dateTime: PropTypes.string.isRequired,
   cardTitle: PropTypes.string.isRequired,
   cardText: PropTypes.string.isRequired,
+  docType: PropTypes.string.isRequired
 }
 
-export default function Card({ bannerImg, dateTime, cardTitle, cardText, redirectURL = null, commentNumber = null }) {
+export default function Card({ bannerImg, dateTime, cardTitle, cardText, docType }) {
+  const JSXdispatch = useContext(JSXDispatchContext)
+
   return (
     <div className="card">
       <figure className="banner">
@@ -19,28 +25,15 @@ export default function Card({ bannerImg, dateTime, cardTitle, cardText, redirec
             <ion-icon name="calendar-outline"></ion-icon>
             <time dateTime={dateTime}>{dateTime}</time>
           </span>
-          {commentNumber 
-            &&
-            <span className="comment-group">
-              <ion-icon name="chatbox-outline"></ion-icon>
-              <span>{commentNumber}</span>
-            </span>
-          }
         </div>
         <h3 className="title">{cardTitle}</h3>
         <p className="text">
           {cardText}
         </p>
-        {redirectURL 
-          && 
-          <a href={redirectURL} className="link-btn">
-            <span>View More</span>
-            <ion-icon name="chevron-forward-outline"></ion-icon>
-          </a>
-        }
-        {
-
-        }
+        <a className="link-btn" onClick={() => {JSXdispatch({ docType: docType})}}> 
+          <span>View More</span>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </a>
       </div>
     </div>
   )

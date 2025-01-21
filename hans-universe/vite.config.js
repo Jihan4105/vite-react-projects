@@ -11,12 +11,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        landing: resolve(__dirname, "src/html/landing.html"),
-        workout: resolve(__dirname, 'src/html/workout.html'),
-        thoughts: resolve(__dirname, 'src/html/thoughts.html'),
-        skills: resolve(__dirname, 'src/html/skills.html'),
-        books: resolve(__dirname, 'src/html/books.html')
+        index: resolve(__dirname, 'index.html'),
+        main: resolve(__dirname, 'src/html/app.html')
       },
     },
   },
@@ -50,6 +46,10 @@ export default defineConfig({
       {
         find: '@pages',
         replacement: resolve(__dirname, "src/pages"),
+      },
+      {
+        find: '@reducer',
+        replacement: resolve(__dirname, "src/reducer"),
       },
       {
         find: '@services',

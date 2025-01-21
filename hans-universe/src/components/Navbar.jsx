@@ -5,23 +5,25 @@ import DropdownButton from "react-bootstrap/DropdownButton"
 import logoImage from "@assets/logo-black.png"
 import { sidebarToggle } from "@utils/utils.js"
 import { UserContext } from "@contexts/UserContext"
+import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
 
 export default function Navbar() {
   const user = useContext(UserContext)
+  const JSXdispatch = useContext(JSXDispatchContext)
 
   return (
     <nav id="nav">
       <div className="container-jh">
-        <a href={`/src/html/landing.html?userId=${user.id}`} className="logo-link">
+        <a onClick={() => {JSXdispatch({ docType: "landing" })}} className="logo-link">
           <img src={logoImage} alt="logo" />
         </a>
         <div className="nav-box">
 
           <ul className="nav-links">
-            <li><a href={`/src/html/skills.html?userId=${user.id}`}>Skills</a></li>
-            <li><a href={`/src/html/workout.html?userId=${user.id}`}>Workout</a></li>
-            <li><a href={`/src/html/books.html?userId=${user.id}`}>Books</a></li>
-            <li><a href={`/src/html/thoughts.html?userId=${user.id}`}>Thoughts</a></li>
+            <li><a onClick={() => {JSXdispatch({ docType: "skills" })}}>Skills</a></li>
+            <li><a onClick={() => {JSXdispatch({ docType: "workout" })}}>Workout</a></li>
+            <li><a onClick={() => {JSXdispatch({ docType: "books" })}}>Books</a></li>
+            <li><a onClick={() => {JSXdispatch({ docType: "thoughts" })}}>Thoughts</a></li>
             <li><a href="#profile">Profile</a></li>
           </ul>
 

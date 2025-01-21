@@ -1,13 +1,14 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import ThoughtsApp from '@pages/ThoughtsApp.jsx'
+import App from '@pages/App.jsx'
 
 // MyStyles
 import "@styles/main.scss"
 
 
-createRoot(document.getElementById('thoughts-root')).render(
+createRoot(document.getElementById('app-root')).render(
   <StrictMode>
-    <ThoughtsApp />
+    <App />
   </StrictMode>,
 )
+

@@ -1,8 +1,12 @@
+import { useContext } from "react"
+
 import workoutPlanetImg from "@assets/landing/workout.png"
 import booksPlanetImg from "@assets/landing/books.png"
 import skillsPlanetImg from "@assets/landing/skills.png"
 import thoughtsPlanetImg from "@assets/landing/thoughts.png"
 import PropTypes from "prop-types"
+
+import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
 
 Planet.propTypes = {
   windowSize: PropTypes.object.isRequired,
@@ -11,6 +15,7 @@ Planet.propTypes = {
 }
 
 export default function Planet({ windowSize, planetName, coords }) {
+  const JSXdispatch = useContext(JSXDispatchContext)
 
   let planetImg
   switch(planetName) {
@@ -34,18 +39,18 @@ export default function Planet({ windowSize, planetName, coords }) {
       {windowSize.innerWidth > 768
         &&    
         <map name={`${planetName}-planet`}>
-          <area shape="circle" coords={coords[0]} href={`/src/html/${planetName}.html`} title={`${planetName}`} />
+          <area shape="circle" coords={coords[0]} onClick={() => {JSXdispatch({ docType: planetName })}} title={`${planetName}`} />
         </map>
       }
       {windowSize.innerWidth <= 768 && windowSize.innerWidth > 576
         && 
         <map name={`${planetName}-planet`}>
-          <area shape="circle" coords={coords[1]} href={`/src/html/${planetName}.html`} title={`${planetName}`} />
+          <area shape="circle" coords={coords[1]} onClick={() => {JSXdispatch({ docType: planetName })}} title={`${planetName}`} />
         </map>
       }
       {windowSize.innerWidth <= 576 && 
         <map name={`${planetName}-planet`}>
-          <area shape="circle" coords={coords[2]} href={`/src/html/${planetName}.html`} title={`${planetName}`} />
+          <area shape="circle" coords={coords[2]} onClick={() => {JSXdispatch({ docType: planetName })}} title={`${planetName}`} />
         </map>
       }
     </>
