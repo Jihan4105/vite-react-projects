@@ -1,0 +1,95 @@
+@use "../abstracts" as *;
+
+#single-blog {
+  padding-bottom: 0px;
+
+  .return-btn {
+    width: 3rem;
+    height: 3rem;
+    place-items: center;
+    display: grid;
+    position: fixed;
+    top: 6rem;
+    right: 4rem;
+    cursor: pointer;
+    z-index: 100;
+    border-radius: 50%;
+    transition: $transition;
+    background-color: $grey-1;
+
+    @media(max-width: 1200px) {
+      right: 2rem;
+    }
+
+    @media(max-width: 968px) {
+      right: 1rem;
+    }
+    
+    @media(max-width: 576px) {
+      width: 2.5rem;
+      height: 2.5rem;
+      top: auto;
+      bottom: 1rem;
+    }
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+
+    ion-icon {
+      font-size: 30px;
+
+      @media(max-width: 576px) {
+        font-size: 24px;
+      }
+    }
+  }
+  
+  .container-jh {
+    .blog-title {
+      font-size: 2.07692308rem;
+    }
+
+    .date-box {
+      display: flex;
+      gap: 2rem;
+      color: $grey-2;
+      font-size: $fs-4;
+      margin-bottom: 40px;
+
+      @media(max-width: 576px) {
+        font-size: 1rem;
+      }
+
+      @media(max-width: 400px) {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      div span {
+        margin-left: 0.5rem;
+        color: black;
+      }
+    }
+
+    .content-box {
+      margin-bottom: 40px;
+    }
+
+    .reaction-box {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      
+      div {
+        display: grid;
+        justify-items: center;
+
+        div{
+          font-size: 40px;
+        }
+      }
+    }
+  }
+}

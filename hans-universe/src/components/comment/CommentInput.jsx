@@ -1,8 +1,9 @@
 import { useContext, useState } from "react"
 import { UserContext } from "@contexts/UserContext"
 
-export default function CommentInput() {
+export default function CommentInput({ type, setIsReplyBtnClicked = undefined }) {
   const [commentText, setCommentText] = useState("")
+  const [focusStatus, setFocusStatus] = useState(false)
   const user = useContext(UserContext)
 
   return(
@@ -20,17 +21,30 @@ export default function CommentInput() {
               autoHeight(e.target)
               setCommentText(e.target.value); 
             }}
+            onFocus={(e) => setFocusStatus(true)}
             placeholder="Add a comment..."
           />
         </div>
-        <div className="button-group">
-          <button className="cancel-btn">Cancel</button>
-          {commentText === "" ? 
-            <button className="submit-btn" disabled>Submit</button>
-            :
-            <button className="submit-btn">Submit</button>
-          }
-        </div>
+        {type === "comment" && focusStatus && 
+          <div className="button-group">
+            <button className="cancel-btn" onClick={() => {setFocusStatus(false)}}>Cancel</button>
+            {commentText === "" ? 
+              <button className="submit-btn" disabled>Submit</button>
+              :
+              <button className="submit-btn">Submit</button>
+            }
+          </div>
+        }
+        {type === "reply" &&
+          <div className="button-group">
+            {setIsReplyBtnClicked && <button className="cancel-btn" onClick={() => {setIsReplyBtnClicked(false)}}>Cancel</button>}
+            {commentText === "" ? 
+              <button className="submit-btn" disabled>Submit</button>
+              :
+              <button className="submit-btn">Submit</button>
+            }
+          </div>
+        }
       </div>
     </div>
   )

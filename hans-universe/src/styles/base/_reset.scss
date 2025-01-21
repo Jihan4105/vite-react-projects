@@ -175,6 +175,10 @@ section {
 
 .replies-box {
   margin-left: 4rem;
+
+  @media(max-width: 500px) {
+    margin-left: 2rem;
+  }
 }
 
 .comment-box {
@@ -182,17 +186,27 @@ section {
   flex-wrap: nowrap;
 
   .user-profile {
-    max-width: 40px;
-    max-height: 40px;
+    min-width: 40px;
+    height: 40px;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 1.2rem;
 
+    // @media (max-width: 500px) {
+    //   min-width: 24px;
+    //   height: 24px;
+    // }
+
     img {
-      width: 100%;
-      height: 100%;
+      width: 40px;
+      height: 40px;
       object-fit: cover;
       object-position: center;
+
+      // @media (max-width: 500px) {
+      //   width: 24px;
+      //   height: 24px;
+      // }
     }
   }
 
@@ -246,7 +260,7 @@ section {
         cursor: pointer;
       }
 
-      .thumbs-up-number {
+      .thumbs-up-number, .thumbs-down-number {
         margin-right: 1rem;
       }
 
@@ -263,8 +277,16 @@ section {
       }
     }
 
+    .spacing {
+      margin-bottom: 1.2rem;
+    }
+
     .expand-replies {
       margin-bottom: 1rem;
+
+      @media(max-width: 500px) {
+        margin-left: -25px;
+      }
       .expand-replies-btn {
         display: flex;
         align-items: center;
@@ -289,6 +311,7 @@ section {
 
 .comment-input-box {
   display: flex;
+  min-height: 55px;
 
   .user-profile-wrapper {
     max-width: 40px;
@@ -311,7 +334,7 @@ section {
 
     .input-wrapper {
       width: 100%;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid #909090;
 
       textarea {
         display: flex;
@@ -321,6 +344,10 @@ section {
         height: 1.5rem;
         resize: none;
         overflow: hidden;
+      }
+
+      &:has(textarea:focus) {
+        border-bottom: 1px solid #0F0F0F;
       }
     }
 

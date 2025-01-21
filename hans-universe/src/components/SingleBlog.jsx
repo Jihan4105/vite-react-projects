@@ -3,23 +3,23 @@ import { getBlogItemByIndex } from "@services/fetchBlogItem"
 
 export default function SingleBlog() {
   const url = new URL(`${window.location.href}`) 
-  const { type, blogIndex } = queryStringToObject(url)
+  const { userId, type, blogIndex } = queryStringToObject(url)
   const blogItem = getBlogItemByIndex(type, blogIndex)
 
   return(
     <section id="single-blog">
-      <div className="icon-btn return-btn">
+      <div className="icon-btn return-btn" title="Return to page" onClick={() => returnPageBtnClick(type, userId)}>
         <ion-icon name="return-down-back-outline"></ion-icon>
       </div>
       <div className="container-jh">
         <h2 className="blog-title">{blogItem.title}</h2>
         <div className="date-box">
           <div className="wrote-date-group">
-            Wrote:
+            Wrote
             <span className="wrote-date">{blogItem.wroteDate}</span>
           </div>
           <div className="modified-date-group">
-            Modified:
+            Modified
             <span className="modified-date">{blogItem.modifiedDate}</span>
           </div>
         </div>
@@ -46,4 +46,8 @@ export default function SingleBlog() {
       </div>
     </section>
   )
+}
+
+function returnPageBtnClick(type, userId) {
+  window.location.href = `/src/html/${type}.html?userId=${userId}`
 }
