@@ -3,8 +3,9 @@ import { Pagination } from "@mui/material"
 import PropTypes from "prop-types"
 
 import { WindowContext } from "@contexts/WindowContext"
-import { UserContext } from "@/contexts/UserContext"
 import { JSXDispatchContext } from "@/contexts/JSXDispatchContext" 
+
+import { initPageScroll } from "@utils/utils"
 
 import workoutBlogDatas from "@data/workoutBlogDatas" 
 import thoughtsBlogDatas from "@data/thoughtsBlogDatas"
@@ -110,4 +111,6 @@ function redirectBlogDetail(type, index, JSXdispatch) {
     blogType: type,  
     blogIndex: index
   })
+
+  initPageScroll();
 }

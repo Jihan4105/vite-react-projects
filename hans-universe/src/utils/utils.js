@@ -29,3 +29,11 @@ export function queryStringToObject(url) {
 export function isEllipsisActive(el) {
   return el.offsetHeight < el.scrollHeight;
 };
+
+export function initPageScroll(isSidebarToggled = false) {
+  window.scrollTo({ top: 0 })
+  
+  if(isSidebarToggled) {
+    sidebarToggle()
+  }
+}

@@ -8,6 +8,8 @@ import PropTypes from "prop-types"
 
 import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
 
+import { initPageScroll } from "@utils/utils"
+
 Planet.propTypes = {
   windowSize: PropTypes.object.isRequired,
   planetName: PropTypes.string.isRequired,
@@ -39,18 +41,18 @@ export default function Planet({ windowSize, planetName, coords }) {
       {windowSize.innerWidth > 768
         &&    
         <map name={`${planetName}-planet`}>
-          <area shape="circle" coords={coords[0]} onClick={() => {JSXdispatch({ docType: planetName })}} title={`${planetName}`} />
+          <area shape="circle" coords={coords[0]} onClick={() => {JSXdispatch({ docType: planetName }); initPageScroll();}} title={`${planetName}`}  style={{ cursor: "pointer" }}/>
         </map>
       }
       {windowSize.innerWidth <= 768 && windowSize.innerWidth > 576
         && 
         <map name={`${planetName}-planet`}>
-          <area shape="circle" coords={coords[1]} onClick={() => {JSXdispatch({ docType: planetName })}} title={`${planetName}`} />
+          <area shape="circle" coords={coords[1]} onClick={() => {JSXdispatch({ docType: planetName }); initPageScroll();}} title={`${planetName}`} style={{ cursor: "pointer" }}/>
         </map>
       }
       {windowSize.innerWidth <= 576 && 
         <map name={`${planetName}-planet`}>
-          <area shape="circle" coords={coords[2]} onClick={() => {JSXdispatch({ docType: planetName })}} title={`${planetName}`} />
+          <area shape="circle" coords={coords[2]} onClick={() => {JSXdispatch({ docType: planetName }); initPageScroll();}} title={`${planetName}`} style={{ cursor: "pointer" }}/>
         </map>
       }
     </>

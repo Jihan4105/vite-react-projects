@@ -1,6 +1,6 @@
 import { UserContext } from "@contexts/UserContext"
 import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
-import { sidebarToggle } from "@utils/utils"
+import { sidebarToggle, initPageScroll } from "@utils/utils"
 import { useContext } from "react"
 
 export default function Sidebar() {
@@ -15,25 +15,25 @@ export default function Sidebar() {
         </button>
         <ul className="sidebar-links">
           <li>
-            <a onClick={() => {JSXdispatch({ docType: "skills" })}} className="sidebar-link">
+            <a onClick={() => {JSXdispatch({ docType: "skills" }); initPageScroll(true);}} className="sidebar-link">
               <ion-icon name="code-outline"></ion-icon>
               Skills
             </a>
           </li>
           <li>
-            <a onClick={() => {JSXdispatch({ docType: "workout" })}} className="sidebar-link">
+            <a onClick={() => {JSXdispatch({ docType: "workout" }); initPageScroll(true);}} className="sidebar-link">
               <ion-icon name="barbell-outline"></ion-icon>
               Workout
             </a>
           </li>
           <li>
-            <a onClick={() => {JSXdispatch({ docType: "books" })}} className="sidebar-link">
+            <a onClick={() => {JSXdispatch({ docType: "books" }); initPageScroll(true);}} className="sidebar-link">
               <ion-icon name="book-outline"></ion-icon>
               Books
             </a>
           </li>
           <li>
-            <a onClick={() => {JSXdispatch({ docType: "thoughts" })}} className="sidebar-link">
+            <a onClick={() => {JSXdispatch({ docType: "thoughts" }); initPageScroll(true);}} className="sidebar-link">
               <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
               Thoughts
             </a>

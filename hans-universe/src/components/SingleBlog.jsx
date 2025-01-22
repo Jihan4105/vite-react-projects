@@ -2,6 +2,7 @@ import { useContext } from "react"
 
 import { getBlogItemByIndex } from "@services/fetchBlogItem"
 import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
+import { initPageScroll } from "@utils/utils"
 
 export default function SingleBlog({ blogType, blogIndex }) {
   const blogItem = getBlogItemByIndex(blogType, blogIndex)
@@ -9,7 +10,7 @@ export default function SingleBlog({ blogType, blogIndex }) {
 
   return(
     <section id="single-blog">
-      <div className="icon-btn return-btn" title="Return to page" onClick={() => {JSXdispatch({ docType: blogType })}}>
+      <div className="icon-btn return-btn" title="Return to page" onClick={() => {JSXdispatch({ docType: blogType }); initPageScroll();}}>
         <ion-icon name="return-down-back-outline"></ion-icon>
       </div>
       <div className="container-jh">

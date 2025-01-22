@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import PropTypes from "prop-types"
 
+import { initPageScroll } from "@utils/utils"
 import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
 
 Card.propTypes = {
@@ -30,7 +31,7 @@ export default function Card({ bannerImg, dateTime, cardTitle, cardText, docType
         <p className="text">
           {cardText}
         </p>
-        <a className="link-btn" onClick={() => {JSXdispatch({ docType: docType})}}> 
+        <a className="link-btn" onClick={() => {JSXdispatch({ docType: docType}); initPageScroll();}}> 
           <span>View More</span>
           <ion-icon name="chevron-forward-outline"></ion-icon>
         </a>
