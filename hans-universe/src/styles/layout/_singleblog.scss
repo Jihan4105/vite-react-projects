@@ -217,6 +217,32 @@
           }
         }
       }
+
+      #comment-edit-dropdown-btn {
+        border-color: transparent;
+        border-radius: 50%;
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: 0;
+        
+        & + .dropdown-menu {
+          min-width: 112px;
+          z-index: 99;
+
+          .dropdown-item {
+            div {
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              
+              ion-icon {
+                font-size: $fs-4;
+              }
+            }
+          }
+
+        }
+      }
     }
 
     .replies-box {

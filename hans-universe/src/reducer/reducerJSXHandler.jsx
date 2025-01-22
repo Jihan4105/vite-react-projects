@@ -20,9 +20,13 @@ import BooksContent from "@components/books/BooksContent"
 // Thoughts Components
 import ThoughtsContent from "@components/thoughts/ThoughtsContent"
 
+// Profile Components
+import MottoSpace from "@components/profile/MottoSpace"
+
 // SingleBlog Components
 import SingleBlog from "@components/SingleBlog"
 import Comment from "@components/comment/Comment"
+
 
 export default function reducerJSXHandler(_, action) {
   switch(action.docType) {
@@ -107,6 +111,14 @@ export default function reducerJSXHandler(_, action) {
               type="thoughts"
               dropdownItems={["Title", "Content", "Title + Content"]}
             />
+          </>
+      }
+    }
+    case "profile" : {
+      return {
+        jsx: 
+          <>
+            <MottoSpace />
           </>
       }
     }

@@ -1,10 +1,15 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useContext } from "react"
+import Dropdown from "react-bootstrap/Dropdown"
+import DropdownButton from "react-bootstrap/DropdownButton"
 
 import { isEllipsisActive } from "@/utils/utils"
 import { getUserById } from "@services/fetchUserDatas"
 import CommentInput from "./CommentInput"
 
+import { UserContext } from "@contexts/UserContext"
+
 export default function CommentBox({ commentItem, isReplyExist = false, isExpandEnabled = undefined, setIsExpandEnabled = undefined }) {
+  const logginedUser = useContext(UserContext)
   const user = getUserById(commentItem.userId)
   const textArea = useRef(null)
   const [isShowDetailActivate, setIsShowDetailActivate] = useState(false) 
@@ -82,6 +87,36 @@ export default function CommentBox({ commentItem, isReplyExist = false, isExpand
           </div>
         }
       </div>
+      {logginedUser.id === user.id &&
+        <>
+          <DropdownButton
+            id="comment-edit-dropdown-btn"
+            drop="down"
+            align="end"
+            variant="transparent"
+            title={
+              <div className="icon-btn comment-edit-btn">
+                <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+              </div>
+            }
+            size="112px"
+          >
+            <Dropdown.Item eventKey="1" active={false}>
+              <div className="comment-Delete-group">
+                <ion-icon name="trash-outline"></ion-icon>
+                <span>Delete</span>
+              </div>
+            </Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item eventKey="2">
+              <div className="comment-edit-group">
+                <ion-icon name="create-outline"></ion-icon>
+                <span>Edit</span>
+              </div>
+            </Dropdown.Item>
+          </DropdownButton>
+        </>
+      }
     </div>
   )
 }

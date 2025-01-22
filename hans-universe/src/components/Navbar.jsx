@@ -7,7 +7,6 @@ import { sidebarToggle, initPageScroll } from "@utils/utils.js"
 import { UserContext } from "@contexts/UserContext"
 import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
 
-
 export default function Navbar() {
   const user = useContext(UserContext)
   const JSXdispatch = useContext(JSXDispatchContext)
@@ -25,7 +24,7 @@ export default function Navbar() {
             <li><a onClick={() => {JSXdispatch({ docType: "workout" }); initPageScroll();}}>Workout</a></li>
             <li><a onClick={() => {JSXdispatch({ docType: "books" }); initPageScroll();}}>Books</a></li>
             <li><a onClick={() => {JSXdispatch({ docType: "thoughts" }); initPageScroll();}}>Thoughts</a></li>
-            <li><a href="#profile">Profile</a></li>
+            <li><a onClick={() => {JSXdispatch({ docType: "profile" }); initPageScroll();}}>Profile</a></li>
           </ul>
 
           <DropdownButton
@@ -34,7 +33,7 @@ export default function Navbar() {
             align="end"
             variant="transparent"
             title={
-              <div className="notifications-btn icon-btn">
+              <div className="notifications-btn">
                 <ion-icon name="notifications-outline" />
                 <span className="notifications-number">9+</span>
               </div>

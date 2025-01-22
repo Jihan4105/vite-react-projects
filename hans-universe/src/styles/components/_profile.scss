@@ -1,0 +1,26 @@
+@use "../abstracts" as *;
+
+#profile-motto {
+  background-image: url("/src/assets/profile/profile-motto.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  .container-jh {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .motto-text {
+      color: white;
+      font-size: $fs-1;
+      font-weight: $fw-500;
+      font-style: italic;
+    }
+
+    .astronaut-wrapper {
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

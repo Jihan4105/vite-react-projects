@@ -39,7 +39,7 @@ export default function Sidebar() {
             </a>
           </li>
           <li>
-            <a href="#profile" className="sidebar-link">
+            <a onClick={() => {JSXdispatch({ docType: "profile" }); initPageScroll(true);}} className="sidebar-link">
               <ion-icon name="body-outline"></ion-icon>
               Profile
             </a>

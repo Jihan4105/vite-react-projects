@@ -36,7 +36,7 @@ export default function Footer() {
             <li><a onClick={() => {JSXdispatch({ docType: "workout" }); initPageScroll();}}>Workout</a></li>
             <li><a onClick={() => {JSXdispatch({ docType: "books" }); initPageScroll();}}>Books</a></li>
             <li><a onClick={() => {JSXdispatch({ docType: "thoughts" }); initPageScroll();}}>Thoughts</a></li>
-            <li><a href="#profile">Profile</a></li>
+            <li><a onClick={() => {JSXdispatch({ docType: "profile" }); initPageScroll();}}>Profile</a></li>
           </ul>
         </div>
       </div>
