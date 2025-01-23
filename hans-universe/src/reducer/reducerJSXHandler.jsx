@@ -22,6 +22,7 @@ import ThoughtsContent from "@components/thoughts/ThoughtsContent"
 
 // Profile Components
 import MottoSpace from "@components/profile/MottoSpace"
+import Introuduce from "@components/profile/Introduce"
 
 // SingleBlog Components
 import SingleBlog from "@components/SingleBlog"
@@ -119,6 +120,8 @@ export default function reducerJSXHandler(_, action) {
         jsx: 
           <>
             <MottoSpace />
+
+            <Introuduce />
           </>
       }
     }

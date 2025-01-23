@@ -4,22 +4,77 @@
   background-image: url("/src/assets/profile/profile-motto.png");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position-y: 70%;
 
   .container-jh {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+
+    @media(max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
 
     .motto-text {
       color: white;
-      font-size: $fs-1;
+      font-size: 37px;
       font-weight: $fw-500;
       font-style: italic;
+
+      @media(max-width: 576px) {
+        font-size: 30px;
+      }
+
+      @media(max-width: 500px) {
+        font-size: 25px;
+      }
+    }
+  }
+}
+
+#introduce {
+  .container-jh {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    gap: 3rem;
+
+    @media(max-width: 968px) {
+      gap: 1rem;
     }
 
-    .astronaut-wrapper {
+    @media(max-width: 576px) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .introduce-img-wrapper {
+      display: flex;
+      justify-content: center;
+
       img {
-        width: 100%;
+        width: 80%;
+
+        @media(max-width: 768px) {
+          font-size: 100%;
+        }
+      } 
+    }
+
+    .introduce-text-group {
+      .section-title {
+        text-align: start;
+
+        @media(max-width: 768px) {
+          font-size: 35px;
+        }
+      }
+
+      .introduce-text {
+        font-size: $fs-4;
       }
     }
   }
