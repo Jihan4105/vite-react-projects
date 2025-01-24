@@ -61,14 +61,29 @@ export default function LoginContents({ contentType, setContentType }) {
   )
 }
 
-function loginBtnClicked(e, email, password, setState) {
+async function loginBtnClicked(e, email, password, setState) {
   e.preventDefault()
+
+  const hostname = import.meta.env.VITE_SERVER_HOSTNAME
+  const port = import.meta.env.VITE_SERVER_PORT
+
+  fetch(`http://${hostname}:${port}/user`, {
+    method: "POST",
+    headers:  {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password,
+    })
+  })
+    .then((res) => console.log(res.json()))
 
   const userdata = getUser(email, password)
 
-  if(!userdata) { setState("email-wrong") } 
-  else if(userdata.password != password) { setState("password-wrong")}
-  else {
-    window.location.href = `/src/html/app.html?userId=${userdata.id}`
-  }
+  // if(!userdata) { setState("email-wrong") } 
+  // else if(userdata.password != password) { setState("password-wrong")}
+  // else {
+  //   window.location.href = `/src/html/app.html?userId=${userdata.id}`
+  // }
 }
