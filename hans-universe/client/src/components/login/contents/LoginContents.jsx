@@ -1,6 +1,5 @@
 import { useState } from "react"
 import InputField from "../InputField.jsx"
-import { getUser } from "@services/fetchUserDatas.js"
 import PropTypes from "prop-types"
 
 LoginContents.propTypes = {
@@ -66,24 +65,32 @@ async function loginBtnClicked(e, email, password, setState) {
 
   const hostname = import.meta.env.VITE_SERVER_HOSTNAME
   const port = import.meta.env.VITE_SERVER_PORT
+  let fetchedData
 
-  fetch(`http://${hostname}:${port}/user`, {
+  await fetch(`http://${hostname}:${port}/login`, {
     method: "POST",
     headers:  {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       email: email,
-      password: password,
+      password: password
     })
   })
-    .then((res) => console.log(res.json()))
+    .then((res) => res.json())
+    .then((data) => {
+      fetchedData = data
+    })
 
-  const userdata = getUser(email, password)
-
-  // if(!userdata) { setState("email-wrong") } 
-  // else if(userdata.password != password) { setState("password-wrong")}
-  // else {
-  //   window.location.href = `/src/html/app.html?userId=${userdata.id}`
-  // }
+  switch(fetchedData.status) {
+    case "no such user" :
+      setState("email-wrong")
+      break
+    case "password wrong" :
+      setState("password-wrong")
+      break
+    case "success" :
+      window.location.href = `/src/html/app.html?userId=${fetchedData.userId}`
+      break
+  }
 }

@@ -18,7 +18,6 @@ BlogList.propTypes = {
 }
 
 export default function BlogList({ type, searchValue, filterValue}) {
-  // debugger;
   const [selectedPage, setSelectedPage] = useState("1")
   const windowWidth = useContext(WindowContext)
   const JSXdispatch = useContext(JSXDispatchContext)

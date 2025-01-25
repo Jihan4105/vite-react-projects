@@ -6,8 +6,21 @@ export function getUser(email) {
   return corrrectUser[0]
 }
 
-export function getUserById(userId) {
-  const corrrectUser = userDatas.filter((userData) => userData.id == userId)
+export async function getUserById(userId) {
+  const hostname = import.meta.env.VITE_SERVER_HOSTNAME
+  const port = import.meta.env.VITE_SERVER_PORT
 
-  return corrrectUser[0]
+  await fetch(`http://${hostname}:${port}/getUserById`, {
+    method: "POST",
+    headers:  {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userId: userId
+    })
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      return data.userData
+    })
 }
