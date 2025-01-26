@@ -154,7 +154,7 @@
       .username-group {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 0.7rem;
+        column-gap: 0.7rem;
         width: 100%;
         margin-bottom: 1rem;
 
@@ -173,6 +173,11 @@
           &:focus{
             border-color: black;
           }
+        }
+
+        .error-text {
+          @include error-text();
+          display: none;
         }
       }
 

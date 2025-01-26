@@ -7,6 +7,7 @@ import { getElement } from "../../../utils/utils.js";
 import useTimer from "../../../hooks/useTimer.js";
 
 let verifyCode
+let nameRegex = /[A-Za-z]+/i
 let passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
 
 SignUpContents.propTypes = {
@@ -24,6 +25,15 @@ export default function SignUpContents({ setContentType }) {
   const [verifyStatusText, setVerifyStatusText] = useState("")
   const [verifyStatus, setVerifyStatus] = useState("unVerified")
   const [count, setCount] = useState(0)
+
+  const [checkInputs, setcheckInputs] = useState({
+    firstName: "no",
+    lastName: "no",
+    email: "no",
+    verfied: "no",
+    password: "no",
+    rewritePassword: "no",
+  })
 
   useTimer(count, setCount, verifyStatus)
 
@@ -43,7 +53,7 @@ export default function SignUpContents({ setContentType }) {
             spellCheck="false"
             autoComplete="off"
             value={firstName}
-            onChange={(e) => {setFirstName(e.target.value)}}  
+            onChange={(e) => {nameChangeHandler(e.target.value, "firstname", setFirstName)}}  
           />
         </div>
         <input 
@@ -54,8 +64,10 @@ export default function SignUpContents({ setContentType }) {
           spellCheck="false"
           autoComplete="off"
           value={lastName}
-          onChange={(e) => {setLastName(e.target.value)}}  
+          onChange={(e) => {nameChangeHandler(e.target.value, "lastname", setLastName)}}  
         />
+        <p className="error-text firstname-error">Character Only</p>
+        <p className="error-text lastname-error">Character Only</p>
       </div>
       <p className="email-label">Email</p>
       <div className="email-input-group">
@@ -130,10 +142,22 @@ export default function SignUpContents({ setContentType }) {
   )
 }
 
+function nameChangeHandler(value, nameType, setState) {
+  const nameErrorText = getElement(`.${nameType}-error`)
+
+  if(!nameRegex.test(value) && value != "" ) {
+    nameErrorText.style.display = "block"
+  } else {
+    nameErrorText.style.display = "none"
+  }
+  
+  setState(value)
+}
+
 function pwdChangeHandler(value, setPassword) {
   const passwordErrorText = getElement('.password-wrong')
 
-  if(!passwordRegex.test(value)) {
+  if(!passwordRegex.test(value) && value != "" ) {
     passwordErrorText.style.visibility = "visible"
   } else {
     passwordErrorText.style.visibility = "hidden"
@@ -194,7 +218,7 @@ function verifyBtnClick(e, code, setVerifyStatus) {
   const verifyBtn = getElement(".verify-btn")
   const codeText = getElement(".code-text")
 
-  if( parseInt(code) === verifyCode) {
+  if( parseInt(code) === verifyCode ) {
     firstNameInput.disabled = true
     lastNameInput.disabled = true
     emailInput.disabled = true
