@@ -1,4 +1,4 @@
-import { useContext, useState, } from "react";
+import { useContext, useRef, useState, } from "react";
 import PropTypes from "prop-types";
 import emailjs from "@emailjs/browser"
 
@@ -10,6 +10,7 @@ let verifyCode
 let nameRegex = /^[a-z ,.'-]+$/i
 let passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
 let emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
+let codeRegex = /^[0-9]{6}$/
 
 let checkInputsStatus = {
   firstname: false,
@@ -17,7 +18,7 @@ let checkInputsStatus = {
   email: false,
   verfied: false,
   password: false,
-  passwordCheck: false,
+  passwordCheck: false
 }
 
 SignUpContents.propTypes = {
@@ -83,21 +84,20 @@ export default function SignUpContents({ setContentType }) {
             placeholder="Type your Email"
             spellCheck="false"
             value={email}
-            onChange={(e) => {emailChangeHandler(e.target.parentElement.nextElementSibling, e.target.value, setEmail)}}  
+            onChange={(e) => {emailChangeHandler(e.target.parentElement.nextElementSibling, e.target.value, setEmail, setVerifyStatusText)}}  
           />
         </div>
         <button 
-          className="send-code-btn" 
-          onClick={(e) => sendEmailBtnClick(e, setOverlayContext, setVerifyStatusText,  setCount, {
+          className="send-code-btn disabled" 
+          onClick={(e) => {sendEmailBtnClick(e, setOverlayContext, setVerifyStatusText,  setCount, {
             firstName: firstName,
             lastName: lastName, 
             email: email
-          })}
-          disabled
+          })}}
         >
+          <div className="button-overlay" onClick={(e) => {e.preventDefault(); e.stopPropagation()}}></div>
           Send Code
         </button>
-        <p className="error-text email-error">Invalid email</p>
       </div>
       <p className="send-code-text">{verifyStatusText}</p>
       <div className="code-box">
@@ -110,12 +110,19 @@ export default function SignUpContents({ setContentType }) {
           autoComplete="off"
           maxLength={6}
           value={code}
-          onChange={(e) => {setCode(e.target.value)}}  
+          onChange={(e) => {codeChangeHandler(e.target.value, setCode)}}  
+          disabled
         />
         <div className="remain-time">
           {parseInt(count / 60)} : {(count % 60).toString().padStart(2, "0")}
         </div>
-        <button className="verify-btn" onClick={(e) => verifyBtnClick(e, code, setVerifyStatus)}>Verify</button>
+        <button 
+          className="verify-btn disabled" 
+          onClick={(e) => verifyBtnClick(e, code, setVerifyStatus, count)}
+        >
+          <div className="button-overlay" onClick={(e) => {e.preventDefault(); e.stopPropagation()}}></div>
+          Verify
+        </button>
       </div>
       <p className="code-text">wrong code</p>
       <p className="password-label">Password</p>
@@ -173,29 +180,40 @@ function returnBtnClick(e, setContentType) {
 
 function nameChangeHandler(value, nameType, setState) {
   const nameErrorText = getElement(`.${nameType}-error`)
+  const buttonElement = getElement(".send-code-btn")
 
   if(!nameRegex.test(value)) {
-    checkInputsStatus[nameType] = false
-    nameErrorText.style.display = "block"
+    checkInputsStatus[nameType] = false  
+    nameErrorText.style.visibility = "visible"
   } else {
     checkInputsStatus[nameType] = true
-    nameErrorText.style.display = "none"
+    nameErrorText.style.visibility = "hidden"
+  }
+
+  if(checkInputsStatus.email && checkInputsStatus.firstname && checkInputsStatus.lastname) {
+    buttonElement.classList.remove("disabled")
+  } else {
+    buttonElement.classList.add("disabled")
   }
   
   setState(value)
 }
 
-function emailChangeHandler(buttonElement, value, setState) {
-  const EmailErrorText = getElement(".email-error") 
+function emailChangeHandler(buttonElement, value, setState, setVerifyStatusText) {
+  const sendCodeText = getElement(".send-code-text")
 
   if(!emailRegex.test(value)) {
     checkInputsStatus.email = false
-    EmailErrorText.style.display = "block"
-    buttonElement.disabled = true
+    buttonElement.classList.add("disabled")
+    sendCodeText.classList.add("error-text")
+    setVerifyStatusText("Invalid email")
   } else {
     checkInputsStatus.email = true
-    EmailErrorText.style.display = "none"
-    buttonElement.disabled = false
+    if(checkInputsStatus.firstname === true && checkInputsStatus.lastname === true) {
+      buttonElement.classList.remove("disabled")
+    }
+    sendCodeText.classList.remove("error-text")
+    setVerifyStatusText("")
   }
 
   setState(value)
@@ -204,10 +222,13 @@ function emailChangeHandler(buttonElement, value, setState) {
 function sendEmailBtnClick(e, setOverlayContext, setVerifyStatusText, setCount, templateParams) {
   e.preventDefault()
 
+  const verifyBtn = getElement(".verify-btn")
   const sendCodeText = getElement(".send-code-text")
+  const codeInput = getElement("#signup-code")
   verifyCode = Math.ceil(Math.random() * 1000000)
   templateParams = {...templateParams, code: verifyCode}
   setOverlayContext(true)
+  sendCodeText.classList.remove("error-text", "success-text")
   setVerifyStatusText("...Sending")
   sendCodeText.classList.remove("success-text")
 
@@ -217,15 +238,32 @@ function sendEmailBtnClick(e, setOverlayContext, setVerifyStatusText, setCount, 
       setVerifyStatusText("Verification Email Sent!")
       sendCodeText.classList.add("success-text")
       setCount(210)
+      verifyBtn.classList.remove('disabled')
+      codeInput.disabled = false
     },
     (error) => {
+      setOverlayContext(false)
       sendCodeText.classList.add("error-text")
       setVerifyStatusText("FAILED...")
     },
   );
 }
 
-function verifyBtnClick(e, code, setVerifyStatus) {
+function codeChangeHandler(value, setCode) {
+  const codeText = getElement(".code-text")
+
+  if(!codeRegex.test(value)) {
+    codeText.classList.add("show")
+    codeText.textContent = "Invalide Code"
+  } else {
+    codeText.classList.remove("show")
+    codeText.textContent = ""
+  }
+
+  setCode(value)
+}
+
+function verifyBtnClick(e, code, setVerifyStatus, countState) {
   e.preventDefault()
 
   const firstNameInput = getElement("#signup-firstname")
@@ -236,13 +274,13 @@ function verifyBtnClick(e, code, setVerifyStatus) {
   const verifyBtn = getElement(".verify-btn")
   const codeText = getElement(".code-text")
 
-  if( parseInt(code) === verifyCode ) {
+  if( parseInt(code) === verifyCode && countState !== 0) {
     firstNameInput.disabled = true
     lastNameInput.disabled = true
     emailInput.disabled = true
-    sendCodeBtn.disabled = true
+    sendCodeBtn.classList.add("disabled")
     codeInput.disabled = true
-    verifyBtn.disabled = true
+    verifyBtn.classList.add('disabled')
 
     codeText.textContent = "Verified!"
     codeText.classList.add("show")
@@ -250,7 +288,11 @@ function verifyBtnClick(e, code, setVerifyStatus) {
     checkInputsStatus.verfied = true
     setVerifyStatus("verified")
   } else {
-    codeText.textContent = "Wrong code"
+    if(countState === 0) {
+      codeText.textContent = "Times up"
+    } else {
+      codeText.textContent = "Wrong code"
+    }
     codeText.classList.add("show")
     codeText.classList.add("error-text")
   }
@@ -290,8 +332,14 @@ function pwdCheckChangeHandler(password, value, setPasswordCheck)  {
   setPasswordCheck(value)
 }
 
-
-
 function signUpBtnClick(e) {
   e.preventDefault()
+
+  for(const[key, value] of Object.entries(checkInputsStatus)) {
+    if(value === false) {
+      if(key === "passwordCheck") {
+        
+      }
+    }
+  }
 }
