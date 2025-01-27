@@ -189,7 +189,7 @@
       .email-input-group {
         display: grid;
         grid-template-columns: auto auto;
-        gap: 0.7rem;
+        column-gap: 0.7rem;
 
         .email-input-box {
           @include input-style(100%, 0px);
@@ -205,10 +205,21 @@
           cursor: pointer;
           transition: all 0.2s ease-in;
 
-          &:hover {
+          &:not(:disabled):hover {
             color: white;
             background-color: black;
           }
+
+          &:is(:disabled) {
+            background-color: $grey-1;
+            border-color: transparent;
+            cursor: default;
+          }
+        }
+
+        .email-error {
+          @include error-text();
+          display: none;
         }
       }
 
@@ -293,13 +304,22 @@
 
       .input-box {
         @include input-style(100%);
+        
+        margin-bottom: 1rem;
+
+        .visible-password-btn{
+          cursor: pointer;
+
+          ion-icon {
+            font-size: 1.5rem;
+          }
+        }
       }
 
       .password-wrong {
         @include error-text();
-        visibility: hidden;
-
-        margin-bottom: 1rem;
+        
+        display: none;
       }
       
       #signup-password-check {
@@ -308,7 +328,6 @@
         border-bottom: 1px solid #ccc;
         letter-spacing: 1px;
         padding: 0.4rem 0.7rem;
-        margin-right: 1rem;
 
         &:focus{
           border-color: black;
@@ -317,7 +336,6 @@
 
       .password-check-wrong {
         @include error-text();
-        visibility: hidden;
       }
 
       .signup-btn {

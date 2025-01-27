@@ -7,8 +7,18 @@ import { getElement } from "../../../utils/utils.js";
 import useTimer from "../../../hooks/useTimer.js";
 
 let verifyCode
-let nameRegex = /[A-Za-z]+/i
+let nameRegex = /^[a-z ,.'-]+$/i
 let passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
+let emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
+
+let checkInputsStatus = {
+  firstname: false,
+  lastname: false,
+  email: false,
+  verfied: false,
+  password: false,
+  passwordCheck: false,
+}
 
 SignUpContents.propTypes = {
   setContentType: PropTypes.func.isRequired
@@ -26,14 +36,7 @@ export default function SignUpContents({ setContentType }) {
   const [verifyStatus, setVerifyStatus] = useState("unVerified")
   const [count, setCount] = useState(0)
 
-  const [checkInputs, setcheckInputs] = useState({
-    firstName: "no",
-    lastName: "no",
-    email: "no",
-    verfied: "no",
-    password: "no",
-    rewritePassword: "no",
-  })
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
   useTimer(count, setCount, verifyStatus)
 
@@ -66,8 +69,8 @@ export default function SignUpContents({ setContentType }) {
           value={lastName}
           onChange={(e) => {nameChangeHandler(e.target.value, "lastname", setLastName)}}  
         />
-        <p className="error-text firstname-error">Character Only</p>
-        <p className="error-text lastname-error">Character Only</p>
+        <p className="error-text firstname-error">Invalid name</p>
+        <p className="error-text lastname-error">Invalid name</p>
       </div>
       <p className="email-label">Email</p>
       <div className="email-input-group">
@@ -80,7 +83,7 @@ export default function SignUpContents({ setContentType }) {
             placeholder="Type your Email"
             spellCheck="false"
             value={email}
-            onChange={(e) => {setEmail(e.target.value)}}  
+            onChange={(e) => {emailChangeHandler(e.target.parentElement.nextElementSibling, e.target.value, setEmail)}}  
           />
         </div>
         <button 
@@ -90,9 +93,11 @@ export default function SignUpContents({ setContentType }) {
             lastName: lastName, 
             email: email
           })}
+          disabled
         >
           Send Code
         </button>
+        <p className="error-text email-error">Invalid email</p>
       </div>
       <p className="send-code-text">{verifyStatusText}</p>
       <div className="code-box">
@@ -123,8 +128,25 @@ export default function SignUpContents({ setContentType }) {
           placeholder="Type your password" 
           spellCheck="false" 
           value={password}
-          onChange={(e) => {pwdChangeHandler(e.target.value, setPassword)}}
+          onChange={(e) => {pwdChangeHandler(e.target.parentElement, e.target.value, setPassword, passwordCheck)}}
         />
+        <div 
+          className="visible-password-btn" 
+          onMouseDown={(e) => {
+            e.target.parentElement.previousElementSibling.type = "text"
+            setIsPasswordVisible(true)
+          }}
+          onMouseUp={(e) => {
+            e.target.parentElement.previousElementSibling.type = "password"
+            setIsPasswordVisible(false)
+          }}
+        >
+          {isPasswordVisible ? 
+            <ion-icon name="eye" /> 
+            :
+            <ion-icon name="eye-outline" /> 
+          }
+        </div>
       </div>
       <p className="error-text password-wrong">Chracter, Number include 8 letters up</p>
       <input 
@@ -136,51 +158,47 @@ export default function SignUpContents({ setContentType }) {
         value={passwordCheck}
         onChange={(e) => {pwdCheckChangeHandler(password, e.target.value, setPasswordCheck)}}  
       />
-      <p className="error-text password-check-wrong">Doesn&apos;t match</p>
+      {password !== passwordCheck && 
+        <p className="error-text password-check-wrong">Doesn&apos;t match</p>
+      }
       <button className="btn signup-btn" onClick={(e) => {signUpBtnClick(e)}}>Sign Up</button>
     </>
   )
 }
 
+function returnBtnClick(e, setContentType) {
+  e.preventDefault()
+  setContentType("login")
+}
+
 function nameChangeHandler(value, nameType, setState) {
   const nameErrorText = getElement(`.${nameType}-error`)
 
-  if(!nameRegex.test(value) && value != "" ) {
+  if(!nameRegex.test(value)) {
+    checkInputsStatus[nameType] = false
     nameErrorText.style.display = "block"
   } else {
+    checkInputsStatus[nameType] = true
     nameErrorText.style.display = "none"
   }
   
   setState(value)
 }
 
-function pwdChangeHandler(value, setPassword) {
-  const passwordErrorText = getElement('.password-wrong')
+function emailChangeHandler(buttonElement, value, setState) {
+  const EmailErrorText = getElement(".email-error") 
 
-  if(!passwordRegex.test(value) && value != "" ) {
-    passwordErrorText.style.visibility = "visible"
+  if(!emailRegex.test(value)) {
+    checkInputsStatus.email = false
+    EmailErrorText.style.display = "block"
+    buttonElement.disabled = true
   } else {
-    passwordErrorText.style.visibility = "hidden"
+    checkInputsStatus.email = true
+    EmailErrorText.style.display = "none"
+    buttonElement.disabled = false
   }
 
-  setPassword(value)
-}
-
-function pwdCheckChangeHandler(password, value, setPasswordCheck)  {
-  const checkErrorText = getElement(".password-check-wrong")
-
-  if(value === password) {
-    checkErrorText.style.visibility = "hidden"
-  } else {
-    checkErrorText.style.visibility = "visible"
-  }
-
-  setPasswordCheck(value)
-}
-
-function returnBtnClick(e, setContentType) {
-  e.preventDefault()
-  setContentType("login")
+  setState(value)
 }
 
 function sendEmailBtnClick(e, setOverlayContext, setVerifyStatusText, setCount, templateParams) {
@@ -229,6 +247,7 @@ function verifyBtnClick(e, code, setVerifyStatus) {
     codeText.textContent = "Verified!"
     codeText.classList.add("show")
     codeText.classList.add("success-text")
+    checkInputsStatus.verfied = true
     setVerifyStatus("verified")
   } else {
     codeText.textContent = "Wrong code"
@@ -236,6 +255,42 @@ function verifyBtnClick(e, code, setVerifyStatus) {
     codeText.classList.add("error-text")
   }
 }
+
+function pwdChangeHandler(inputBoxElement, value, setPassword, passwordCheck) {
+  const passwordErrorText = getElement('.password-wrong')
+
+  if(value !== passwordCheck) {
+    checkInputsStatus.passwordCheck = false
+  } else {
+    checkInputsStatus.passwordCheck = true
+  }
+
+  if(!passwordRegex.test(value)) {
+    passwordErrorText.style.display = "block"
+    inputBoxElement.style.marginBottom = "0"
+    passwordErrorText.style.marginBottom= "1rem"
+    checkInputsStatus.password = false
+  } else {
+    passwordErrorText.style.display = "none"
+    inputBoxElement.style.marginBottom = "1rem"
+    checkInputsStatus.password = true
+  }
+  
+  setPassword(value)
+}
+
+function pwdCheckChangeHandler(password, value, setPasswordCheck)  {
+  
+  if(value === password) {
+    checkInputsStatus.passwordCheck = true
+  } else {
+    checkInputsStatus.passwordCheck = false
+  }
+  
+  setPasswordCheck(value)
+}
+
+
 
 function signUpBtnClick(e) {
   e.preventDefault()
