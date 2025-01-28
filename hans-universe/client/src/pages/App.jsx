@@ -1,4 +1,4 @@
-import { useState, useReducer } from "react"
+import { useState, useReducer, useEffect } from "react"
 
 // Contexts
 import { WindowContext } from "@contexts/WindowContext"
@@ -42,18 +42,34 @@ function App() {
         <Contact />
       </>
   })
-
+  const [loading, setLoading] = useState(true)
+  const [userData, setUserData] = useState({})
   const url = new URL(`${window.location.href}`)
   const queryObject = queryStringToObject(url)
-  const user = getUserById(queryObject.userId)
+  const getUser = async() => {
+    let data = await getUserById(queryObject.userId)
+    setLoading(false)
+    setUserData(data.userData)
+  } 
+  
+  useEffect(() => {
+    getUser()
+  }, [])
 
   useWindow(windowSize, setWindowSize)
   
+  if(loading) {
+    return (
+      <div className="loader-container">
+        <div className="loader"></div>
+      </div>
+    )
+  }
   return (
     <>
       <WindowContext.Provider value={windowSize.innerWidth}>
         <JSXDispatchContext.Provider value={dispatch}>
-          <UserContext.Provider value={user}>
+          <UserContext.Provider value={userData}>
             <Navbar />
             
             <Sidebar />

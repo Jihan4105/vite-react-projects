@@ -332,14 +332,59 @@ function pwdCheckChangeHandler(password, value, setPasswordCheck)  {
   setPasswordCheck(value)
 }
 
-function signUpBtnClick(e) {
+async function signUpBtnClick(e) {
   e.preventDefault()
+
+  let isEveryFieldFilled = true
 
   for(const[key, value] of Object.entries(checkInputsStatus)) {
     if(value === false) {
-      if(key === "passwordCheck") {
-        
+      switch(key) {
+        case "firstname" :
+          getElement(`#signup-${key}`).focus()
+          isEveryFieldFilled = false
+          break
+        case "lastname" :
+          getElement(`#signup-${key}`).focus()
+          isEveryFieldFilled = false
+          break
+        case "email" :
+          getElement(`#signup-${key}`).focus()
+          isEveryFieldFilled = false
+          break
+        case "verfied" :
+          getElement("#signup-code").focus()
+          isEveryFieldFilled = false
+          break
+        case "password" :
+          getElement(`#signup-${key}`).focus()
+          isEveryFieldFilled = false
+          break
+        case "passwordCheck" :
+          getElement("#signup-password-check").focus()
+          isEveryFieldFilled = false
+          break
       }
+      break
     }
+  }
+
+  if(isEveryFieldFilled === true) {
+    const firstname = getElement("#signup-firstname").value
+    const lastname = getElement("#signup-lastname").value
+    const email = getElement("#signup-email").value
+    const password = getElement("#signup-password").value
+
+    await fetch(`http://${hostname}:${port}/signup`, {
+      method: "POST",
+      headers:  {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: firstname + lastname, 
+        email: email,
+        password: password
+      })
+    })
   }
 }

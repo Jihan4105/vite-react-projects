@@ -14,13 +14,14 @@ app.use(bodyParser.json())
 
 const hostname = '127.0.0.1';
 const port = 3000;
+const userId = 4;
 
 app.post("/login", (req,res) => {
   const correctUser = userDatas.filter((userData) => userData.email === req.body.email)
 
   if(correctUser[0] === undefined) { res.json({ status: "no such user"})}
   else if(correctUser[0].password != req.body.password) { res.json({ status: "password wrong"})}
-  else {  res.json({ status: "success", userId: correctUser[0].id})}
+  else { res.json({ status: "success", userId: correctUser[0].id})}
 })
 
 app.post("/getUserById", (req,res) => {
@@ -34,9 +35,15 @@ app.post("/getUserById", (req,res) => {
     }
   }
 
-  console.log(correctUserData)
-
   res.json({ userData: correctUserData })
+})
+
+app.post("/signup", (req, res) => {
+  const newUserData = {
+    id: userId++,
+    username: req.body.username,
+
+  }
 })
 
 

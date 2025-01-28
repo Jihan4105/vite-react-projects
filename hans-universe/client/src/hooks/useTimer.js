@@ -17,12 +17,8 @@ export default function useTimer(state, setState, verifyStatus) {
           return () => {
             clearInterval(id)
           }
-        } else {
-          alert("Times UP!")
         }
-      } else {
-        alert("Verified!")
-      }
+      } 
     } else {
       isMountingRef.current = false;
     }

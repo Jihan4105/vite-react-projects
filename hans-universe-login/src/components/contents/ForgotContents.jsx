@@ -65,7 +65,6 @@ function forgotSubmitClick(e, email, setOverlayContext) {
 
     emailjs.send("service_ilc4owv", "template_8rdi7ch", templateParams, "JLoXopf6tYXQJm4fk").then(
       (response) => {
-        console.log('SUCCESS!', response.status, response.text);
         setOverlayContext(false)
         errorText.textContent = "Successfly Sended!"
         errorText.classList.remove("error-text")
@@ -73,7 +72,6 @@ function forgotSubmitClick(e, email, setOverlayContext) {
         
       },
       (error) => {
-        console.log('FAILED...', error);
         setOverlayContext(false)
         errorText.textContent = "Something Went Wrong..."
         errorText.classList.add("error-text")
