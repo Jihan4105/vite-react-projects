@@ -168,7 +168,7 @@ export default function SignUpContents({ setContentType }) {
       {password !== passwordCheck && 
         <p className="error-text password-check-wrong">Doesn&apos;t match</p>
       }
-      <button className="btn signup-btn" onClick={(e) => {signUpBtnClick(e)}}>Sign Up</button>
+      <button className="btn signup-btn" onClick={(e) => {signUpBtnClick(e, setContentType)}}>Sign Up</button>
     </>
   )
 }
@@ -332,7 +332,7 @@ function pwdCheckChangeHandler(password, value, setPasswordCheck)  {
   setPasswordCheck(value)
 }
 
-async function signUpBtnClick(e) {
+async function signUpBtnClick(e, setContentType) {
   e.preventDefault()
 
   let isEveryFieldFilled = true
@@ -374,17 +374,30 @@ async function signUpBtnClick(e) {
     const lastname = getElement("#signup-lastname").value
     const email = getElement("#signup-email").value
     const password = getElement("#signup-password").value
+    const hostname = import.meta.env.VITE_SERVER_HOSTNAME
+    const port = import.meta.env.VITE_SERVER_PORT
 
-    await fetch(`http://${hostname}:${port}/signup`, {
+    const res = await fetch(`http://${hostname}:${port}/signup`, {
       method: "POST",
       headers:  {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: firstname + lastname, 
+        username: firstname + " " + lastname, 
         email: email,
         password: password
       })
     })
+    const data = await res.json()
+
+    switch(data.status) {
+      case "success" :
+        alert("Succesfly SignUp!")
+        setContentType("login")
+        break;
+      case "error" :
+        alert("Something exection occured...")
+        break;
+    }
   }
 }

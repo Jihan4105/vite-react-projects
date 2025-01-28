@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors"
 import bodyParser from "body-parser"
-import userDatas from "./src/data/userDatas.js"
+import userDatas from "./src/datas/userDatas.js"
 
 const app = express()
 app.use(cors({
@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 
 const hostname = '127.0.0.1';
 const port = 3000;
-const userId = 4;
+let userId = 4;
 
 app.post("/login", (req,res) => {
   const correctUser = userDatas.filter((userData) => userData.email === req.body.email)
@@ -40,9 +40,20 @@ app.post("/getUserById", (req,res) => {
 
 app.post("/signup", (req, res) => {
   const newUserData = {
-    id: userId++,
+    id: Math.random().toString(36).substring(2,11).toUpperCase(),
     username: req.body.username,
-
+    userProfile: "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=",
+    email: req.body.email,
+    password: req.body.password
+  }
+  console.log(userDatas)
+  try {
+    userDatas.push(newUserData)
+    console.log(userDatas)
+    res.json({ status: "success" })
+  } catch(error) {
+    console.log(error.message)
+    res.json({ status: "error" })
   }
 })
 
