@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Pagination } from "@mui/material"
 import PropTypes from "prop-types"
 
@@ -7,9 +7,7 @@ import { JSXDispatchContext } from "@/contexts/JSXDispatchContext"
 
 import { initPageScroll } from "@utils/utils"
 
-import workoutBlogDatas from "@data/workoutBlogDatas" 
-import thoughtsBlogDatas from "@data/thoughtsBlogDatas"
-import booksBlogDatas from "@data/booksBlogDatas"
+import { getBlogDatas } from "@services/fetchBlog"
 
 BlogList.propTypes = {
   type: PropTypes.string.isRequired,
@@ -19,59 +17,67 @@ BlogList.propTypes = {
 
 export default function BlogList({ type, searchValue, filterValue}) {
   const [selectedPage, setSelectedPage] = useState("1")
+  const [loading, setLoading] = useState(true)
+  const [blogDatas, setBlogDatas] = useState({})
   const windowWidth = useContext(WindowContext)
   const JSXdispatch = useContext(JSXDispatchContext)
-  let blogDatas
   let filteredDatas
-
-  switch(type) {
-    case "workout" :
-      blogDatas = workoutBlogDatas
-      break;
-    case "thoughts" :
-      blogDatas = thoughtsBlogDatas
-      break;
-    case "books" :
-      blogDatas = booksBlogDatas
-      break;
-  } 
-
-  filteredDatas = blogDatas.filter((blogData) => {
-    if(type === "workout" || type === "thoughts") {
-      if(filterValue === "Title + Content") {
-        return (
-          blogData.title.toLowerCase().includes(searchValue.toLowerCase()) ? 
-          true : 
-            blogData.content.toLowerCase().includes(searchValue.toLowerCase()) ? 
-            true : 
-            false
-        )
-      }  
-      else {
-        return (blogData[filterValue.toLowerCase()].toLowerCase().includes(searchValue.toLowerCase()))
-      }
-    }
-    else if( type === "books" ) {
-      if(filterValue === "Any") {
-        return(
-          blogData.title.toLowerCase().includes(searchValue.toLowerCase()) ?
-          true :
-          false
-        )
-      } else {
-        return (
-          blogData.genre === filterValue.toLowerCase() 
-            &&
-          blogData.title.toLowerCase().includes(searchValue.toLowerCase()) 
-        )
-      }
-    }
-  })
   
+  const fetchBlogDatas = async () => {
+    const data = await getBlogDatas(type)
+    setLoading(false)
+    setBlogDatas(data)
+  }
+  
+  useEffect(() => {
+    fetchBlogDatas()
+  }, [])
+
+  if(!loading) {
+    filteredDatas = blogDatas.filter((blogData) => {
+      if(type === "workout" || type === "thoughts") {
+        if(filterValue === "Title + Content") {
+          return (
+            blogData.title.toLowerCase().includes(searchValue.toLowerCase()) ? 
+            true : 
+              blogData.content.toLowerCase().includes(searchValue.toLowerCase()) ? 
+              true : 
+              false
+          )
+        }  
+        else {
+          return (blogData[filterValue.toLowerCase()].toLowerCase().includes(searchValue.toLowerCase()))
+        }
+      }
+      else if( type === "books" ) {
+        if(filterValue === "Any") {
+          return(
+            blogData.title.toLowerCase().includes(searchValue.toLowerCase()) ?
+            true :
+            false
+          )
+        } else {
+          return (
+            blogData.genre === filterValue.toLowerCase() 
+              &&
+            blogData.title.toLowerCase().includes(searchValue.toLowerCase()) 
+          )
+        }
+      }
+    })
+    
+  }
   
   const startIndex = 5 * (selectedPage - 1)
   const endIndex = 5 * selectedPage - 1
 
+  if(loading) {
+    return (
+      <div className="loader-container">
+        <div className="loader"></div>
+      </div>
+    )
+  }
   return(
     <>
       <ul className="blog-list">

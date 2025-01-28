@@ -1,22 +1,17 @@
 import userDatas from "../data/userDatas";
 
-export function getUser(email) {
-  const corrrectUser = userDatas.filter((userData) => userData.email === email)
-
-  return corrrectUser[0]
-}
-
-export async function getUserById(userId) {
+export async function getUserByFilter(filterType, filterValue) {
   const hostname = import.meta.env.VITE_SERVER_HOSTNAME
   const port = import.meta.env.VITE_SERVER_PORT
 
-  const response = await fetch(`http://${hostname}:${port}/getUserById`, {
+  const response = await fetch(`http://${hostname}:${port}/getUserByFilter`, {
     method: "POST",
     headers:  {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      userId: userId
+      filterType: filterType,
+      filterValue: filterValue
     })
   })
   const data = await response.json()

@@ -12,7 +12,7 @@ import reducerJSXHandler from "@reducer/reducerJSXHandler"
 import { queryStringToObject } from "@utils/utils"
 
 // Services
-import { getUserById } from "@services/fetchUserDatas"
+import { getUserByFilter } from "@services/fetchUserDatas"
 
 // Hooks
 import useWindow from "@hooks/useWindow.js"
@@ -47,7 +47,7 @@ function App() {
   const url = new URL(`${window.location.href}`)
   const queryObject = queryStringToObject(url)
   const getUser = async() => {
-    let data = await getUserById(queryObject.userId)
+    let data = await getUserByFilter("id", queryObject.userId)
     setLoading(false)
     setUserData(data.userData)
   } 

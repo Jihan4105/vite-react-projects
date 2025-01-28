@@ -2,6 +2,9 @@ import express from "express"
 import cors from "cors"
 import bodyParser from "body-parser"
 import userDatas from "./src/datas/userDatas.js"
+import workoutBlogDatas from "./src/datas/workoutBlogDatas.js"
+import booksBlogDatas from "./src/datas/booksBlogDatas.js"
+import thoughtsBlogDatas from "./src/datas/thoughtsBlogDatas.js"
 
 const app = express()
 app.use(cors({
@@ -14,7 +17,8 @@ app.use(bodyParser.json())
 
 const hostname = '127.0.0.1';
 const port = 3000;
-let userId = 4;
+
+// Login, Signup, Forgot 
 
 app.post("/login", (req,res) => {
   const correctUser = userDatas.filter((userData) => userData.email === req.body.email)
@@ -22,20 +26,6 @@ app.post("/login", (req,res) => {
   if(correctUser[0] === undefined) { res.json({ status: "no such user"})}
   else if(correctUser[0].password != req.body.password) { res.json({ status: "password wrong"})}
   else { res.json({ status: "success", userId: correctUser[0].id})}
-})
-
-app.post("/getUserById", (req,res) => {
-  const userId = req.body.userId
-  let correctUserData
-
-  for(let i = 0; i < userDatas.length; i++) {
-    if(userDatas[i].id == userId) {
-      correctUserData = userDatas[i]
-      break;
-    }
-  }
-
-  res.json({ userData: correctUserData })
 })
 
 app.post("/signup", (req, res) => {
@@ -54,6 +44,59 @@ app.post("/signup", (req, res) => {
   } catch(error) {
     console.log(error.message)
     res.json({ status: "error" })
+  }
+})
+
+
+// User
+
+app.post("/getUserByFilter", (req,res) => {
+  const filterValue = req.body.filterValue
+
+  let correctUserData
+
+  for(let i = 0; i < userDatas.length; i++) {
+    if(userDatas[i][req.body.filterType] == filterValue) {
+      correctUserData = userDatas[i]
+      break;
+    }
+  }
+  
+  res.json({ userData: correctUserData })
+})
+
+// Blog
+
+app.post("/getBlogDatas", (req,res) => {
+  const blogType = req.body.blogType
+
+  switch(blogType) {
+    case "workout" :
+      res.json({ blogDatas: workoutBlogDatas })
+      break
+    case "books" :
+      res.json({ blogDatas: booksBlogDatas })
+      break
+    case "thoughts" :
+      res.json({ blogDatas: thoughtsBlogDatas})
+      break
+  }
+})
+
+app.post("/getBlogItem", (req,res) => {
+  const blogType = req.body.blogType
+  const blogIndex = req.body.blogIndex
+
+  switch(blogType) {
+    case "workout" :
+      res.json({ blogItem: workoutBlogDatas[blogIndex] })
+      break
+    case "books" :
+      res.json({ blogItem: booksBlogDatas[blogIndex] })
+      break
+    case "thoughts" :
+      res.json({ blogItem: thoughtsBlogDatas[blogIndex]})
+      break
   }
 })
 

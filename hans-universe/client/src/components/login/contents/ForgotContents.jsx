@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import emailjs from "@emailjs/browser"
 
 import { OverlayContext } from "@contexts/OverlayContext";
-import { getUser } from "@services/fetchUserDatas";
+import { getUserByFilter } from "@services/fetchUserDatas";
 import InputField from "../InputField";
 import PropTypes from "prop-types";
 import { getElement } from "@utils/utils";
@@ -42,11 +42,13 @@ function returnBtnClick(e, setContentType) {
   setContentType("login")
 }
 
-function forgotSubmitClick(e, email, setOverlayContext) {
+async function forgotSubmitClick(e, email, setOverlayContext) {
   e.preventDefault()
 
   const errorText = getElement(".email-error")
-  const userData = getUser(email)
+  const data = await getUserByFilter("email", email)
+  const userData = data.userData
+
   if(userData) {
     const userPasswordLength = userData.password.length
 

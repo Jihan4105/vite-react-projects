@@ -2,39 +2,60 @@ import { useState, useRef, useEffect, useContext } from "react"
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
 
-import { isEllipsisActive } from "@/utils/utils"
-import { getUserById } from "@services/fetchUserDatas"
+import { isEllipsisActive } from "@utils/utils"
+import { getUserByFilter } from "@services/fetchUserDatas"
 import CommentInput from "./CommentInput"
 
 import { UserContext } from "@contexts/UserContext"
 
 export default function CommentBox({ commentItem, isReplyExist = false, isExpandEnabled = undefined, setIsExpandEnabled = undefined }) {
   const logginedUser = useContext(UserContext)
-  const user = getUserById(commentItem.userId)
   const textArea = useRef(null)
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState({})
   const [isShowDetailActivate, setIsShowDetailActivate] = useState(false) 
   const [isReplyBtnClicked, setIsReplyBtnClicked] = useState(false)
+
+  const getUser = async () => {
+    const data = await getUserByFilter("id", commentItem.userId)
+    setLoading(false)
+    setUser(data.userData)
+  }
   
   useEffect(() => {
-    const textAreaDOM = textArea.current
-    const observer = new ResizeObserver((entries) => {
-      for (let entry of entries) {
-        const { width, height } = entry.contentRect;
-
-        if(isEllipsisActive(textAreaDOM)) {
-          setIsShowDetailActivate(true)
-        } else {
-          setIsShowDetailActivate(false)
+    if(loading === false) {
+      const textAreaDOM = textArea.current
+      const observer = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          const { width, height } = entry.contentRect;
+  
+          if(isEllipsisActive(textAreaDOM)) {
+            setIsShowDetailActivate(true)
+          } else {
+            setIsShowDetailActivate(false)
+          }
         }
+      });
+  
+      observer.observe(textAreaDOM)
+  
+      return () => {
+        observer.unobserve(textAreaDOM)
       }
-    });
-
-    observer.observe(textAreaDOM)
-
-    return () => {
-      observer.unobserve(textAreaDOM)
     }
   }, [])
+
+  useEffect(() => {
+    getUser()
+  }, [])
+
+  if(loading) {
+    return (
+      <div className="loader-container">
+        <div className="loader"></div>
+      </div>
+    )
+  }
 
   return (
     <div className="comment-box">

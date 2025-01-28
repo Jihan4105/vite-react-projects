@@ -1,13 +1,31 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 
-import { getBlogItemByIndex } from "@services/fetchBlogItem"
+import { getBlogItem } from "@/services/fetchBlog"
 import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
 import { initPageScroll } from "@utils/utils"
 
 export default function SingleBlog({ blogType, blogIndex }) {
-  const blogItem = getBlogItemByIndex(blogType, blogIndex)
   const JSXdispatch = useContext(JSXDispatchContext)
+  const [loading, setLoading] = useState(true)
+  const [blogItem, setBlogItem] = useState({})
 
+  const fetchBlogItem = async () => {
+    const singleBlogItem = await getBlogItem(blogType, blogIndex)
+    console.log(singleBlogItem)
+    setLoading(false)
+    setBlogItem(singleBlogItem)
+  }
+  useEffect(() => {
+    fetchBlogItem()
+  }, [])
+
+  if(loading) {
+    return (
+      <div className="loader-container">
+        <div className="loader"></div>
+      </div>
+    )
+  }
   return(
     <section id="single-blog">
       <div className="icon-btn return-btn" title="Return to page" onClick={() => {JSXdispatch({ docType: blogType }); initPageScroll();}}>
