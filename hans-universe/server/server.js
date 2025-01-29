@@ -20,16 +20,10 @@ app.use(cors({
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-const hostname = '127.0.0.1';
-const port = 3000;
-
-// -----------------DB-----------------------------------
-
 connectDB()
 
-
-// ------------------------------------------------------
-
+const hostname = '127.0.0.1';
+const port = 3000;
 
 
 // ----------------Routers------------------------------
@@ -65,7 +59,6 @@ app.get("/testdbREADById/:id", async (req, res) => {
   try {
     const { id } = req.params
     const item = await itemModel.findById(id)
-    console.log(item)
     res.status(200).json(item)
   } catch (error) {
     res.status(500).json({ message: error.message })
