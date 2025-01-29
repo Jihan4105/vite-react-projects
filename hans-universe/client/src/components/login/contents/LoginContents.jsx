@@ -67,7 +67,7 @@ async function loginBtnClicked(e, email, password, setState) {
   const port = import.meta.env.VITE_SERVER_PORT
   let fetchedData
 
-  await fetch(`http://${hostname}:${port}/login`, {
+  await fetch(`http://${hostname}:${port}/sign/login`, {
     method: "POST",
     headers:  {
       "Content-Type": "application/json",

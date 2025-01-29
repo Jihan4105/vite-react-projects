@@ -377,7 +377,7 @@ async function signUpBtnClick(e, setContentType) {
     const hostname = import.meta.env.VITE_SERVER_HOSTNAME
     const port = import.meta.env.VITE_SERVER_PORT
 
-    const res = await fetch(`http://${hostname}:${port}/signup`, {
+    const res = await fetch(`http://${hostname}:${port}/sign/signup`, {
       method: "POST",
       headers:  {
         "Content-Type": "application/json",

@@ -4,7 +4,7 @@ export async function getUserByFilter(filterType, filterValue) {
   const hostname = import.meta.env.VITE_SERVER_HOSTNAME
   const port = import.meta.env.VITE_SERVER_PORT
 
-  const response = await fetch(`http://${hostname}:${port}/getUserByFilter`, {
+  const response = await fetch(`http://${hostname}:${port}/user/getUserByFilter`, {
     method: "POST",
     headers:  {
       "Content-Type": "application/json",

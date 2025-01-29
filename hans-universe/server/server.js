@@ -1,10 +1,15 @@
 import express from "express"
 import cors from "cors"
 import bodyParser from "body-parser"
-import userDatas from "./src/datas/userDatas.js"
-import workoutBlogDatas from "./src/datas/workoutBlogDatas.js"
-import booksBlogDatas from "./src/datas/booksBlogDatas.js"
-import thoughtsBlogDatas from "./src/datas/thoughtsBlogDatas.js"
+
+// DB
+import connectDB from "./src/db/connect.js"
+import itemModel from "./src/models/Item.js"
+
+// Routers
+import userRouter from "./src/routes/user.js"
+import signRouter from "./src/routes/sign.js"
+import blogRouter from "./src/routes/blog.js"
 
 const app = express()
 app.use(cors({
@@ -18,88 +23,97 @@ app.use(bodyParser.json())
 const hostname = '127.0.0.1';
 const port = 3000;
 
-// Login, Signup, Forgot 
+// -----------------DB-----------------------------------
 
-app.post("/login", (req,res) => {
-  const correctUser = userDatas.filter((userData) => userData.email === req.body.email)
+connectDB()
 
-  if(correctUser[0] === undefined) { res.json({ status: "no such user"})}
-  else if(correctUser[0].password != req.body.password) { res.json({ status: "password wrong"})}
-  else { res.json({ status: "success", userId: correctUser[0].id})}
-})
 
-app.post("/signup", (req, res) => {
-  const newUserData = {
-    id: Math.random().toString(36).substring(2,11).toUpperCase(),
-    username: req.body.username,
-    userProfile: "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=",
-    email: req.body.email,
-    password: req.body.password
+// ------------------------------------------------------
+
+
+
+// ----------------Routers------------------------------
+
+app.use("/sign", signRouter)
+
+app.use("/user", userRouter)
+
+app.use("/blog", blogRouter)
+
+
+app.post("/testdbCreate", async (req, res) => {
+  const postItem = {
+    name: "New Product",
+    description: "New description"
   }
-  console.log(userDatas)
   try {
-    userDatas.push(newUserData)
-    console.log(userDatas)
-    res.json({ status: "success" })
-  } catch(error) {
-    console.log(error.message)
-    res.json({ status: "error" })
+    const item = await itemModel.create(postItem)
+    res.status(200)
+    res.json(item)
+  } catch (error) {
+    res.status(500)
+    res.json({message: error.message})
   }
 })
 
+app.get("/testdbREAD", async (req, res) => {
+  const items = await itemModel.find()
+  res.json(items)
+})
 
-// User
+app.get("/testdbREADById/:id", async (req, res) => {
+  try {
+    const { id } = req.params
+    const item = await itemModel.findById(id)
+    console.log(item)
+    res.status(200).json(item)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+})
 
-app.post("/getUserByFilter", (req,res) => {
-  const filterValue = req.body.filterValue
+app.put("/testdbUPDATE/:id", async (req, res) => {
+  try {
+    const { id } = req.params
+    const item = await itemModel.findByIdAndUpdate(id, {
+      name: "Cool",
+      description: "Hell"
+    })
+    // item 은 updated 된 data가 날라옴옴
 
-  let correctUserData
-
-  for(let i = 0; i < userDatas.length; i++) {
-    if(userDatas[i][req.body.filterType] == filterValue) {
-      correctUserData = userDatas[i]
-      break;
+    if(!item) {
+      return res.status(404).json({message: "Item not found"})
     }
-  }
-  
-  res.json({ userData: correctUserData })
-})
 
-// Blog
-
-app.post("/getBlogDatas", (req,res) => {
-  const blogType = req.body.blogType
-
-  switch(blogType) {
-    case "workout" :
-      res.json({ blogDatas: workoutBlogDatas })
-      break
-    case "books" :
-      res.json({ blogDatas: booksBlogDatas })
-      break
-    case "thoughts" :
-      res.json({ blogDatas: thoughtsBlogDatas})
-      break
+    const updatedItem = await itemModel.findById(id)
+    res.status(200).json(updatedItem)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
   }
 })
 
-app.post("/getBlogItem", (req,res) => {
-  const blogType = req.body.blogType
-  const blogIndex = req.body.blogIndex
+app.delete("/testdbDELETE/:id", async (req, res) => {
+  try {
+    const { id } = req.params
+    const item = await itemModel.findByIdAndDelete(id)
 
-  switch(blogType) {
-    case "workout" :
-      res.json({ blogItem: workoutBlogDatas[blogIndex] })
-      break
-    case "books" :
-      res.json({ blogItem: booksBlogDatas[blogIndex] })
-      break
-    case "thoughts" :
-      res.json({ blogItem: thoughtsBlogDatas[blogIndex]})
-      break
+    console.log(item)
+
+    if(!item) {
+      res.status(404).json({ message: "product not found"})
+    }
+
+    res.status(200)
+    res.json({ message: "Product Deleted Sucessfuly"})
+  } catch (error) {
+    res.status(500)
+    res.json({ message: error.message})
   }
 })
 
+// FindById ===> id값으로 필드 찾는 method READ
+
+// ------------------------------------------------------
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
