@@ -25,8 +25,7 @@ import MottoSpace from "@components/profile/MottoSpace"
 import Introuduce from "@components/profile/Introduce"
 
 // SingleBlog Components
-import SingleBlog from "@components/SingleBlog"
-import Comment from "@components/comment/Comment"
+import SingleBlog from "@components/singleblog/SingleBlog"
 
 
 export default function reducerJSXHandler(_, action) {
@@ -128,17 +127,10 @@ export default function reducerJSXHandler(_, action) {
     case "singleblog" : {
       return {
         jsx: 
-          <>
-            <SingleBlog
-              blogType={action.blogType}
-              blogIndex={action.blogIndex}
-            />
-                  
-            <Comment 
-              blogType={action.blogType}
-              blogIndex={action.blogIndex}
-            />
-          </>,
+          <SingleBlog
+            blogType={action.blogType}
+            blogIndex={action.blogIndex}
+          />
       }
     }
   }

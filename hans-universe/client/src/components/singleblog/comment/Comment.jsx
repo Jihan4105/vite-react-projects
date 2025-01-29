@@ -1,12 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-import { getBlogItemByIndex } from "@services/fetchBlogItem"
 import CommentInput from "./CommentInput"
 import CommentBox from "./CommentBox"
 
-export default function Comment({ blogType, blogIndex }) {
-  const blogItem = getBlogItemByIndex(blogType, blogIndex)
-
+export default function Comment({ blogItem }) {
   return(
     <section id="comment">
       <div className="container-jh">
