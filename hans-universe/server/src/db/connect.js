@@ -1,9 +1,10 @@
 import mongoose from "mongoose"
+import dotenv from "dotenv/config"
 
 const connectDB = async () => {
   try {
     const connect = await mongoose.connect(
-      "mongodb+srv://jihan4105:sam990604@hans-universe.zlwqx.mongodb.net/testdb?retryWrites=true&w=majority&appName=Hans-Universe"
+      `mongodb+srv://${process.env.DB_ADMIN}:${process.env.DB_PASSWORD}@hans-universe.zlwqx.mongodb.net/testdb?retryWrites=true&w=majority&appName=Hans-Universe`
     )
     console.log(`MongoDB Connected: ${connect.connection.host}`)
   } catch (error) {
