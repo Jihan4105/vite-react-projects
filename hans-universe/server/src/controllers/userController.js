@@ -1,18 +1,34 @@
-import userDatas from "../datas/userDatas.js"
+// import userDatas from "../datas/userDatas.js"
+import UserModel from "../models/UserModel.js"
 
-const getUserByFilter = (req,res) => {
+const getUserByFilter = async (req,res) => {
   const filterValue = req.body.filterValue
 
-  let correctUserData
+  try{
+    let correctUserData
+    const userDatas = await UserModel.find()
 
-  for(let i = 0; i < userDatas.length; i++) {
-    if(userDatas[i][req.body.filterType] == filterValue) {
-      correctUserData = userDatas[i]
-      break;
+    console.log(userDatas)
+
+    for(let i = 0; i < userDatas.length; i++) {
+      if(userDatas[i][req.body.filterType] == filterValue) {
+        correctUserData = userDatas[i]
+        break;
+      }
     }
+    
+    if(!correctUserData) {
+      res.status(404)
+      res.json({ message: "No Correct User Found"})
+    }
+
+    res.status(200)
+    res.json({ userData: correctUserData })
+  } catch(error) {
+    res.status(500)
+    res.json({ message: error.message })
   }
   
-  res.json({ userData: correctUserData })
 }
 
 const userController = {

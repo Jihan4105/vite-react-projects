@@ -4,13 +4,11 @@ import bodyParser from "body-parser"
 
 // DB
 import connectDB from "./src/db/connect.js"
-// import itemModel from "./src/models/Item.js"
 
 // Routers
 import userRouter from "./src/routes/userRoutes.js"
 import signRouter from "./src/routes/signRoutes.js"
 import blogRouter from "./src/routes/blogRoutes.js"
-import itemRouter from "./src/routes/itemRoutes.js"
 
 const app = express()
 app.use(cors({
@@ -23,6 +21,7 @@ app.use(bodyParser.json())
 
 // 브라우저에서 주소를 치면 파일에 접근할 수 있게 해줌.
 app.use("/uploads", express.static("uploads"))
+app.use("/assets", express.static("src/assets"))
 
 connectDB()
 
@@ -37,8 +36,6 @@ app.use("/sign", signRouter)
 app.use("/user", userRouter)
 
 app.use("/blog", blogRouter)
-
-app.use("/item", itemRouter)
 
 
 // app.post("/testdbCreate", async (req, res) => {
