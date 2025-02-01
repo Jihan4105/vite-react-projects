@@ -1,28 +1,36 @@
-import userDatas from "../datas/userDatas.js"
+import UserModel from "../models/UserModel.js"
 
-const login = (req,res) => {
-  const correctUser = userDatas.filter((userData) => userData.email === req.body.email)
+const login = async (req,res) => {
 
-  if(correctUser[0] === undefined) { res.json({ status: "no such user"})}
-  else if(correctUser[0].password != req.body.password) { res.json({ status: "password wrong"})}
-  else { res.json({ status: "success", userId: correctUser[0].id})}
+  try {
+    const fetchedData = await UserModel.find({"email": req.body.email})
+    const correctUser = fetchedData[0]
+
+    res.status(200)
+    if(!fetchedData) { res.json({ status: "no such user"}) }
+    else if(correctUser.password != req.body.password) { res.json({ status: "password wrong"})} 
+    else { res.json({ status: "success", userId: correctUser.id })}
+
+  } catch(error) {
+    res.status(500)
+    res.json({ status: error.message })
+  }
 }
 
-const signup = (req, res) => {
+const signup = async (req, res) => {
   const newUserData = {
-    id: Math.random().toString(36).substring(2,11).toUpperCase(),
-    username: req.body.username,
-    userProfile: "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=",
+    userName: req.body.username,
+    userProfile: "http://127.0.0.1:3000/assets/defaultUserProfile.png",
     email: req.body.email,
     password: req.body.password
   }
-  console.log(userDatas)
+  console.log(newUserData)
   try {
-    userDatas.push(newUserData)
-    console.log(userDatas)
+    const fetchedData = await UserModel.create(newUserData)
+    res.status(200)
     res.json({ status: "success" })
   } catch(error) {
-    console.log(error.message)
+    res.status(500)
     res.json({ status: "error" })
   }
 }

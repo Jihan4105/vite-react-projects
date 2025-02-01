@@ -65,9 +65,8 @@ async function loginBtnClicked(e, email, password, setState) {
 
   const hostname = import.meta.env.VITE_SERVER_HOSTNAME
   const port = import.meta.env.VITE_SERVER_PORT
-  let fetchedData
 
-  await fetch(`http://${hostname}:${port}/sign/login`, {
+  const res = await fetch(`http://${hostname}:${port}/sign/login`, {
     method: "POST",
     headers:  {
       "Content-Type": "application/json",
@@ -77,12 +76,9 @@ async function loginBtnClicked(e, email, password, setState) {
       password: password
     })
   })
-    .then((res) => res.json())
-    .then((data) => {
-      fetchedData = data
-    })
+  const data = await res.json()
 
-  switch(fetchedData.status) {
+  switch(data.status) {
     case "no such user" :
       setState("email-wrong")
       break
@@ -90,7 +86,7 @@ async function loginBtnClicked(e, email, password, setState) {
       setState("password-wrong")
       break
     case "success" :
-      window.location.href = `/src/html/app.html?userId=${fetchedData.userId}`
+      window.location.href = `/src/html/app.html?userId=${data.userId}`
       break
   }
 }

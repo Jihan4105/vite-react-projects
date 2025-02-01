@@ -9,6 +9,7 @@ import connectDB from "./src/db/connect.js"
 import userRouter from "./src/routes/userRoutes.js"
 import signRouter from "./src/routes/signRoutes.js"
 import blogRouter from "./src/routes/blogRoutes.js"
+import workoutBlogDatas from "./src/datas/workoutBlogDatas.js"
 
 const app = express()
 app.use(cors({
@@ -28,6 +29,7 @@ connectDB()
 const hostname = '127.0.0.1';
 const port = 3000;
 
+console.log(JSON.stringify(workoutBlogDatas))
 
 // ----------------Routers------------------------------
 

@@ -1,5 +1,3 @@
-import userDatas from "../data/userDatas";
-
 export async function getUserByFilter(filterType, filterValue) {
   const hostname = import.meta.env.VITE_SERVER_HOSTNAME
   const port = import.meta.env.VITE_SERVER_PORT

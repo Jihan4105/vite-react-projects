@@ -1,6 +1,5 @@
 const thoughtsBlogDatas = [
   {
-    id: 1,
     title: "What makes Me",
     content: "Hello World",
     wroteDate: "2020-05-08",
@@ -13,7 +12,7 @@ const thoughtsBlogDatas = [
     },
     commentTree: [
       {
-        userId: 1,
+        userId: "679e055f6832ffe4af2f93ce",
         date: "2021-10-18",
         content: "LoremIpsum10LoremIpsum10LoremIpsum10",
         thumbsUp: 4,
@@ -21,14 +20,14 @@ const thoughtsBlogDatas = [
         replyNumber: 2,
         replies: [
           {
-            userId: 2,
+            userId: "679e06986832ffe4af2f93d1",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
             thumbsUp: 2,
             thumbsDown: 0,
           },
           {
-            userId: 3,
+            userId: "679e07956832ffe4af2f93d2",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
             thumbsUp: 0,
@@ -36,7 +35,7 @@ const thoughtsBlogDatas = [
           },
         ]
       },{
-        userId:3,
+        userId: "679e07956832ffe4af2f93d2",
         date: "2021-10-18",
         content: "KOKOWA NEKI DAE ARI",
         thumbsUp: 1,
@@ -47,7 +46,6 @@ const thoughtsBlogDatas = [
     ]
   },
   {
-    id: 2,
     title: "Thoughts about me",
     content: "Hello World",
     wroteDate: "2021-04-03",
@@ -60,32 +58,40 @@ const thoughtsBlogDatas = [
     },
     commentTree: [
       {
-        commentId: 1,
-        name: "John Doe",
+        userId: "679e055f6832ffe4af2f93ce",
         date: "2021-10-18",
+        content: "LoremIpsum10LoremIpsum10LoremIpsum10",
         thumbsUp: 4,
         thumbsDown: 6,
+        replyNumber: 2,
         replies: [
           {
-            userId: 2,
+            userId: "679e06986832ffe4af2f93d1",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
             thumbsUp: 2,
             thumbsDown: 0,
           },
           {
-            userId: 3,
+            userId: "679e07956832ffe4af2f93d2",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
-            thumbsUp: 2,
+            thumbsUp: 0,
             thumbsDown: 0,
           },
         ]
+      },{
+        userId: "679e07956832ffe4af2f93d2",
+        date: "2021-10-18",
+        content: "KOKOWA NEKI DAE ARI",
+        thumbsUp: 1,
+        thumbsDown: 1,
+        replyNumber: 0,
+        replies: []
       }
     ]
   },
   {
-    id: 3,
     title: "Haitta Chubasa ga Tomae nai yo ni",
     content: "Hello World",
     wroteDate: "2020-12-12",
@@ -98,32 +104,40 @@ const thoughtsBlogDatas = [
     },
     commentTree: [
       {
-        commentId: 1,
-        name: "John Doe",
+        userId: "679e055f6832ffe4af2f93ce",
         date: "2021-10-18",
+        content: "LoremIpsum10LoremIpsum10LoremIpsum10",
         thumbsUp: 4,
         thumbsDown: 6,
+        replyNumber: 2,
         replies: [
           {
-            userId: 2,
+            userId: "679e06986832ffe4af2f93d1",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
             thumbsUp: 2,
             thumbsDown: 0,
           },
           {
-            userId: 3,
+            userId: "679e07956832ffe4af2f93d2",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
-            thumbsUp: 2,
+            thumbsUp: 0,
             thumbsDown: 0,
           },
         ]
+      },{
+        userId: "679e07956832ffe4af2f93d2",
+        date: "2021-10-18",
+        content: "KOKOWA NEKI DAE ARI",
+        thumbsUp: 1,
+        thumbsDown: 1,
+        replyNumber: 0,
+        replies: []
       }
     ]
   },
   {
-    id: 4,
     title: "Orae wa kono michi o Aruki Stuzukaeru",
     content: "Hello World",
     wroteDate: "2024-12-14",
@@ -136,32 +150,40 @@ const thoughtsBlogDatas = [
     },
     commentTree: [
       {
-        commentId: 1,
-        name: "John Doe",
+        userId: "679e055f6832ffe4af2f93ce",
         date: "2021-10-18",
+        content: "LoremIpsum10LoremIpsum10LoremIpsum10",
         thumbsUp: 4,
         thumbsDown: 6,
+        replyNumber: 2,
         replies: [
           {
-            userId: 2,
+            userId: "679e06986832ffe4af2f93d1",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
             thumbsUp: 2,
             thumbsDown: 0,
           },
           {
-            userId: 3,
+            userId: "679e07956832ffe4af2f93d2",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
-            thumbsUp: 2,
+            thumbsUp: 0,
             thumbsDown: 0,
           },
         ]
+      },{
+        userId: "679e07956832ffe4af2f93d2",
+        date: "2021-10-18",
+        content: "KOKOWA NEKI DAE ARI",
+        thumbsUp: 1,
+        thumbsDown: 1,
+        replyNumber: 0,
+        replies: []
       }
     ]
   },
   {
-    id: 5,
     title: "Wagahai wa Neki dae ari",
     content: "Hello World",
     wroteDate: "2012-01-01",
@@ -174,32 +196,40 @@ const thoughtsBlogDatas = [
     },
     commentTree: [
       {
-        commentId: 1,
-        name: "John Doe",
+        userId: "679e055f6832ffe4af2f93ce",
         date: "2021-10-18",
+        content: "LoremIpsum10LoremIpsum10LoremIpsum10",
         thumbsUp: 4,
         thumbsDown: 6,
+        replyNumber: 2,
         replies: [
           {
-            userId: 2,
+            userId: "679e06986832ffe4af2f93d1",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
             thumbsUp: 2,
             thumbsDown: 0,
           },
           {
-            userId: 3,
+            userId: "679e07956832ffe4af2f93d2",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
-            thumbsUp: 2,
+            thumbsUp: 0,
             thumbsDown: 0,
           },
         ]
+      },{
+        userId: "679e07956832ffe4af2f93d2",
+        date: "2021-10-18",
+        content: "KOKOWA NEKI DAE ARI",
+        thumbsUp: 1,
+        thumbsDown: 1,
+        replyNumber: 0,
+        replies: []
       }
     ]
   },
   {
-    id: 6,
     title: "Naemurase Nainda",
     content: "Hello World",
     wroteDate: "2020-05-08",
@@ -212,32 +242,40 @@ const thoughtsBlogDatas = [
     },
     commentTree: [
       {
-        commentId: 1,
-        name: "John Doe",
+        userId: "679e055f6832ffe4af2f93ce",
         date: "2021-10-18",
+        content: "LoremIpsum10LoremIpsum10LoremIpsum10",
         thumbsUp: 4,
         thumbsDown: 6,
+        replyNumber: 2,
         replies: [
           {
-            userId: 2,
+            userId: "679e06986832ffe4af2f93d1",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
             thumbsUp: 2,
             thumbsDown: 0,
           },
           {
-            userId: 3,
+            userId: "679e07956832ffe4af2f93d2",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
-            thumbsUp: 2,
+            thumbsUp: 0,
             thumbsDown: 0,
           },
         ]
+      },{
+        userId: "679e07956832ffe4af2f93d2",
+        date: "2021-10-18",
+        content: "KOKOWA NEKI DAE ARI",
+        thumbsUp: 1,
+        thumbsDown: 1,
+        replyNumber: 0,
+        replies: []
       }
     ]
   },
   {
-    id: 7,
     title: "Kazae Mo nai Kudari Sona Yoruni",
     content: "Hello World",
     wroteDate: "2021-04-03",
@@ -250,32 +288,40 @@ const thoughtsBlogDatas = [
     },
     commentTree: [
       {
-        commentId: 1,
-        name: "John Doe",
+        userId: "679e055f6832ffe4af2f93ce",
         date: "2021-10-18",
+        content: "LoremIpsum10LoremIpsum10LoremIpsum10",
         thumbsUp: 4,
         thumbsDown: 6,
+        replyNumber: 2,
         replies: [
           {
-            userId: 2,
+            userId: "679e06986832ffe4af2f93d1",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
             thumbsUp: 2,
             thumbsDown: 0,
           },
           {
-            userId: 3,
+            userId: "679e07956832ffe4af2f93d2",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
-            thumbsUp: 2,
+            thumbsUp: 0,
             thumbsDown: 0,
           },
         ]
+      },{
+        userId: "679e07956832ffe4af2f93d2",
+        date: "2021-10-18",
+        content: "KOKOWA NEKI DAE ARI",
+        thumbsUp: 1,
+        thumbsDown: 1,
+        replyNumber: 0,
+        replies: []
       }
     ]
   },
   {
-    id: 8,
     title: "Kimmino Koae ga Mimidae Tokuae",
     content: "Hello World",
     wroteDate: "2020-12-12",
@@ -288,32 +334,40 @@ const thoughtsBlogDatas = [
     },
     commentTree: [
       {
-        commentId: 1,
-        name: "John Doe",
+        userId: "679e055f6832ffe4af2f93ce",
         date: "2021-10-18",
+        content: "LoremIpsum10LoremIpsum10LoremIpsum10",
         thumbsUp: 4,
         thumbsDown: 6,
+        replyNumber: 2,
         replies: [
           {
-            userId: 2,
+            userId: "679e06986832ffe4af2f93d1",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
             thumbsUp: 2,
             thumbsDown: 0,
           },
           {
-            userId: 3,
+            userId: "679e07956832ffe4af2f93d2",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
-            thumbsUp: 2,
+            thumbsUp: 0,
             thumbsDown: 0,
           },
         ]
+      },{
+        userId: "679e07956832ffe4af2f93d2",
+        date: "2021-10-18",
+        content: "KOKOWA NEKI DAE ARI",
+        thumbsUp: 1,
+        thumbsDown: 1,
+        replyNumber: 0,
+        replies: []
       }
     ]
   },
   {
-    id: 9,
     title: "Yuraei da gan shou",
     content: "Hello World",
     wroteDate: "2024-12-14",
@@ -326,32 +380,41 @@ const thoughtsBlogDatas = [
     },
     commentTree: [
       {
-        commentId: 1,
-        name: "John Doe",
+        userId: "679e055f6832ffe4af2f93ce",
         date: "2021-10-18",
+        content: "LoremIpsum10LoremIpsum10LoremIpsum10",
         thumbsUp: 4,
         thumbsDown: 6,
+        replyNumber: 2,
         replies: [
           {
-            userId: 2,
+            userId: "679e06986832ffe4af2f93d1",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
             thumbsUp: 2,
             thumbsDown: 0,
           },
           {
-            userId: 3,
+            userId: "679e07956832ffe4af2f93d2",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
-            thumbsUp: 2,
+            thumbsUp: 0,
             thumbsDown: 0,
           },
         ]
+      },{
+        userId: "679e07956832ffe4af2f93d2",
+        date: "2021-10-18",
+        content: "KOKOWA NEKI DAE ARI",
+        thumbsUp: 1,
+        thumbsDown: 1,
+        replyNumber: 0,
+        replies: []
       }
     ]
   },
   {
-    id: 10,
+
     title: "Hitta tae baka nanimo kawaranai",
     content: "Hello World",
     wroteDate: "2012-01-01",
@@ -364,30 +427,40 @@ const thoughtsBlogDatas = [
     },
     commentTree: [
       {
-        commentId: 1,
-        name: "John Doe",
+        userId: "679e055f6832ffe4af2f93ce",
         date: "2021-10-18",
+        content: "LoremIpsum10LoremIpsum10LoremIpsum10",
         thumbsUp: 4,
         thumbsDown: 6,
+        replyNumber: 2,
         replies: [
           {
-            userId: 2,
+            userId: "679e06986832ffe4af2f93d1",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
             thumbsUp: 2,
             thumbsDown: 0,
           },
           {
-            userId: 3,
+            userId: "679e07956832ffe4af2f93d2",
             date: "2021-10-19",
             content: "What do you mean Lorem Ipsum?",
-            thumbsUp: 2,
+            thumbsUp: 0,
             thumbsDown: 0,
           },
         ]
+      },{
+        userId: "679e07956832ffe4af2f93d2",
+        date: "2021-10-18",
+        content: "KOKOWA NEKI DAE ARI",
+        thumbsUp: 1,
+        thumbsDown: 1,
+        replyNumber: 0,
+        replies: []
       }
     ]
   },
 ]
 
 export default thoughtsBlogDatas
+

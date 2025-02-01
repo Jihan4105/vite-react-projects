@@ -2,20 +2,16 @@
 import UserModel from "../models/UserModel.js"
 
 const getUserByFilter = async (req,res) => {
+  const filterType = req.body.filterType === "id" ? "_id" : req.body.filterType
   const filterValue = req.body.filterValue
+  let filterObject = {}
+  filterObject[filterType] = filterValue
 
   try{
-    let correctUserData
-    const userDatas = await UserModel.find()
+    const fetchedData = await UserModel.find(filterObject)
+    const correctUserData = fetchedData[0]
 
-    console.log(userDatas)
-
-    for(let i = 0; i < userDatas.length; i++) {
-      if(userDatas[i][req.body.filterType] == filterValue) {
-        correctUserData = userDatas[i]
-        break;
-      }
-    }
+    console.log(correctUserData)
     
     if(!correctUserData) {
       res.status(404)
