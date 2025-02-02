@@ -11,8 +11,6 @@ const getUserByFilter = async (req,res) => {
     const fetchedData = await UserModel.find(filterObject)
     const correctUserData = fetchedData[0]
 
-    console.log(correctUserData)
-    
     if(!correctUserData) {
       res.status(404)
       res.json({ message: "No Correct User Found"})

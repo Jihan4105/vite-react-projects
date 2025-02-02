@@ -84,7 +84,7 @@ export default function BlogList({ type, searchValue, filterValue}) {
         {filteredDatas.map((blogItem, index) => {
           if(startIndex <= index && index <= endIndex) {
             return (
-              <li className="blog-item-wrapper" key={blogItem.id} onClick={() => {redirectBlogDetail(type, index, JSXdispatch)}}>
+              <li className="blog-item-wrapper" key={blogItem._id} onClick={() => {redirectBlogDetail(type, blogItem._id, JSXdispatch)}}>
                 <div className="blog-item">
                   <div className="blog-title-group">
                     <p className="blog-title">
@@ -110,11 +110,11 @@ export default function BlogList({ type, searchValue, filterValue}) {
   )
 }
 
-function redirectBlogDetail(type, index, JSXdispatch) {
+function redirectBlogDetail(type, id, JSXdispatch) {
   JSXdispatch({ 
     docType: "singleblog", 
     blogType: type,  
-    blogIndex: index
+    blogId: id
   })
 
   initPageScroll();

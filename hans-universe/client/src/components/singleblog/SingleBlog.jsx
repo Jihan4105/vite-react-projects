@@ -5,12 +5,12 @@ import Comment from "./comment/Comment"
 
 import { getBlogItem } from "@services/fetchBlog"
 
-export default function SingleBlog({ blogType, blogIndex }) {
+export default function SingleBlog({ blogType, blogId }) {
   const [loading, setLoading] = useState(true)
   const [blogItem, setBlogItem] = useState({})
 
   const fetchBlogItem = async () => {
-    const singleBlogItem = await getBlogItem(blogType, blogIndex)
+    const singleBlogItem = await getBlogItem(blogType, blogId)
     setLoading(false)
     setBlogItem(singleBlogItem)
   }

@@ -5,9 +5,10 @@ export default function CommentInput({ type, setIsReplyBtnClicked = undefined })
   const [commentText, setCommentText] = useState("")
   const [focusStatus, setFocusStatus] = useState(false)
   const user = useContext(UserContext)
+  let commentBoxMargin = type === "comment" ? "1rem" : "0"
 
   return(
-    <div className="comment-input-box">
+    <div className="comment-input-box" style={{marginBottom: commentBoxMargin}}>
       <div className="user-profile-wrapper">
         <img src={user.userProfile} className="user-profile" />
       </div>
@@ -27,7 +28,7 @@ export default function CommentInput({ type, setIsReplyBtnClicked = undefined })
         </div>
         {type === "comment" && focusStatus && 
           <div className="button-group">
-            <button className="cancel-btn" onClick={() => {setFocusStatus(false)}}>Cancel</button>
+            <button className="cancel-btn" onClick={(e) => {cancelBtnHandler(e.target.parentElement.previousElementSibling.children[0], setCommentText, setFocusStatus)}}>Cancel</button>
             {commentText === "" ? 
               <button className="submit-btn" disabled>Submit</button>
               :
@@ -54,3 +55,11 @@ function autoHeight(element) {
   element.style.height = "5px";
   element.style.height = (element.scrollHeight) + "px"
 }
+
+function cancelBtnHandler(textArea, setCommentText, setFocusStatus) {
+  textArea.value = ""
+  setCommentText("")
+  setFocusStatus(false)
+}
+
+// function()

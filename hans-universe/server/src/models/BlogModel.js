@@ -32,6 +32,39 @@ const blogSchema = new mongoose.Schema({
   ]
 })
 
+const booksBlogSchema = new mongoose.Schema({
+  title: String,
+  genre: String,
+  content: String,
+  wroteDate: String,
+  modifiedDate: String,
+  commentsNumber: String,
+  reaction: {
+    like: Number,
+    hmm: Number,
+    disagree: Number,
+  },
+  commentTree: [
+    {
+      userId: String,
+      date: String,
+      content: String,
+      thumbsUp: Number,
+      thumbsDown: Number,
+      replyNumber: Number,
+      replies: [
+        {
+          userId: String,
+          date: String,
+          content: String,
+          thumbsUp: Number,
+          thumbsDown: Number,
+        }
+      ]
+    }
+  ]
+})
+
 export const WorkoutModel = mongoose.model("workoutdata", blogSchema)
-export const BooksModel = mongoose.model("booksdata", blogSchema)
-export const thoughtsModel = mongoose.model("thoughtsdata", blogSchema)
+export const ThoughtsModel = mongoose.model("thoughtsdata", blogSchema)
+export const BooksModel = mongoose.model("booksdata", booksBlogSchema)

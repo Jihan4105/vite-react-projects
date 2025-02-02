@@ -1,37 +1,63 @@
 import workoutBlogDatas from "../datas/workoutBlogDatas.js"
 import booksBlogDatas from "../datas/booksBlogDatas.js"
 import thoughtsBlogDatas from "../datas/thoughtsBlogDatas.js"
+import { BooksModel, WorkoutModel, ThoughtsModel } from "../models/BlogModel.js"
 
-const getBlogDatas = (req,res) => {
+const getBlogDatas = async (req,res) => {
   const blogType = req.body.blogType
+  let BlogModel
 
   switch(blogType) {
     case "workout" :
-      res.json({ blogDatas: workoutBlogDatas })
+      BlogModel = WorkoutModel 
       break
     case "books" :
-      res.json({ blogDatas: booksBlogDatas })
+      BlogModel = BooksModel
       break
     case "thoughts" :
-      res.json({ blogDatas: thoughtsBlogDatas})
+      BlogModel = ThoughtsModel
       break
+  }
+
+  try {
+    const fechedDatas = await BlogModel.find({})
+    res.status(200)
+    res.json(fechedDatas)
+  } catch(error) {
+    res.status(500)
+    res.json({ message: error.message })
   }
 }
 
-const getBlogItem = (req,res) => {
+const getBlogItem = async (req,res) => {
   const blogType = req.body.blogType
-  const blogIndex = req.body.blogIndex
+  const blogId = req.body.blogId
+  let BlogModel
 
   switch(blogType) {
     case "workout" :
-      res.json({ blogItem: workoutBlogDatas[blogIndex] })
+      BlogModel = WorkoutModel 
       break
     case "books" :
-      res.json({ blogItem: booksBlogDatas[blogIndex] })
+      BlogModel = BooksModel
       break
     case "thoughts" :
-      res.json({ blogItem: thoughtsBlogDatas[blogIndex]})
+      BlogModel = ThoughtsModel
       break
+  }
+
+  try {
+    const blogItem = await BlogModel.findById(blogId)
+
+    if(!blogItem) {
+      res.status(404)
+      res.json({ message: "No such Item"})
+    }
+    res.status(200)
+    res.json(blogItem)
+  } catch(error) {
+    res.status(500)
+    res.json({ message: error.message })
   }
 }
 

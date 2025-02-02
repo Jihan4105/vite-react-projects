@@ -108,7 +108,7 @@ export default function CommentBox({ commentItem, isReplyExist = false, isExpand
           </div>
         }
       </div>
-      {logginedUser.id === user.id &&
+      {logginedUser._id === user._id &&
         <>
           <DropdownButton
             id="comment-edit-dropdown-btn"

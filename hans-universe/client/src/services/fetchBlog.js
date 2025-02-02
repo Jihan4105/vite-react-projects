@@ -5,7 +5,7 @@ export async function getBlogDatas (blogType) {
   const response = await fetch(`http://${hostname}:${port}/blog/getBlogDatas`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json",             
     },
     body: JSON.stringify({
       blogType: blogType
@@ -13,10 +13,10 @@ export async function getBlogDatas (blogType) {
   })
   const data = await response.json()
 
-  return data.blogDatas
+  return data
 }
 
-export async function getBlogItem (blogType, blogIndex) {
+export async function getBlogItem (blogType, blogId) {
   const hostname = import.meta.env.VITE_SERVER_HOSTNAME
   const port = import.meta.env.VITE_SERVER_PORT
 
@@ -27,11 +27,11 @@ export async function getBlogItem (blogType, blogIndex) {
     },
     body: JSON.stringify({
       blogType: blogType,
-      blogIndex: blogIndex
+      blogId: blogId
     })
   })
 
   const data = await response.json()
 
-  return data.blogItem
+  return data
 }

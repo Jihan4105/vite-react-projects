@@ -129,7 +129,7 @@ export default function reducerJSXHandler(_, action) {
         jsx: 
           <SingleBlog
             blogType={action.blogType}
-            blogIndex={action.blogIndex}
+            blogId={action.blogId}
           />
       }
     }
