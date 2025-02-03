@@ -33,3 +33,9 @@ Single Blog Page 개발 이어가야함, 구체적으론 댓글기능 먼저 구
   컴포넌트를 보여주는 기능을 구현해야함.
 
 2. Comment Component의 getBlogItemByIndex를 서버쪽에서 구현을 다시 해줘야함.
+
+----------2025-02-03
+
+1. MongoDB booksData reaction필드가 없어서 추가해줘야함.
+
+2. SingleBlog의 수정기능 구현해야함.

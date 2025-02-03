@@ -15,6 +15,7 @@ export default function CommentBox({ blogType, commentItem, commentIndex, isRepl
   const [user, setUser] = useState({})
   const [isShowDetailActivate, setIsShowDetailActivate] = useState(false) 
   const [isReplyBtnClicked, setIsReplyBtnClicked] = useState(false)
+  const [isEditModeEnabled, setIsEditModeEnabled] = useState(false)
 
   const getUser = async () => {
     const data = await getUserByFilter("id", commentItem.userId)
@@ -133,7 +134,7 @@ export default function CommentBox({ blogType, commentItem, commentIndex, isRepl
               </div>
             </Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item eventKey="2">
+            <Dropdown.Item eventKey="2" onClick={() => {setIsEditModeEnabled(true)}}>
               <div className="comment-edit-group">
                 <ion-icon name="create-outline"></ion-icon>
                 <span>Edit</span>
