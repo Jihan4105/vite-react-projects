@@ -9,6 +9,7 @@ import connectDB from "./src/db/connect.js"
 import userRouter from "./src/routes/userRoutes.js"
 import signRouter from "./src/routes/signRoutes.js"
 import blogRouter from "./src/routes/blogRoutes.js"
+import commentRouter from "./src/routes/commentRoutes.js"
 
 const app = express()
 app.use(cors({
@@ -35,6 +36,8 @@ app.use("/sign", signRouter)
 app.use("/user", userRouter)
 
 app.use("/blog", blogRouter)
+
+app.use("/comment", commentRouter)
 
 
 // app.post("/testdbCreate", async (req, res) => {

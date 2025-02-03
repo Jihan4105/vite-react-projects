@@ -1,20 +1,8 @@
-import { BooksModel, WorkoutModel, ThoughtsModel } from "../models/BlogModel.js"
+import { switchBlogModel } from "../utils/utils.js"
 
 const getBlogDatas = async (req,res) => {
   const blogType = req.body.blogType
-  let BlogModel
-
-  switch(blogType) {
-    case "workout" :
-      BlogModel = WorkoutModel 
-      break
-    case "books" :
-      BlogModel = BooksModel
-      break
-    case "thoughts" :
-      BlogModel = ThoughtsModel
-      break
-  }
+  const BlogModel = switchBlogModel(blogType)
 
   try {
     const fechedDatas = await BlogModel.find({})
@@ -29,22 +17,12 @@ const getBlogDatas = async (req,res) => {
 const getBlogItem = async (req,res) => {
   const blogType = req.body.blogType
   const blogId = req.body.blogId
-  let BlogModel
-
-  switch(blogType) {
-    case "workout" :
-      BlogModel = WorkoutModel 
-      break
-    case "books" :
-      BlogModel = BooksModel
-      break
-    case "thoughts" :
-      BlogModel = ThoughtsModel
-      break
-  }
+  const BlogModel = switchBlogModel(blogType)
 
   try {
     const blogItem = await BlogModel.findById(blogId)
+
+    console.log(blogItem)
 
     if(!blogItem) {
       res.status(404)

@@ -1,9 +1,11 @@
 import { useContext } from "react"
 
 import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
+import { BlogItemContext } from "@contexts/BlogItemContext"
 import { initPageScroll } from "@utils/utils"
 
-export default function SingleBlogContent({ blogItem, blogType }) {
+export default function SingleBlogContent({ blogType }) {
+  const blogItem = useContext(BlogItemContext)
   const JSXdispatch = useContext(JSXDispatchContext)
 
   return(

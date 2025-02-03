@@ -8,7 +8,7 @@ import CommentInput from "./CommentInput"
 
 import { UserContext } from "@contexts/UserContext"
 
-export default function CommentBox({ commentItem, isReplyExist = false, isExpandEnabled = undefined, setIsExpandEnabled = undefined }) {
+export default function CommentBox({ blogType, commentItem, commentIndex, isReplyExist, setBlogItem, isExpandEnabled = undefined, setIsExpandEnabled = undefined }) {
   const logginedUser = useContext(UserContext)
   const textArea = useRef(null)
   const [loading, setLoading] = useState(true)
@@ -92,7 +92,10 @@ export default function CommentBox({ commentItem, isReplyExist = false, isExpand
         {isReplyBtnClicked && 
           <CommentInput 
             type="reply"
+            blogType={blogType}
+            setBlogItem={setBlogItem}
             setIsReplyBtnClicked={setIsReplyBtnClicked}
+            commentIndex={commentIndex}
           />
         }
         {commentItem.replyNumber != 0 && isReplyExist && 

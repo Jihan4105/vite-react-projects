@@ -28,7 +28,6 @@ const signup = async (req, res) => {
     email: req.body.email,
     password: req.body.password
   }
-  console.log(newUserData)
   try {
     const fetchedData = await UserModel.create(newUserData)
     res.status(200)

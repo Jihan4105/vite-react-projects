@@ -27,7 +27,6 @@ export async function getBlogItem (blogType, blogId) {
       blogId: blogId
     })
   })
-
   const data = await response.json()
 
   return data

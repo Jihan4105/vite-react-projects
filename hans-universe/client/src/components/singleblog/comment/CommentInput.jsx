@@ -1,11 +1,15 @@
 import { useContext, useState } from "react"
 import { UserContext } from "@contexts/UserContext"
+import { BlogItemContext } from "@contexts/BlogItemContext"
 import { createComment } from "@services/fetchComment"
 
-export default function CommentInput({ type, setIsReplyBtnClicked = undefined }) {
+import { getFormatedDate } from "@utils/utils.js"
+
+export default function CommentInput({ type, blogType, setBlogItem, setIsReplyBtnClicked = undefined, commentIndex = undefined }) {
   const [commentText, setCommentText] = useState("")
   const [focusStatus, setFocusStatus] = useState(false)
   const user = useContext(UserContext)
+  const blogItem = useContext(BlogItemContext)
   let commentBoxMargin = type === "comment" ? "1rem" : "0"
 
   return(
@@ -33,7 +37,7 @@ export default function CommentInput({ type, setIsReplyBtnClicked = undefined })
             {commentText === "" ? 
               <button className="submit-btn" disabled>Submit</button>
               :
-              <button className="submit-btn" onClick={() => {submitBtnHandler(type, user, commentText, index)}}>Submit</button>
+              <button className="submit-btn" onClick={() => {submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem)}}>Submit</button>
             }
           </div>
         }
@@ -43,7 +47,7 @@ export default function CommentInput({ type, setIsReplyBtnClicked = undefined })
             {commentText === "" ? 
               <button className="submit-btn" disabled>Submit</button>
               :
-              <button className="submit-btn">Submit</button>
+              <button className="submit-btn" onClick={() => {submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem, commentIndex)}}>Submit</button>
             }
           </div>
         }
@@ -63,8 +67,21 @@ function cancelBtnHandler(textArea, setCommentText, setFocusStatus) {
   setFocusStatus(false)
 }
 
-async function submitBtnHandler(type, user, commentText, index) {
-  if(type === "comment") {
-    const data = await createComment(type, user, commentText, index)
+async function submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem, commentIndex = undefined) {
+  let newComment = {
+    userId: user._id,
+    date: getFormatedDate(new Date()),
+    content: commentText,
+    thumbsUp: 0,
+    thumbsDown: 0
   }
+
+  if(type === "comment") {
+    newComment.replyNumber = 0
+    newComment.replies = []
+  }
+
+  const newBlogItem = await createComment(blogType, blogItem, newComment, commentIndex)
+
+  setBlogItem(newBlogItem)
 }
