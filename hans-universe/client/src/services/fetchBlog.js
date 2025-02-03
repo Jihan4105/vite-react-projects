@@ -1,7 +1,7 @@
-export async function getBlogDatas (blogType) {
-  const hostname = import.meta.env.VITE_SERVER_HOSTNAME
-  const port = import.meta.env.VITE_SERVER_PORT
+const hostname = import.meta.env.VITE_SERVER_HOSTNAME
+const port = import.meta.env.VITE_SERVER_PORT
 
+export async function getBlogDatas (blogType) {
   const response = await fetch(`http://${hostname}:${port}/blog/getBlogDatas`, {
     method: "POST",
     headers: {
@@ -17,9 +17,6 @@ export async function getBlogDatas (blogType) {
 }
 
 export async function getBlogItem (blogType, blogId) {
-  const hostname = import.meta.env.VITE_SERVER_HOSTNAME
-  const port = import.meta.env.VITE_SERVER_PORT
-
   const response = await fetch(`http://${hostname}:${port}/blog/getBlogItem`, {
     method: "POST",
     headers: {

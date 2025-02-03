@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import { UserContext } from "@contexts/UserContext"
+import { createComment } from "@services/fetchComment"
 
 export default function CommentInput({ type, setIsReplyBtnClicked = undefined }) {
   const [commentText, setCommentText] = useState("")
@@ -32,13 +33,13 @@ export default function CommentInput({ type, setIsReplyBtnClicked = undefined })
             {commentText === "" ? 
               <button className="submit-btn" disabled>Submit</button>
               :
-              <button className="submit-btn">Submit</button>
+              <button className="submit-btn" onClick={() => {submitBtnHandler(type, user, commentText, index)}}>Submit</button>
             }
           </div>
         }
         {type === "reply" &&
           <div className="button-group">
-            {setIsReplyBtnClicked && <button className="cancel-btn" onClick={() => {setIsReplyBtnClicked(false)}}>Cancel</button>}
+            {setIsReplyBtnClicked && <button className="cancel-btn" onClick={(e) => {setIsReplyBtnClicked(false)}}>Cancel</button>}
             {commentText === "" ? 
               <button className="submit-btn" disabled>Submit</button>
               :
@@ -62,4 +63,8 @@ function cancelBtnHandler(textArea, setCommentText, setFocusStatus) {
   setFocusStatus(false)
 }
 
-// function()
+async function submitBtnHandler(type, user, commentText, index) {
+  if(type === "comment") {
+    const data = await createComment(type, user, commentText, index)
+  }
+}

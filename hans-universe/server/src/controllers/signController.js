@@ -4,17 +4,21 @@ const login = async (req,res) => {
 
   try {
     const fetchedData = await UserModel.find({"email": req.body.email})
+  
+    if(fetchedData.length === 0) {
+      res.status(200)
+      res.json({ status: "no such user"}) 
+    }
+  
     const correctUser = fetchedData[0]
-
     res.status(200)
-    if(!fetchedData) { res.json({ status: "no such user"}) }
-    else if(correctUser.password != req.body.password) { res.json({ status: "password wrong"})} 
+    if(correctUser.password != req.body.password) { res.json({ status: "password wrong"})} 
     else { res.json({ status: "success", userId: correctUser.id })}
-
   } catch(error) {
     res.status(500)
-    res.json({ status: error.message })
+    res.json({ status: "Something bad Occured", message: error.message})
   }
+
 }
 
 const signup = async (req, res) => {

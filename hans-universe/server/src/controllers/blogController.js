@@ -1,6 +1,3 @@
-import workoutBlogDatas from "../datas/workoutBlogDatas.js"
-import booksBlogDatas from "../datas/booksBlogDatas.js"
-import thoughtsBlogDatas from "../datas/thoughtsBlogDatas.js"
 import { BooksModel, WorkoutModel, ThoughtsModel } from "../models/BlogModel.js"
 
 const getBlogDatas = async (req,res) => {

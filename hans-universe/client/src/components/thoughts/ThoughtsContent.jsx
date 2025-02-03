@@ -1,12 +1,35 @@
 import thoughtsContentImg from "@assets/thoughts/thoughts-content.jpg"
-import thoughtsBlogDatas from "@data/thoughtsBlogDatas"
+import { getBlogDatas } from "@services/fetchBlog"
+import { useState, useEffect } from "react"
 
 export default function ThoughtsContent() {
-  const copiedBlogDatas = [...thoughtsBlogDatas]
-  const sortedDatas = copiedBlogDatas.sort((itemPrevious, itemNext) => {
-    return itemNext.commentsNumber - itemPrevious.commentsNumber
-  })
-  sortedDatas.splice(3, sortedDatas.length)
+  
+  const [loading, setLoading] = useState(false)
+  const [sortedDatas, setSortedDats] = useState([])
+  
+  const fetchBlogDatas = async () => {
+    const data = await getBlogDatas("thoughts")
+
+    setSortedDats(
+      data.sort((itemPrevious, itemNext) => {
+        return itemNext.commentsNumber - itemPrevious.commentsNumber
+      }).slice(0, 3)
+    )
+    setLoading(true)
+  }
+
+  useEffect(() => {
+    fetchBlogDatas()
+  }, [])
+
+
+  if(!loading) {
+    return(
+      <div className="loader-container">
+        <div className="loader"></div>
+      </div>
+    )
+  } 
 
   return(
     <section id="thoughts-contents">
