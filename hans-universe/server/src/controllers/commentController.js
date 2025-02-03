@@ -8,13 +8,18 @@ const createComment = async (req, res) => {
   const newBlogItem = { ...blogItem }
 
   if(commentIndex === undefined) {
+    newBlogItem.commentsNumber += 1
     newBlogItem.commentTree.push(newComment)
   } else {
+    newBlogItem.commentsNumber += 1
+    newBlogItem.commentTree[commentIndex].replyNumber += 1
     newBlogItem.commentTree[commentIndex].replies.push(newComment)
   }
 
   try {
-    const fetchedBlogItem = await BlogModel.findByIdAndUpdate(blogItem._id, newBlogItem)
+    const fetchedBlogItem = await BlogModel.findByIdAndUpdate(blogItem._id, newBlogItem, {
+      returnDocument: "after"
+    })
     res.status(200)
     res.json(fetchedBlogItem)
   } catch(error) {

@@ -14,8 +14,7 @@ export async function createComment( blogType, blogItem, newComment, commentInde
       commentIndex: commentIndex
     })
   }) 
-
   const data = await res.json()
-
+  
   return data
 }

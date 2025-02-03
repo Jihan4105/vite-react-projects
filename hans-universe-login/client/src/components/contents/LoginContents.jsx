@@ -8,7 +8,7 @@ LoginContents.propTypes = {
   setContentType: PropTypes.func.isRequired
 }
 
-export default function LoginContents({ contentType,setContentType }) {
+export default function LoginContents({ contentType, setContentType }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [whichIsWrong, setWhichIsWrong] = useState("")
@@ -68,5 +68,4 @@ function loginBtnClicked(e, email, password, setState) {
 
   if(!userdata) { setState("email-wrong") } 
   else if(userdata.password != password) { setState("password-wrong")}
-  else {console.log("Login Success!")}
 }

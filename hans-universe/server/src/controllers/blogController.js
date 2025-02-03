@@ -22,8 +22,6 @@ const getBlogItem = async (req,res) => {
   try {
     const blogItem = await BlogModel.findById(blogId)
 
-    console.log(blogItem)
-
     if(!blogItem) {
       res.status(404)
       res.json({ message: "No such Item"})

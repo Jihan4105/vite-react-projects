@@ -1,6 +1,4 @@
-import { useState, useEffect, useContext } from "react"
-
-import { BlogItemContext } from "@contexts/BlogItemContext"
+import { useState, useEffect } from "react"
 
 import SingleBlogContent from "./SingleBlogContent"
 import Comment from "./comment/Comment"
@@ -10,7 +8,6 @@ import { getBlogItem } from "@services/fetchBlog"
 export default function SingleBlog({ blogType, blogId }) {
   const [loading, setLoading] = useState(true)
   const [blogItem, setBlogItem] = useState({})
-
 
   const fetchBlogItem = async () => {
     const singleBlogItem = await getBlogItem(blogType, blogId)
@@ -30,16 +27,16 @@ export default function SingleBlog({ blogType, blogId }) {
   }
   return(
     <>
-      <BlogItemContext.Provider value={blogItem}>
-        <SingleBlogContent
-          blogType={blogType}
+      <SingleBlogContent
+        blogType={blogType}
+        blogItem={blogItem}
         />
-              
-        <Comment 
-          blogType={blogType}
-          setBlogItem={setBlogItem}
-        />
-      </BlogItemContext.Provider>
+            
+      <Comment 
+        blogType={blogType}
+        blogItem={blogItem}
+        setBlogItem={setBlogItem}
+      />
     </>
   )
 }

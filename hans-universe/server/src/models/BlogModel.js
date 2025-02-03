@@ -5,7 +5,7 @@ const blogSchema = new mongoose.Schema({
   content: String,
   wroteDate: String,
   modifiedDate: String,
-  commentsNumber: String,
+  commentsNumber: Number,
   reaction: {
     like: Number,
     hmm: Number,

@@ -1,15 +1,13 @@
 import { useContext, useState } from "react"
 import { UserContext } from "@contexts/UserContext"
-import { BlogItemContext } from "@contexts/BlogItemContext"
 import { createComment } from "@services/fetchComment"
 
 import { getFormatedDate } from "@utils/utils.js"
 
-export default function CommentInput({ type, blogType, setBlogItem, setIsReplyBtnClicked = undefined, commentIndex = undefined }) {
+export default function CommentInput({ type, blogType, blogItem, setBlogItem, setIsReplyBtnClicked = undefined, commentIndex = undefined }) {
   const [commentText, setCommentText] = useState("")
   const [focusStatus, setFocusStatus] = useState(false)
   const user = useContext(UserContext)
-  const blogItem = useContext(BlogItemContext)
   let commentBoxMargin = type === "comment" ? "1rem" : "0"
 
   return(
@@ -37,7 +35,7 @@ export default function CommentInput({ type, blogType, setBlogItem, setIsReplyBt
             {commentText === "" ? 
               <button className="submit-btn" disabled>Submit</button>
               :
-              <button className="submit-btn" onClick={() => {submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem)}}>Submit</button>
+              <button className="submit-btn" onClick={() => {submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus)}}>Submit</button>
             }
           </div>
         }
@@ -47,7 +45,7 @@ export default function CommentInput({ type, blogType, setBlogItem, setIsReplyBt
             {commentText === "" ? 
               <button className="submit-btn" disabled>Submit</button>
               :
-              <button className="submit-btn" onClick={() => {submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem, commentIndex)}}>Submit</button>
+              <button className="submit-btn" onClick={() => {submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus, setIsReplyBtnClicked,  commentIndex)}}>Submit</button>
             }
           </div>
         }
@@ -67,7 +65,7 @@ function cancelBtnHandler(textArea, setCommentText, setFocusStatus) {
   setFocusStatus(false)
 }
 
-async function submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem, commentIndex = undefined) {
+async function submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus, setIsReplyBtnClicked, commentIndex = undefined) {
   let newComment = {
     userId: user._id,
     date: getFormatedDate(new Date()),
@@ -82,6 +80,13 @@ async function submitBtnHandler(type, blogType, user, commentText, blogItem, set
   }
 
   const newBlogItem = await createComment(blogType, blogItem, newComment, commentIndex)
+
+  if(type == "comment") {
+    setCommentText("")
+    setFocusStatus(false)
+  } else {
+    setIsReplyBtnClicked(false)
+  }
 
   setBlogItem(newBlogItem)
 }

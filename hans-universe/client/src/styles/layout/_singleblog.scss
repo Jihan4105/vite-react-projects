@@ -107,6 +107,7 @@
     .comment-box {
       display: flex; 
       flex-wrap: nowrap;
+      margin-top: 1rem;
     
       .user-profile {
         min-width: 40px;
@@ -195,8 +196,6 @@
         }
     
         .expand-replies {
-          margin-bottom: 1rem;
-    
           .expand-replies-btn {
             display: flex;
             align-items: center;

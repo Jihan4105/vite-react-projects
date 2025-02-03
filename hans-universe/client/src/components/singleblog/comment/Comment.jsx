@@ -1,12 +1,7 @@
-import { useContext, useState } from "react"
-
 import CommentInput from "./CommentInput"
-import CommentBox from "./CommentBox"
-import { BlogItemContext } from "@/contexts/BlogItemContext"
+import CommentWrapper from "./CommentWrapper"
 
-export default function Comment({ blogType, setBlogItem }) {
-  const blogItem = useContext(BlogItemContext)
-
+export default function Comment({ blogType, blogItem, setBlogItem }) {
   return(
     <section id="comment">
       <div className="container-jh">
@@ -14,40 +9,20 @@ export default function Comment({ blogType, setBlogItem }) {
         <CommentInput 
           type="comment"
           blogType={blogType}
+          blogItem={blogItem}
           setBlogItem={setBlogItem}
         />
         {
           blogItem.commentTree.map((commentItem, commentIndex) => {
-            const [isExpandEnabled, setIsExpandEnabled] = useState(false)
-
             return(
-              <div key={`comment-${commentIndex}`}>
-                <CommentBox 
-                  blogType={blogType}
-                  commentItem={commentItem}
-                  commentIndex={commentIndex}
-                  isReplyExist={true}
-                  setBlogItem={setBlogItem}
-                  isExpandEnabled={isExpandEnabled}
-                  setIsExpandEnabled={setIsExpandEnabled}
-                />
-                {isExpandEnabled &&
-                  <div className="replies-box">
-                    {commentItem.replies.map((replyItem, index) => {
-                      return(
-                        <CommentBox 
-                          key={index}
-                          blogType={blogType}
-                          commentItem={replyItem}
-                          commentIndex={commentIndex}
-                          isReplyExist={false}
-                          setBlogItem={setBlogItem}
-                        />
-                      )
-                    })}
-                  </div>
-                }
-              </div>
+              <CommentWrapper 
+                key={`comment-${commentIndex}`}
+                blogType={blogType}
+                blogItem={blogItem}
+                setBlogItem={setBlogItem}
+                commentItem={commentItem}
+                commentIndex={commentIndex}
+              />
             )
           })
         }
