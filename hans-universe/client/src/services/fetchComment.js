@@ -18,3 +18,19 @@ export async function createComment( blogType, blogItem, newComment, commentInde
   
   return data
 }
+
+export async function editComment( blogType, blogItem, commentText, commentId, newDate) {
+  const res = await fetch(`http://${hostname}:${port}/comment/edit`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json" 
+    },
+    body: JSON.stringify({
+      blogType: blogType,
+      blogItem: blogItem,
+      commentText: commentText,
+      commentId: commentId,
+      newDate: newDate
+    })
+  })
+}

@@ -5,7 +5,7 @@ const booksBlogDatas = [
     wroteDate: "2025-01-17",
     modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
-    commentsNumber: "10",
+    commentsNumber: 4,
     reaction: {
       like: 4,
       hmm: 1,
@@ -52,7 +52,12 @@ const booksBlogDatas = [
     wroteDate: "2025-01-17",
     modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
-    commentsNumber: "10",
+    commentsNumber: 4,
+    reaction: {
+      like: 4,
+      hmm: 1,
+      disagree: 2
+    },
     commentTree: [
       {
         userId: "679e055f6832ffe4af2f93ce",
@@ -94,7 +99,12 @@ const booksBlogDatas = [
     wroteDate: "2025-01-17",
     modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
-    commentsNumber: "10",
+    commentsNumber: 4,
+    reaction: {
+      like: 4,
+      hmm: 1,
+      disagree: 2
+    },
     commentTree: [
       {
         userId: "679e055f6832ffe4af2f93ce",
@@ -136,7 +146,12 @@ const booksBlogDatas = [
     wroteDate: "2025-01-17",
     modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
-    commentsNumber: "10",
+    commentsNumber: 4,
+    reaction: {
+      like: 4,
+      hmm: 1,
+      disagree: 2
+    },
     commentTree: [
       {
         userId: "679e055f6832ffe4af2f93ce",
@@ -178,7 +193,12 @@ const booksBlogDatas = [
     wroteDate: "2025-01-17",
     modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
-    commentsNumber: "10",
+    commentsNumber: 4,
+    reaction: {
+      like: 4,
+      hmm: 1,
+      disagree: 2
+    },
     commentTree: [
       {
         userId: "679e055f6832ffe4af2f93ce",
@@ -220,7 +240,12 @@ const booksBlogDatas = [
     wroteDate: "2025-01-17",
     modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
-    commentsNumber: "10",
+    commentsNumber: 4,
+    reaction: {
+      like: 4,
+      hmm: 1,
+      disagree: 2
+    },
     commentTree: [
       {
         userId: "679e055f6832ffe4af2f93ce",
@@ -262,7 +287,12 @@ const booksBlogDatas = [
     wroteDate: "2025-01-17",
     modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
-    commentsNumber: "10",
+    commentsNumber: 4,
+    reaction: {
+      like: 4,
+      hmm: 1,
+      disagree: 2
+    },
     commentTree: [
       {
         userId: "679e055f6832ffe4af2f93ce",
@@ -304,7 +334,12 @@ const booksBlogDatas = [
     wroteDate: "2025-01-17",
     modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
-    commentsNumber: "10",
+    commentsNumber: 4,
+    reaction: {
+      like: 4,
+      hmm: 1,
+      disagree: 2
+    },
     commentTree: [
       {
         userId: "679e055f6832ffe4af2f93ce",
@@ -346,7 +381,12 @@ const booksBlogDatas = [
     wroteDate: "2025-01-17",
     modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
-    commentsNumber: "10",
+    commentsNumber: 4,
+    reaction: {
+      like: 4,
+      hmm: 1,
+      disagree: 2
+    },
     commentTree: [
       {
         userId: "679e055f6832ffe4af2f93ce",
@@ -388,7 +428,12 @@ const booksBlogDatas = [
     wroteDate: "2025-01-17",
     modifiedDate: "2025-01-19",
     content: "Integer mollis eros non ante porttitor, ut tincidunt nisi dictum. Morbi enim est, faucibus a varius eu, laoreet finibus dui. Nullam ullamcorper ex eu orci.",
-    commentsNumber: "10",
+    commentsNumber: 4,
+    reaction: {
+      like: 4,
+      hmm: 1,
+      disagree: 2
+    },
     commentTree: [
       {
         userId: "679e055f6832ffe4af2f93ce",

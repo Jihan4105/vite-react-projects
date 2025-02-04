@@ -28,8 +28,15 @@ const createComment = async (req, res) => {
   }
 }
 
+const editComment = async (req, res) => {
+  const { blogItemm, commentText, commentId, newDate } = req.body
+  const BlogModel = switchBlogModel(req.body.blogType)
+
+}
+
 const commentController = {
   createComment,
+  editComment,
 }
 
 export default commentController

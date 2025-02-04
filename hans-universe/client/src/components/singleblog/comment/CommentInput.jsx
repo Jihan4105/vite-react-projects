@@ -18,8 +18,6 @@ export default function CommentInput({ type, blogType, blogItem, setBlogItem, se
       <div className="input-group">
         <div className="input-wrapper">
           <textarea 
-            // id="comment-input" 
-            // name="comment-input" 
             value={commentText}
             onChange={(e) => {
               autoHeight(e.target)
@@ -45,7 +43,7 @@ export default function CommentInput({ type, blogType, blogItem, setBlogItem, se
             {commentText === "" ? 
               <button className="submit-btn" disabled>Submit</button>
               :
-              <button className="submit-btn" onClick={() => {submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus, setIsReplyBtnClicked,  commentIndex)}}>Submit</button>
+              <button className="submit-btn" onClick={() => {submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus, setIsReplyBtnClicked, commentIndex)}}>Submit</button>
             }
           </div>
         }
