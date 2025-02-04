@@ -17,40 +17,43 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
   const [isShowDetailActivate, setIsShowDetailActivate] = useState(false) 
   const [isReplyBtnClicked, setIsReplyBtnClicked] = useState(false)
   const [isEditModeEnabled, setIsEditModeEnabled] = useState(false)
+  const [isDetailBtnClicked, setIsDetailBtnClicked] = useState(false)
 
   const getUser = async () => {
     const data = await getUserByFilter("id", commentItem.userId)
     setLoading(false)
     setUser(data.userData)
   }
-  
+
   useEffect(() => {
     if(loading === false) {
       const textAreaDOM = textArea.current
       const observer = new ResizeObserver((entries) => {
         for (let entry of entries) {
           const { width, height } = entry.contentRect;
-  
+
+          console.log(isEllipsisActive(textAreaDOM), isDetailBtnClicked)
+
           if(isEllipsisActive(textAreaDOM)) {
-            console.log("!")
             setIsShowDetailActivate(true)
           } else {
             setIsShowDetailActivate(false)
           }
         }
       });
-  
+      
       observer.observe(textAreaDOM)
-  
+      
       return () => {
         observer.unobserve(textAreaDOM)
       }
     }
-  }, [])
-
+  }, [user])
+  
   useEffect(() => {
     getUser()
   }, [])
+  
 
   if(loading) {
     return (
@@ -86,10 +89,18 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
             <div className="text-field" ref={textArea}>
               {commentItem.content}
             </div>
-            {isShowDetailActivate && 
-              <button className="show-details-btn" onClick={(e) => { e.target.previousElementSibling.style.webkitLineClamp = "none"}}>
-                Show details
-              </button>
+            {(isShowDetailActivate || (!isShowDetailActivate && isDetailBtnClicked)) &&   
+              <>
+                {!isDetailBtnClicked ? 
+                  <button className="show-details-btn" onClick={(e) => { e.target.previousElementSibling.style.webkitLineClamp = "none"; setIsDetailBtnClicked(true) }}>
+                    Show details
+                  </button>
+                :
+                  <button className="hide-details-btn" onClick={(e) => {e.target.previousElementSibling.style.webkitLineClamp = 4; setIsDetailBtnClicked(false)}}>
+                    Hide details
+                  </button>
+                }
+              </>
             }
             <div className="reaction-field">
               <ion-icon name="thumbs-up-outline"></ion-icon>

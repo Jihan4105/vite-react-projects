@@ -163,6 +163,18 @@
             text-decoration: underline;
           }
         }
+
+        .hide-details-btn {
+          width: fit-content;
+          color: $grey-2;
+          background-color: transparent;
+          font-weight: 400;
+          margin-bottom: 0.5rem;
+    
+          &:hover {
+            text-decoration: underline;
+          }
+        }
     
         .reaction-field {
           display: flex;
