@@ -8,6 +8,7 @@ export default function CommentWrapper({ blogType, blogItem, setBlogItem, commen
   return(
     <div>
       <CommentBox 
+        type="comment"
         blogType={blogType}
         commentItem={commentItem}
         commentIndex={commentIndex}
@@ -22,6 +23,7 @@ export default function CommentWrapper({ blogType, blogItem, setBlogItem, commen
           {commentItem.replies.map((replyItem, index) => {
             return(
               <CommentBox 
+                type="reply"
                 key={index}
                 blogType={blogType}
                 commentItem={replyItem}

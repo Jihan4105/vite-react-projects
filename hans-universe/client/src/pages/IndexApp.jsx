@@ -9,7 +9,6 @@ export default function IndexApp() {
   const [overlayContext, setOverlayContext] = useState(false)
   let content
 
-  // debugger
   switch(contentType) {
     case "login" :
       content = <LoginContents 

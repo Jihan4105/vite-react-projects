@@ -9,7 +9,7 @@ import CommentInput from "./CommentInput"
 import { UserContext } from "@contexts/UserContext"
 import CommentEditInput from "./CommentEditInput"
 
-export default function CommentBox({ blogType, commentItem, commentIndex, isReplyExist, blogItem, setBlogItem, isExpandEnabled = undefined, setIsExpandEnabled = undefined }) {
+export default function CommentBox({ type, blogType, commentItem, commentIndex, isReplyExist, blogItem, setBlogItem, isExpandEnabled = undefined, setIsExpandEnabled = undefined }) {
   const logginedUser = useContext(UserContext)
   const textArea = useRef(null)
   const [loading, setLoading] = useState(true)
@@ -32,6 +32,7 @@ export default function CommentBox({ blogType, commentItem, commentIndex, isRepl
           const { width, height } = entry.contentRect;
   
           if(isEllipsisActive(textAreaDOM)) {
+            console.log("!")
             setIsShowDetailActivate(true)
           } else {
             setIsShowDetailActivate(false)
@@ -63,12 +64,14 @@ export default function CommentBox({ blogType, commentItem, commentIndex, isRepl
     <div className="comment-box">
       {isEditModeEnabled ?
         <CommentEditInput 
+          type={type}
           blogType={blogType}
           blogItem={blogItem}
           setBlogItem={setBlogItem}
           setIsEditModeEnabled={setIsEditModeEnabled}
           previousComment={commentItem.content}
           commentId={commentItem._id}
+          commentIndex={commentIndex}
         /> 
         :
         <>
@@ -84,7 +87,7 @@ export default function CommentBox({ blogType, commentItem, commentIndex, isRepl
               {commentItem.content}
             </div>
             {isShowDetailActivate && 
-              <button className="show-details-btn">
+              <button className="show-details-btn" onClick={(e) => { e.target.previousElementSibling.style.webkitLineClamp = "none"}}>
                 Show details
               </button>
             }
