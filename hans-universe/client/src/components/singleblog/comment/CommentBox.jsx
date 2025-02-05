@@ -4,6 +4,7 @@ import DropdownButton from "react-bootstrap/DropdownButton"
 
 import { isEllipsisActive } from "@utils/utils"
 import { getUserByFilter } from "@services/fetchUserDatas"
+import { deleteComment } from "@/services/fetchComment"
 import CommentInput from "./CommentInput"
 
 import { UserContext } from "@contexts/UserContext"
@@ -31,8 +32,6 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
       const observer = new ResizeObserver((entries) => {
         for (let entry of entries) {
           const { width, height } = entry.contentRect;
-
-          console.log(isEllipsisActive(textAreaDOM), isDetailBtnClicked)
 
           if(isEllipsisActive(textAreaDOM)) {
             setIsShowDetailActivate(true)
@@ -89,7 +88,7 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
             <div className="text-field" ref={textArea}>
               {commentItem.content}
             </div>
-            {(isShowDetailActivate || (!isShowDetailActivate && isDetailBtnClicked)) &&   
+            {(isShowDetailActivate || isDetailBtnClicked) &&   
               <>
                 {!isDetailBtnClicked ? 
                   <button className="show-details-btn" onClick={(e) => { e.target.previousElementSibling.style.webkitLineClamp = "none"; setIsDetailBtnClicked(true) }}>
@@ -153,7 +152,7 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
                 }
                 size="112px"
               >
-                <Dropdown.Item eventKey="1" active={false}>
+                <Dropdown.Item eventKey="1" active={false} onClick={() => {deleteButtonHandler(type, blogType, blogItem, commentItem._id, commentIndex, setBlogItem)}}>
                   <div className="comment-Delete-group">
                     <ion-icon name="trash-outline"></ion-icon>
                     <span>Delete</span>
@@ -173,4 +172,10 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
       }
     </div>
   )
+}
+
+async function deleteButtonHandler(type, blogType, blogItem, commentId, commentIndex, setBlogItem) {
+  const data = await deleteComment(type, blogType, blogItem, commentId, commentIndex)
+
+  setBlogItem(data)
 }

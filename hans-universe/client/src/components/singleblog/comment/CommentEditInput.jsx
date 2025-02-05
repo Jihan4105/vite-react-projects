@@ -55,9 +55,7 @@ async function editCommentHandler(type, blogType, commentText, commentId, commen
   const newDate = getFormatedDate(new Date())
 
   const data = await editComment(type, blogType, blogItem, commentText, commentId, commentIndex, newDate)
-
-  console.log(data)
-
+  
   setBlogItem(data)
   setIsEditModeEnabled(false)
 }

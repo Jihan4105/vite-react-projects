@@ -39,3 +39,22 @@ export async function editComment( type, blogType, blogItem, commentText, commen
 
   return data
 }
+
+export async function deleteComment( type, blogType, blogItem, commentId, commentIndex ) {
+  const res = await fetch(`http://${hostname}:${port}/comment/delete`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      type: type,
+      blogType: blogType,
+      blogItem: blogItem,
+      commentId: commentId,
+      commentIndex: commentIndex,
+    })
+  })
+  const data = await res.json()
+
+  return data
+}

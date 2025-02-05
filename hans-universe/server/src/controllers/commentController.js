@@ -31,13 +31,11 @@ const createComment = async (req, res) => {
 const editComment = async (req, res) => {
   const { type, blogItem, commentText, commentId, commentIndex, newDate } = req.body
   const BlogModel = switchBlogModel(req.body.blogType)
-  console.log(commentIndex)
   let newBlogItem = {...blogItem}
 
   if(type === "comment") {
     newBlogItem.commentTree[commentIndex].content = commentText
     newBlogItem.commentTree[commentIndex].date = newDate
-    console.log(newBlogItem)
   } else {
     newBlogItem.commentTree[commentIndex].replies.forEach((replyItem, index) => {
       if(replyItem._id === commentId) {
@@ -45,7 +43,6 @@ const editComment = async (req, res) => {
         replyItem.date = newDate
       }
     })
-    console.log(newBlogItem.commentTree[commentIndex].replies)
   }
 
 
@@ -63,7 +60,34 @@ const editComment = async (req, res) => {
 }
 
 const deleteComment = async (req, res) => {
-  
+  const { type, blogItem, commentId, commentIndex } = req.body
+  const BlogModel = switchBlogModel(req.body.blogType)
+  let newBlogItem = {...blogItem}
+
+  if( type === "comment" ) {
+    newBlogItem.commentTree.splice(commentIndex, 1)
+  } else {
+    let replyIndex
+    newBlogItem.commentTree[commentIndex].replies.forEach((replyItem, index) => {
+      if(replyItem._id === commentId) {
+        replyIndex = index
+        return;
+      }
+    })
+    newBlogItem.commentTree[commentIndex].replies.splice(replyIndex, 1)
+  }
+
+  try {
+    const fetchedBlogItem = await BlogModel.findByIdAndUpdate(blogItem._id, newBlogItem, {
+      returnDocument: "after"
+    })
+
+    res.status(200)
+    res.json(fetchedBlogItem)
+  } catch(error) {
+    res.status(500)
+    res.json({ message: error.message })
+  }
 }
 
 const commentController = {
