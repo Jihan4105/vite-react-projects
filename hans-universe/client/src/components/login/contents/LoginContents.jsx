@@ -1,4 +1,5 @@
 import { useState } from "react"
+import useSignIn from "react-auth-kit/hooks/useSignIn.js"
 import InputField from "../InputField.jsx"
 import PropTypes from "prop-types"
 
@@ -8,9 +9,55 @@ LoginContents.propTypes = {
 }
 
 export default function LoginContents({ contentType, setContentType }) {
+  const signIn = useSignIn()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [whichIsWrong, setWhichIsWrong] = useState("")
+
+  const loginBtnClicked = async(e) => {
+    e.preventDefault()
+    
+    const hostname = import.meta.env.VITE_SERVER_HOSTNAME
+    const port = import.meta.env.VITE_SERVER_PORT
+  
+    const res = await fetch(`http://${hostname}:${port}/sign/login`, {
+      method: "POST",
+      headers:  {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    })
+    const data = await res.json()
+  
+    switch(data.status) {
+      case "no such user" :
+        setWhichIsWrong("email-wrong")
+        break
+      case "password wrong" :
+        setWhichIsWrong("password-wrong")
+        break
+      case "success" :
+        if(signIn({
+          auth: {
+            token: data.accessToken,
+            type: "Bearer"
+          },
+          refresh: data.refreshToken,
+          userState: {
+            name: "React User",
+            uid: data.userId
+          }
+        })) {
+          window.location.href = `/src/html/app.html?userId=${data.userId}`
+        } else {
+          throw Error("Failed to Authorizing")
+        }
+        break
+    }
+  }
 
   return(
     <>
@@ -49,7 +96,7 @@ export default function LoginContents({ contentType, setContentType }) {
       >
         your password is wrong
       </p>
-      <button className="login-btn" onClick={(e) => loginBtnClicked(e, email, password, setWhichIsWrong)}>Log in</button>
+      <button className="login-btn" onClick={(e) => loginBtnClicked(e)}>Log in</button>
       <p className="orsignup-text">Or Sign Up Using</p>
       <div className="google-sign-up">
         <ion-icon className="google-icon" name="logo-google"></ion-icon>
@@ -58,35 +105,4 @@ export default function LoginContents({ contentType, setContentType }) {
       <span className="sign-up" onClick={() => setContentType("signup")}>SIGN UP</span>
     </>
   )
-}
-
-async function loginBtnClicked(e, email, password, setState) {
-  e.preventDefault()
-
-  const hostname = import.meta.env.VITE_SERVER_HOSTNAME
-  const port = import.meta.env.VITE_SERVER_PORT
-
-  const res = await fetch(`http://${hostname}:${port}/sign/login`, {
-    method: "POST",
-    headers:  {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      password: password
-    })
-  })
-  const data = await res.json()
-
-  switch(data.status) {
-    case "no such user" :
-      setState("email-wrong")
-      break
-    case "password wrong" :
-      setState("password-wrong")
-      break
-    case "success" :
-      window.location.href = `/src/html/app.html?userId=${data.userId}`
-      break
-  }
 }

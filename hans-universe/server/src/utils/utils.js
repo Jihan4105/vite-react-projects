@@ -17,3 +17,7 @@ export function switchBlogModel(blogType) {
 
   return BlogModel
 }
+
+export function generateAccesToken(user) {
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "3m"})
+}
