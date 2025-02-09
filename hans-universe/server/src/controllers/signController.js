@@ -9,9 +9,8 @@ const login = async (req,res) => {
   try {
     const fetchedData = await UserModel.find({"email": req.body.email})
     let correctUser = fetchedData[0]
-    correctUser._id.toString()
     if(fetchedData.length === 0) {res.json({ status: "no such user"}) }
-    else if(bcrypt.compare(req.body.password, correctUser.password)) {
+    else if(await bcrypt.compare(req.body.password, correctUser.password)) {
       const accessToken = generateAccesToken({ userId: correctUser._id.toJSON()})
       const refreshToken = jwt.sign({ userId: correctUser._id.toJSON()}, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "7d"})
       try {
@@ -30,7 +29,6 @@ const login = async (req,res) => {
     }
   } catch(error) {
     res.status(500)
-    console.log(error.message)
     res.json({ status: "Something bad Occured", message: error.message })
   }
 }

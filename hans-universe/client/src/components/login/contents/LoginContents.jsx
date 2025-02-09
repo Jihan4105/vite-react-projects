@@ -1,14 +1,9 @@
 import { useState } from "react"
+import { Link } from "react-router"
 import useSignIn from "react-auth-kit/hooks/useSignIn"
 import InputField from "../InputField.jsx"
-import PropTypes from "prop-types"
 
-LoginContents.propTypes = {
-  contentType: PropTypes.string.isRequired,
-  setContentType: PropTypes.func.isRequired
-}
-
-export default function LoginContents({ contentType, setContentType }) {
+export default function LoginContents() {
   const signIn = useSignIn()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -31,7 +26,7 @@ export default function LoginContents({ contentType, setContentType }) {
       })
     })
     const data = await res.json()
-  
+    
     switch(data.status) {
       case "no such user" :
         setWhichIsWrong("email-wrong")
@@ -50,7 +45,7 @@ export default function LoginContents({ contentType, setContentType }) {
             uid: data.userId
           }
         })) {
-          window.location.href = `/src/html/app.html?userId=${data.userId}`
+          window.location.href = `/app/landing?userId=${data.userId}`
         } else {
           throw Error("Failed to Authorizing")
         }
@@ -60,48 +55,50 @@ export default function LoginContents({ contentType, setContentType }) {
 
   return(
     <>
-      <h1 className="login-title">Login</h1>
-      <p className="email-label">Email</p>
-      <InputField 
-        contentType={contentType}
-        type="email"
-        state={email}
-        setState={setEmail}
-        placeholder="Email"
-        iconName="mail-outline"
-      />
-      <p 
-        className={
-          `error-text 
-          email-error 
-          ${whichIsWrong === "email-wrong" ? "show" : "invisible"}`}
-      >
-        no such user exsit
-      </p>
-      <p className="password-label" onClick={() => {setContentType("forgot")}}>Password <span className="login-forgot">Forgot password?</span></p>
-      <InputField
-        contentType={contentType}
-        type="password" 
-        state={password}
-        setState={setPassword}
-        placeholder="PWD"
-        iconName="lock-closed-outline"
-      /> 
-      <p 
-        className={
-          `error-text 
-          password-error
-          ${whichIsWrong === "password-wrong" ? "show" : "invisible"}`}
-      >
-        your password is wrong
-      </p>
-      <button className="login-btn" onClick={(e) => loginBtnClicked(e)}>Log in</button>
-      <p className="orsignup-text">Or Sign Up Using</p>
-      <div className="google-sign-up">
-        <ion-icon className="google-icon" name="logo-google"></ion-icon>
-      </div>
-      <p className="orsignup-text">Or Sign Up Using</p>
-      <span className="sign-up" onClick={() => setContentType("signup")}>SIGN UP</span>
+      <form className="login-form login">
+        <h1 className="login-title">Login</h1>
+        <p className="email-label">Email</p>
+        <InputField 
+          contentType="login"
+          type="email"
+          state={email}
+          setState={setEmail}
+          placeholder="Email"
+          iconName="mail-outline"
+        />
+        <p 
+          className={
+            `error-text 
+            email-error 
+            ${whichIsWrong === "email-wrong" ? "show" : "invisible"}`}
+        >
+          no such user exsit
+        </p>
+        <p className="password-label">Password <span className="login-forgot"><Link to="/forgot">Forgot password?</Link></span></p>
+        <InputField
+          contentType="login"
+          type="password" 
+          state={password}
+          setState={setPassword}
+          placeholder="PWD"
+          iconName="lock-closed-outline"
+        /> 
+        <p 
+          className={
+            `error-text 
+            password-error
+            ${whichIsWrong === "password-wrong" ? "show" : "invisible"}`}
+        >
+          your password is wrong
+        </p>
+        <button className="login-btn" onClick={(e) => loginBtnClicked(e)}>Log in</button>
+        <p className="orsignup-text">Or Sign Up Using</p>
+        <div className="google-sign-up">
+          <ion-icon className="google-icon" name="logo-google"></ion-icon>
+        </div>
+        <p className="orsignup-text">Or Sign Up Using</p>
+        <span className="sign-up"><Link to="/signup">SIGN UP</Link></span>
+      </form>
     </>
   )
 }

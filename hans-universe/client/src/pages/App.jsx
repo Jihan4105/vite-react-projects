@@ -1,12 +1,8 @@
-import { useState, useReducer, useEffect } from "react"
+import { useState, useEffect } from "react"
 
 // Contexts
 import { WindowContext } from "@contexts/WindowContext"
 import { UserContext } from "@contexts/UserContext"
-import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
-
-// Reducer
-import reducerJSXHandler from "@reducer/reducerJSXHandler"
 
 // Utils
 import { queryStringToObject } from "@utils/utils"
@@ -22,25 +18,10 @@ import Navbar from "@components/Navbar"
 import Footer from "@components/Footer"
 import Sidebar from "@components/Sidebar"
 
-// Landing Components
-import Hero from "@components/landing/Hero"
-import NewsLetter from "@components/landing/NewsLetter"
-import Contact from "@components/landing/Contact"
-
-function App() {
+function App({ children }) {
   const [windowSize, setWindowSize] = useState({
     innerWidth: window.innerWidth,
     innerHeight: window.innerHeight
-  })
-  const [jsxContent, dispatch] = useReducer(reducerJSXHandler, {
-    jsx : 
-      <>
-        <Hero /> 
-    
-        <NewsLetter /> 
-        
-        <Contact />
-      </>
   })
   const [loading, setLoading] = useState(true)
   const [userData, setUserData] = useState({})
@@ -68,17 +49,15 @@ function App() {
   return (
     <>
       <WindowContext.Provider value={windowSize.innerWidth}>
-        <JSXDispatchContext.Provider value={dispatch}>
-          <UserContext.Provider value={userData}>
-            <Navbar />
-            
-            <Sidebar />
+        <UserContext.Provider value={userData}>
+          <Navbar />
+          
+          <Sidebar />
 
-            {jsxContent.jsx}
+          {children}
 
-            <Footer />
-          </UserContext.Provider>
-        </JSXDispatchContext.Provider> 
+          <Footer />
+        </UserContext.Provider>
       </WindowContext.Provider>
     </>
   )

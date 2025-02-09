@@ -1,13 +1,49 @@
 import { StrictMode } from 'react'
+import axios from 'axios'
 import { createRoot } from 'react-dom/client'
 import AuthProvider from 'react-auth-kit'
+import { BrowserRouter, Routes, Route } from 'react-router'
 
-import IndexApp from '@pages/IndexApp.jsx'
 import createStore from 'react-auth-kit/createStore'
 import createRefresh from 'react-auth-kit/createRefresh'
 
 // Mystyles
 import "@styles/main.scss"
+
+import LoginContents from '@components/login/contents/LoginContents'
+import SignUpContents from '@components/login/contents/SignupConents'
+import ForgotContents from '@components/login/contents/ForgotContents'
+
+import App from './App'
+
+// Common Componenets
+import Header from "@components/Header" 
+import Blog from "@components/Blog"
+
+// Landing Components
+import Hero from "@components/landing/Hero"
+import NewsLetter from "@components/landing/NewsLetter"
+import Contact from "@components/landing/Contact"
+
+// Skills Components
+import SkillsStacks from "@components/skills/SkillsStacks"
+import Portfolio from "@components/skills/Portfolio"
+
+// Workout Components
+import WorkoutContents from "@components/workout/WorkoutContents.jsx"
+
+// Books Components
+import BooksContent from "@components/books/BooksContent"
+
+// Thoughts Components
+import ThoughtsContent from "@components/thoughts/ThoughtsContent"
+
+// Profile Components
+import MottoSpace from "@components/profile/MottoSpace"
+import Introuduce from "@components/profile/Introduce"
+
+// SingleBlog Components
+import SingleBlog from "@components/singleblog/SingleBlog"
 
 
 const refresh = createRefresh({
@@ -42,10 +78,127 @@ const store = createStore({
   refresh: refresh
 })
 
-createRoot(document.getElementById('login-root')).render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider store={store}>
-      <IndexApp />
+      <BrowserRouter>
+        <Routes>
+
+          <Route path="/">
+            <Route index path='login' element={<LoginContents />}/>   
+          
+            <Route path='signup' element={<SignUpContents />}/>   
+            
+            <Route path='forgot' element={<ForgotContents />}/>  
+          </Route>
+
+          <Route path="/app">
+            <Route 
+              index 
+              path='landing'
+              element={
+                <>
+                  <App>
+                    <Hero /> 
+                    
+                    <NewsLetter /> 
+                    
+                    <Contact />
+                  </App>
+                </>
+              } />
+            <Route
+              path='skills'
+              element={
+                <>
+                  <App>
+                    <Header 
+                      key="skills-header"
+                      type="skills"
+                    />
+
+                    <SkillsStacks />
+
+                    <Portfolio />
+                  </App>
+                </>
+              } />
+            <Route 
+              path='workout'
+              element={
+                <>
+                  <Header 
+                    key="workout-header"
+                    type="workout"
+                  />
+
+                  <WorkoutContents />
+
+                  <Blog 
+                    key="workout-blog"
+                    type="workout"
+                    dropdownItems={["Title", "Content", "Title + Content"]}
+                  />
+                </>
+              }
+            />
+            <Route 
+              path='books'
+              element={
+                <>
+                  <Header 
+                    key="books-header"
+                    type="books"
+                  />
+
+                  <BooksContent />
+
+                  <Blog 
+                    key="books-blog"
+                    type="books"
+                    dropdownItems={["Any", "Novel", "Humanities", "Philosophy"]}
+                  />
+                </>
+              }
+            />
+            <Route 
+              path='thoughts'
+              element={
+                <>
+                  <Header 
+                    key="thoughts-header"
+                    type="thoughts"
+                  />
+
+                  <ThoughtsContent />
+
+                  <Blog 
+                    key="thoughts-blog"
+                    type="thoughts"
+                    dropdownItems={["Title", "Content", "Title + Content"]}
+                  />
+                </>
+              }
+            />
+            <Route 
+              path='profile'
+              element={
+                <>
+                  <MottoSpace />
+                  
+                  <Introuduce />
+                </>
+              }
+            />
+            <Route 
+              path='singleblog'
+              element={
+                <SingleBlog />
+              }
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </AuthProvider>
   </StrictMode>,
 )
