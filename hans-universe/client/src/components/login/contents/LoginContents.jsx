@@ -1,5 +1,5 @@
 import { useState } from "react"
-import useSignIn from "react-auth-kit/hooks/useSignIn.js"
+import useSignIn from "react-auth-kit/hooks/useSignIn"
 import InputField from "../InputField.jsx"
 import PropTypes from "prop-types"
 
@@ -47,7 +47,6 @@ export default function LoginContents({ contentType, setContentType }) {
           },
           refresh: data.refreshToken,
           userState: {
-            name: "React User",
             uid: data.userId
           }
         })) {
