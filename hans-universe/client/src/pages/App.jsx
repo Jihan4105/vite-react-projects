@@ -24,13 +24,13 @@ function App() {
     innerWidth: window.innerWidth,
     innerHeight: window.innerHeight
   })
-  const [loading, setLoading] = useState(true)
+  const [userLoading, setUserLoading] = useState(true)
   const [userData, setUserData] = useState({})
   const url = new URL(`${window.location.href}`)
   const queryObject = queryStringToObject(url)
   const getUser = async() => {
     let data = await getUserByFilter("id", queryObject.userId)
-    setLoading(false)
+    setUserLoading(false)
     setUserData(data.userData)
   } 
   
@@ -40,7 +40,7 @@ function App() {
 
   useWindow(windowSize, setWindowSize)
   
-  if(loading) {
+  if(userLoading) {
     return (
       <div className="loader-container">
         <div className="loader"></div>

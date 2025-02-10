@@ -60,7 +60,6 @@ export default function BlogList({ type, searchValue, filterValue}) {
         }
       }
     })
-    
   }
   
   const startIndex = 5 * (selectedPage - 1)
@@ -79,7 +78,7 @@ export default function BlogList({ type, searchValue, filterValue}) {
         {filteredDatas.map((blogItem, index) => {
           if(startIndex <= index && index <= endIndex) {
             return (
-              <li className="blog-item-wrapper" key={blogItem._id} onClick={() => {navigate(`/app/singleblog?userId=${user._id}&blogType=${type}%blogItemId=${blogItem._id}`)}}>
+              <li className="blog-item-wrapper" key={blogItem._id} onClick={() => {navigate(`/app/singleblog?userId=${user._id}&blogType=${type}&blogId=${blogItem._id}`); initPageScroll()}}>
                 <div className="blog-item">
                   <div className="blog-title-group">
                     <p className="blog-title">
@@ -103,14 +102,4 @@ export default function BlogList({ type, searchValue, filterValue}) {
       />
     </>
   )
-}
-
-function redirectBlogDetail(type, id, JSXdispatch) {
-  JSXdispatch({ 
-    docType: "singleblog", 
-    blogType: type,  
-    blogId: id
-  })
-
-  initPageScroll();
 }

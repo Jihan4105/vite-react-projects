@@ -1,14 +1,16 @@
 import { useContext } from "react"
+import { useNavigate } from "react-router";
 
-import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
+import UserContext from "@contexts/UserContext";
 import { initPageScroll } from "@utils/utils"
 
 export default function SingleBlogContent({ blogType, blogItem }) {
-  const JSXdispatch = useContext(JSXDispatchContext)
+  const user = useContext(UserContext)
+  const navigate = useNavigate()
 
   return(
     <section id="single-blog">
-      <div className="icon-btn return-btn" title="Return to page" onClick={() => {JSXdispatch({ docType: blogType }); initPageScroll();}}>
+      <div className="icon-btn return-btn" title="Return to page" onClick={() => { navigate(`/app/${blogType}?userId=${user._id}`); initPageScroll();}}>
         <ion-icon name="return-down-back-outline"></ion-icon>
       </div>
       <div className="container-jh">

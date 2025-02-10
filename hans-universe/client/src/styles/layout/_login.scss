@@ -28,6 +28,7 @@
       .email-label {
         font-size: 1.2rem;
         margin-bottom: 0.5rem;
+        font-weight: $fw-500;
       }
   
       .input-box {
@@ -50,8 +51,9 @@
       .password-label {
         font-size: 1.2rem;
         margin-bottom: 0.5rem;
+        font-weight: $fw-500;
   
-        span {
+        .login-forgot a{
           font-size: 0.8rem;
           color: #ccc;
           cursor: pointer;
@@ -150,6 +152,7 @@
       .username-label {
         font-size: 1.2rem;
         margin-bottom: 0.5rem;
+        font-weight: $fw-500;
       }
 
       .username-group {
@@ -185,6 +188,7 @@
       .email-label {
         font-size: 1.2rem;
         margin-bottom: 0.5rem;
+        font-weight: $fw-500;
       }
 
       .email-input-group {
@@ -340,6 +344,7 @@
       .password-label {
         font-size: 1.2rem;
         margin-bottom: 0.5rem;
+        font-weight: $fw-500;
       }
 
       .input-box {
@@ -436,6 +441,7 @@
       .email-label {
         font-size: 1.2rem;
         margin-bottom: 0.5rem;
+        font-weight: $fw-500;
       }
 
       .input-box {
