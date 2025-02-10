@@ -7,7 +7,7 @@ import { getUserByFilter } from "@services/fetchUserDatas"
 import { deleteComment } from "@/services/fetchComment"
 import CommentInput from "./CommentInput"
 
-import { UserContext } from "@contexts/UserContext"
+import UserContext from "@contexts/UserContext"
 import CommentEditInput from "./CommentEditInput"
 
 export default function CommentBox({ type, blogType, commentItem, commentIndex, isReplyExist, blogItem, setBlogItem, isExpandEnabled = undefined, setIsExpandEnabled = undefined }) {

@@ -1,19 +1,12 @@
 import { useContext } from "react"
-import PropTypes from "prop-types"
+import { Link } from "react-router"
+
+import UserContext from "@/contexts/UserContext"
 
 import { initPageScroll } from "@utils/utils"
-import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
-
-Card.propTypes = {
-  bannerImg: PropTypes.string.isRequired,
-  dateTime: PropTypes.string.isRequired,
-  cardTitle: PropTypes.string.isRequired,
-  cardText: PropTypes.string.isRequired,
-  docType: PropTypes.string.isRequired
-}
 
 export default function Card({ bannerImg, dateTime, cardTitle, cardText, docType }) {
-  const JSXdispatch = useContext(JSXDispatchContext)
+  const user = useContext(UserContext)
 
   return (
     <div className="card">
@@ -31,10 +24,10 @@ export default function Card({ bannerImg, dateTime, cardTitle, cardText, docType
         <p className="text">
           {cardText}
         </p>
-        <a className="link-btn" onClick={() => {JSXdispatch({ docType: docType}); initPageScroll();}}> 
+        <Link className="link-btn" to={`/app/${docType}?userId=${user._id}`} onClick={() => {initPageScroll()}}>
           <span>View More</span>
           <ion-icon name="chevron-forward-outline"></ion-icon>
-        </a>
+        </Link>
       </div>
     </div>
   )

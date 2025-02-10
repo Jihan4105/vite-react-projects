@@ -1,7 +1,7 @@
 import { useState } from "react"
 import LoginContents from "../components/contents/LoginContents"
 import SignUpContents from "../components/contents/SignupConents"
-import { OverlayContext } from "../contexts/OverlayContext"
+import OverlayContext from "../contexts/OverlayContext"
 import ForgotContents from "../components/contents/ForgotContents"
 
 export default function IndexApp() {

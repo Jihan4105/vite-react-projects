@@ -1,26 +1,21 @@
 import { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router"
 import { Pagination } from "@mui/material"
-import PropTypes from "prop-types"
 
-import { WindowContext } from "@contexts/WindowContext"
-import { JSXDispatchContext } from "@/contexts/JSXDispatchContext" 
+import WindowContext from "@contexts/WindowContext" 
+import UserContext from "@contexts/UserContext"
 
 import { initPageScroll } from "@utils/utils"
 
 import { getBlogDatas } from "@services/fetchBlog"
-
-BlogList.propTypes = {
-  type: PropTypes.string.isRequired,
-  searchValue: PropTypes.string.isRequired,
-  filterValue: PropTypes.string.isRequired
-}
 
 export default function BlogList({ type, searchValue, filterValue}) {
   const [selectedPage, setSelectedPage] = useState("1")
   const [loading, setLoading] = useState(true)
   const [blogDatas, setBlogDatas] = useState({})
   const windowWidth = useContext(WindowContext)
-  const JSXdispatch = useContext(JSXDispatchContext)
+  const user = useContext(UserContext)
+  const navigate = useNavigate()
   let filteredDatas
   
   const fetchBlogDatas = async () => {
@@ -84,7 +79,7 @@ export default function BlogList({ type, searchValue, filterValue}) {
         {filteredDatas.map((blogItem, index) => {
           if(startIndex <= index && index <= endIndex) {
             return (
-              <li className="blog-item-wrapper" key={blogItem._id} onClick={() => {redirectBlogDetail(type, blogItem._id, JSXdispatch)}}>
+              <li className="blog-item-wrapper" key={blogItem._id} onClick={() => {navigate(`/app/singleblog?userId=${user._id}&blogType=${type}%blogItemId=${blogItem._id}`)}}>
                 <div className="blog-item">
                   <div className="blog-title-group">
                     <p className="blog-title">

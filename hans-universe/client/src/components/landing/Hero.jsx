@@ -1,27 +1,29 @@
-import { useState, useContext } from "react"
+import { useContext } from "react"
+import { Link } from "react-router"
 
 import Planet from "./Planet"
 import astronautImg from "@assets/landing/astronaut.png"
 import profilePlanetImg from "@assets/landing/planet.png"
-import { JSXDispatchContext } from "@/contexts/JSXDispatchContext"
-import { WindowContext } from "@/contexts/WindowContext"
+import UserContext from "@contexts/UserContext"
+import WindowContext from "@contexts/WindowContext"
+
+import { initPageScroll } from "@utils/utils"
 
 export default function Hero() {
+  const user = useContext(UserContext)
   const windowWidth = useContext(WindowContext)
-  const JSXdispach = useContext(JSXDispatchContext)
 
   return (
     <section id="hero">
       <div className="container-jh">
         <div className="planet-box">
           <img className="profile-planet" src={profilePlanetImg} alt="planet" />
-          <a className="profile" title="Clck ME!" onClick={() => {JSXdispach({ docType: "profile" })}}></a>
+          <Link className="profile" to={`/app/profile?userId=${user._id}`} title="Click Me!" onClick={() => {initPageScroll()}} />
         </div>
         <div className="astronaut-box">
           <h1 className="section-title">What Makes Me</h1>
           <div className="astronaut">
             <img className="astronaut-img gravity-moving" src={astronautImg} alt="" />
-
             {windowWidth > 450 &&
             <>
               <Planet 

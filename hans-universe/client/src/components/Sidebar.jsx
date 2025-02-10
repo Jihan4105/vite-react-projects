@@ -1,11 +1,11 @@
-import { UserContext } from "@contexts/UserContext"
-import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
+import { Link } from "react-router"
+
+import UserContext from "@contexts/UserContext"
 import { sidebarToggle, initPageScroll } from "@utils/utils"
 import { useContext } from "react"
 
 export default function Sidebar() {
   const user = useContext(UserContext)
-  const JSXdispatch = useContext(JSXDispatchContext)
 
   return (
     <div className="sidebar-overlay">
@@ -15,34 +15,34 @@ export default function Sidebar() {
         </button>
         <ul className="sidebar-links">
           <li>
-            <a onClick={() => {JSXdispatch({ docType: "skills" }); initPageScroll(true);}} className="sidebar-link">
+            <Link to={`/app/skills?userId=${user._id}`} onClick={() => {initPageScroll(); sidebarToggle()}} className="sidebar-link">
               <ion-icon name="code-outline"></ion-icon>
               Skills
-            </a>
+            </Link>
           </li>
           <li>
-            <a onClick={() => {JSXdispatch({ docType: "workout" }); initPageScroll(true);}} className="sidebar-link">
+            <Link to={`/app/workout?userId=${user._id}`} onClick={() => {initPageScroll(); sidebarToggle()}} className="sidebar-link">
               <ion-icon name="barbell-outline"></ion-icon>
               Workout
-            </a>
+            </Link>
           </li>
           <li>
-            <a onClick={() => {JSXdispatch({ docType: "books" }); initPageScroll(true);}} className="sidebar-link">
+            <Link to={`/app/books?userId=${user._id}`} onClick={() => {initPageScroll(); sidebarToggle()}} className="sidebar-link">
               <ion-icon name="book-outline"></ion-icon>
               Books
-            </a>
+            </Link>
           </li>
           <li>
-            <a onClick={() => {JSXdispatch({ docType: "thoughts" }); initPageScroll(true);}} className="sidebar-link">
-              <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+            <Link to={`/app/thoughts?userId=${user._id}`} onClick={() => {initPageScroll(); sidebarToggle()}} className="sidebar-link">
+              <ion-icon name="chatbubble-outline"></ion-icon>
               Thoughts
-            </a>
+            </Link>
           </li>
           <li>
-            <a onClick={() => {JSXdispatch({ docType: "profile" }); initPageScroll(true);}} className="sidebar-link">
+            <Link to={`/app/profile?userId=${user._id}`} onClick={() => {initPageScroll(); sidebarToggle()}} className="sidebar-link">
               <ion-icon name="body-outline"></ion-icon>
               Profile
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#editprofile" className="sidebar-link">

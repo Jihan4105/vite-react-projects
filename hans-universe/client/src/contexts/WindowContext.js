@@ -1,3 +1,5 @@
 import { createContext } from "react";
 
-export const WindowContext = createContext(null)
+const WindowContext = createContext(null)
+
+export default WindowContext

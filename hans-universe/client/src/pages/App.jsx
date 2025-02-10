@@ -2,8 +2,8 @@ import { useState, useEffect } from "react"
 import { Outlet } from "react-router"
 
 // Contexts
-import { WindowContext } from "@contexts/WindowContext"
-import { UserContext } from "@contexts/UserContext"
+import WindowContext from "@contexts/WindowContext"
+import UserContext from "@contexts/UserContext"
 
 // Utils
 import { queryStringToObject } from "@utils/utils"

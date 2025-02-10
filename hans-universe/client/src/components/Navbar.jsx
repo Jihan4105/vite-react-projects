@@ -1,30 +1,49 @@
 import { useContext } from "react"
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
+import { Link } from "react-router"
 
 import logoImage from "@assets/logo-black.png"
 import { sidebarToggle, initPageScroll } from "@utils/utils.js"
-import { UserContext } from "@contexts/UserContext"
-import { JSXDispatchContext } from "@contexts/JSXDispatchContext"
+import UserContext from "@contexts/UserContext"
 
 export default function Navbar() {
   const user = useContext(UserContext)
-  const JSXdispatch = useContext(JSXDispatchContext)
 
   return (
     <nav id="nav">
       <div className="container-jh">
-        <a onClick={() => {JSXdispatch({ docType: "landing" }); initPageScroll();}} className="logo-link">
+        <Link to={`/app/landing?userId=${user._id}`} className="logo-link" onClick={() => {initPageScroll()}}>
           <img src={logoImage} alt="logo" />
-        </a>
+        </Link>
         <div className="nav-box">
 
           <ul className="nav-links">
-            <li><a onClick={() => {JSXdispatch({ docType: "skills" }); initPageScroll();}}>Skills</a></li>
-            <li><a onClick={() => {JSXdispatch({ docType: "workout" }); initPageScroll();}}>Workout</a></li>
-            <li><a onClick={() => {JSXdispatch({ docType: "books" }); initPageScroll();}}>Books</a></li>
-            <li><a onClick={() => {JSXdispatch({ docType: "thoughts" }); initPageScroll();}}>Thoughts</a></li>
-            <li><a onClick={() => {JSXdispatch({ docType: "profile" }); initPageScroll();}}>Profile</a></li>
+            <li>
+              <Link to={`/app/skills?userId=${user._id}`} onClick={() => {initPageScroll()}}>
+                Skills
+              </Link>
+            </li>
+            <li>
+              <Link to={`/app/workout?userId=${user._id}`} onClick={() => {initPageScroll()}}>
+                Workout
+              </Link>
+            </li>
+            <li>
+              <Link to={`/app/books?userId=${user._id}`} onClick={() => {initPageScroll()}}>
+                Books
+              </Link>
+            </li>
+            <li>
+              <Link to={`/app/thoughts?userId=${user._id}`} onClick={() => {initPageScroll()}}>
+                Thoughts
+              </Link>
+            </li>
+            <li>
+              <Link to={`/app/profile?userId=${user._id}`} onClick={() => {initPageScroll()}}>
+                Profile
+              </Link>
+            </li>
           </ul>
 
           <DropdownButton

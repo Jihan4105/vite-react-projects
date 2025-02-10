@@ -2,7 +2,7 @@ import { useContext } from "react"
 
 import mottoAstronautImg from "@assets/profile/motto-astronaut.png"
 
-import { WindowContext } from "@contexts/WindowContext"
+import WindowContext from "@contexts/WindowContext"
 
 export default function MottoSpace() {
   const windowWidth = useContext(WindowContext)

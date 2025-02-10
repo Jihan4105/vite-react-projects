@@ -7,7 +7,7 @@ export default function NewsLetter() {
   return (
     <section id="news">
       <div className="container-jh">
-        <h2 className="section-title">My Latest News</h2>
+        <h1 className="section-title">My Latest News</h1>
         <p className="section-text">
           Check my latest news and share me what you think!
         </p>
@@ -33,7 +33,7 @@ export default function NewsLetter() {
               cardText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores dolor, obcaecati eveniet officia
                   provident ea
                   non illo. Natus, debitis omnis."
-              docType="book"
+              docType="books"
             />
           </li>
           <li key={3}>

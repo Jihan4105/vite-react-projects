@@ -1,3 +1,5 @@
 import { createContext } from "react";
 
-export const OverlayContext = createContext(null)
+const OverlayContext = createContext(null)
+
+export default OverlayContext

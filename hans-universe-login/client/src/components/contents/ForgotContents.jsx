@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import emailjs from "@emailjs/browser"
 
-import { OverlayContext } from "../../contexts/OverlayContext";
+import OverlayContext from "../../contexts/OverlayContext";
 import { getUser } from "../../services/fetchData";
 import InputField from "../InputField";
 import PropTypes from "prop-types";

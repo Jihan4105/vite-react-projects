@@ -2,7 +2,7 @@ import { useContext, useState, } from "react";
 import PropTypes from "prop-types";
 import emailjs from "@emailjs/browser"
 
-import { OverlayContext } from "../../contexts/OverlayContext.js";
+import OverlayContext from "../../contexts/OverlayContext.js";
 import { getElement } from "../../utils/utils.js";
 import useTimer from "../../hooks/useTimer.js";
 
