@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { Outlet } from "react-router"
 
 // Contexts
 import { WindowContext } from "@contexts/WindowContext"
@@ -18,7 +19,7 @@ import Navbar from "@components/Navbar"
 import Footer from "@components/Footer"
 import Sidebar from "@components/Sidebar"
 
-function App({ children }) {
+function App() {
   const [windowSize, setWindowSize] = useState({
     innerWidth: window.innerWidth,
     innerHeight: window.innerHeight
@@ -48,17 +49,19 @@ function App({ children }) {
   }
   return (
     <>
-      <WindowContext.Provider value={windowSize.innerWidth}>
-        <UserContext.Provider value={userData}>
-          <Navbar />
-          
-          <Sidebar />
+      <div id="app-root">
+        <WindowContext.Provider value={windowSize.innerWidth}>
+          <UserContext.Provider value={userData}>
+            <Navbar />
+            
+            <Sidebar />
 
-          {children}
+            <Outlet />
 
-          <Footer />
-        </UserContext.Provider>
-      </WindowContext.Provider>
+            <Footer />
+          </UserContext.Provider>
+        </WindowContext.Provider>
+      </div>
     </>
   )
 }

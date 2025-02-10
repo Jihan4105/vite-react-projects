@@ -38,13 +38,11 @@ export default function SignUpContents() {
   useTimer(count, setCount, verifyStatus)
 
   return (
-    <>
+    <div id="login-root">
       <form className="login-form signup">
-        <button className="return-btn" title="return to login">
-          <Link to="/">
-            <ion-icon name="return-down-back-outline" />
-          </Link>
-        </button>
+        <Link to="/" className="return-btn" title="return to login">
+          <ion-icon name="return-down-back-outline" />
+        </Link>
         <h1 className="signup-title">Sign Up</h1>
         <p className="username-label">User Name</p>
         <div className="username-group">
@@ -172,7 +170,7 @@ export default function SignUpContents() {
         <button className="btn signup-btn" onClick={(e) => {signUpBtnClick(e, navigate)}}>Sign Up</button>
       </form>
       {isOverlayEnable && <div className="overlay"></div>}
-    </>
+    </div>
   )
 }
 

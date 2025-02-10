@@ -1,7 +1,7 @@
 @use "../abstracts" as *;
 
 
-#login-root {
+#root #login-root {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/assets/login/login-background.jpg");
   width: 100vw;
   height: 100vh;
@@ -121,6 +121,7 @@
     // SignUp Contents
 
     &.signup {
+
       .return-btn {
         position: absolute;
         right: 1rem;
@@ -131,7 +132,7 @@
         place-items: center;
         background-color: transparent;
         border-radius: 50%;
-        font-size: 1.6rem;
+        font-size: 1.8rem;
         cursor: pointer;
         border: none;
         transition: background-color 0.2s ease-in;
@@ -408,7 +409,7 @@
         place-items: center;
         background-color: transparent;
         border-radius: 50%;
-        font-size: 1.6rem;
+        font-size: 1.8rem;
         cursor: pointer;
         border: none;
         transition: background-color 0.2s ease-in;

@@ -11,9 +11,11 @@ export default function ForgotContents() {
   const [email, setEmail] = useState("")
 
   return (
-    <>
+    <div id="login-root">
       <form className="login-form forgot">
-        <button className="return-btn" title="return to login"><Link to="/"><ion-icon name="return-down-back-outline" /></Link></button>
+        <Link to="/" className="return-btn" title="return to login">
+          <ion-icon name="return-down-back-outline" />
+        </Link>
         <h1 className="forgot-title">Forgot Password</h1>
         <p className="forgot-subtitle">Enter your email and I&apos;ll send you  a link to reset your password</p>
         <p className="email-label">Email</p>
@@ -29,7 +31,7 @@ export default function ForgotContents() {
         <button className="forgot-submit-btn" onClick={(e) => forgotSubmitClick(e, email, setIsOverlayEnabled)}>Submit</button>
       </form>
       {isOverlayEnable && <div className="overlay"></div>}
-    </>
+    </div>
   )
 }
 

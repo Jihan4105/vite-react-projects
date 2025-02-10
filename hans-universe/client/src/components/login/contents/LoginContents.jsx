@@ -54,7 +54,7 @@ export default function LoginContents() {
   }
 
   return(
-    <>
+    <div id="login-root">
       <form className="login-form login">
         <h1 className="login-title">Login</h1>
         <p className="email-label">Email</p>
@@ -99,6 +99,6 @@ export default function LoginContents() {
         <p className="orsignup-text">Or Sign Up Using</p>
         <span className="sign-up"><Link to="/signup">SIGN UP</Link></span>
       </form>
-    </>
+    </div>
   )
 }

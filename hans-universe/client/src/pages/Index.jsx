@@ -84,43 +84,37 @@ createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <Routes>
 
-          <Route path="/">
-            <Route index path='login' element={<LoginContents />}/>   
+          <Route index path='/' element={<LoginContents />}/>   
+        
+          <Route path='/signup' element={<SignUpContents />}/>   
           
-            <Route path='signup' element={<SignUpContents />}/>   
-            
-            <Route path='forgot' element={<ForgotContents />}/>  
-          </Route>
+          <Route path='/forgot' element={<ForgotContents />}/>  
 
-          <Route path="/app">
+          <Route path="/app" element={<App />}>
             <Route 
               index 
               path='landing'
               element={
                 <>
-                  <App>
-                    <Hero /> 
-                    
-                    <NewsLetter /> 
-                    
-                    <Contact />
-                  </App>
+                  <Hero /> 
+                  
+                  <NewsLetter /> 
+                  
+                  <Contact />
                 </>
               } />
             <Route
               path='skills'
               element={
                 <>
-                  <App>
-                    <Header 
-                      key="skills-header"
-                      type="skills"
-                    />
+                  <Header 
+                    key="skills-header"
+                    type="skills"
+                  />
 
-                    <SkillsStacks />
+                  <SkillsStacks />
 
-                    <Portfolio />
-                  </App>
+                  <Portfolio />
                 </>
               } />
             <Route 
