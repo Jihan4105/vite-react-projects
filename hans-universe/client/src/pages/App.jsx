@@ -28,6 +28,7 @@ function App() {
   const [userData, setUserData] = useState({})
   const url = new URL(`${window.location.href}`)
   const queryObject = queryStringToObject(url)
+
   const getUser = async() => {
     let data = await getUserByFilter("id", queryObject.userId)
     setUserLoading(false)

@@ -2,7 +2,6 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
 import UserModel from "../models/UserModel.js"
-import RefreshTokensModel from "../models/RefreshTokenModel.js"
 import { generateAccesToken } from "../utils/utils.js"
 
 const login = async (req,res) => {
@@ -13,16 +12,8 @@ const login = async (req,res) => {
     else if(await bcrypt.compare(req.body.password, correctUser.password)) {
       const accessToken = generateAccesToken({ userId: correctUser._id.toJSON()})
       const refreshToken = jwt.sign({ userId: correctUser._id.toJSON()}, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "7d"})
-      try {
-        const createdToken = await RefreshTokensModel.create({
-          userId: correctUser._id,
-          refreshToken: refreshToken
-        })
-        res.json({ status: "success", userId: correctUser._id, accessToken: accessToken, refreshToken: refreshToken })
-      } catch(error) {
-        res.status(500)
-        res.json({ status: "Something bad Occured", message: error.message })
-      }
+      res.cookie("refresh", refreshToken, { httpOnly: true, sameSite: "None", maxAage: 24 * 60 * 60 * 1000 })
+      res.json({ status: "success", userId: correctUser._id, accessToken: accessToken, refreshToken: refreshToken })
     } 
     else { 
       res.json({ status: "password wrong"})

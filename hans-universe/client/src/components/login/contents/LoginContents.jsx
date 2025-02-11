@@ -1,10 +1,12 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import axios from "@api/api.js"
 import { Link } from "react-router"
-import useSignIn from "react-auth-kit/hooks/useSignIn"
 import InputField from "../InputField.jsx"
 
+import AuthContext from "@contexts/AuthProvider.js"
+
 export default function LoginContents() {
-  const signIn = useSignIn()
+  const { setAuth } = useContext(AuthContext)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [whichIsWrong, setWhichIsWrong] = useState("")
@@ -26,6 +28,10 @@ export default function LoginContents() {
       })
     })
     const data = await res.json()
+
+    const accessToken = data?.accessToken
+
+    setAuth({ userId: userId, accessToken: accessToken})
     
     switch(data.status) {
       case "no such user" :
@@ -35,20 +41,7 @@ export default function LoginContents() {
         setWhichIsWrong("password-wrong")
         break
       case "success" :
-        if(signIn({
-          auth: {
-            token: data.accessToken,
-            type: "Bearer"
-          },
-          refresh: data.refreshToken,
-          userState: {
-            uid: data.userId
-          }
-        })) {
-          window.location.href = `/app/landing?userId=${data.userId}`
-        } else {
-          throw Error("Failed to Authorizing")
-        }
+        window.location.href = `/app/landing?userId=${data.userId}`
         break
     }
   }
