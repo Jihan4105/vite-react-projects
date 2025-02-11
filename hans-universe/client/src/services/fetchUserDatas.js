@@ -1,17 +1,12 @@
-export async function getUserByFilter(filterType, filterValue) {
-  const hostname = import.meta.env.VITE_SERVER_HOSTNAME
-  const port = import.meta.env.VITE_SERVER_PORT
+import useAxiosPrivate from "@/hooks/useAxiosPrivate"
 
-  const response = await fetch(`http://${hostname}:${port}/user/getUserByFilter`, {
-    method: "POST",
-    headers:  {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      filterType: filterType,
-      filterValue: filterValue
-    })
+const axiosPrivate = useAxiosPrivate()
+
+export async function getUserByFilter(filterType, filterValue) {
+  const res = await axiosPrivate.post(`/user/getUserByFilter`, {
+    filterType: filterType,
+    filterValue: filterValue
   })
-  const data = await response.json()
+  const data = res.data
   return data
 }

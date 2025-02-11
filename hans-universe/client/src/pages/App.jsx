@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import { Outlet } from "react-router"
 
+import AuthContext from "@contexts/AuthContext"
+
 // Contexts
 import WindowContext from "@contexts/WindowContext"
 import UserContext from "@contexts/UserContext"
@@ -26,6 +28,7 @@ function App() {
   })
   const [userLoading, setUserLoading] = useState(true)
   const [userData, setUserData] = useState({})
+  const [auth, setAuth] = useState({})
   const url = new URL(`${window.location.href}`)
   const queryObject = queryStringToObject(url)
 
@@ -51,17 +54,19 @@ function App() {
   return (
     <>
       <div id="app-root">
-        <WindowContext.Provider value={windowSize.innerWidth}>
-          <UserContext.Provider value={userData}>
-            <Navbar />
-            
-            <Sidebar />
+        <AuthContext.Provider value={{ auth, setAuth }}>
+          <WindowContext.Provider value={windowSize.innerWidth}>
+            <UserContext.Provider value={userData}>
+              <Navbar />
+              
+              <Sidebar />
 
-            <Outlet />
+              <Outlet />
 
-            <Footer />
-          </UserContext.Provider>
-        </WindowContext.Provider>
+              <Footer />
+            </UserContext.Provider>
+          </WindowContext.Provider>
+        </AuthContext.Provider>
       </div>
     </>
   )

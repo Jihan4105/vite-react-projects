@@ -3,7 +3,7 @@ import axios from "@api/api.js"
 import { Link } from "react-router"
 import InputField from "../InputField.jsx"
 
-import AuthContext from "@contexts/AuthProvider.js"
+import AuthContext from "@/contexts/AuthContext.js"
 
 export default function LoginContents() {
   const { setAuth } = useContext(AuthContext)

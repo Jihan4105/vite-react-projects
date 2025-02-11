@@ -2,9 +2,6 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router'
 
-// Auth
-import { AuthProvider } from '@/contexts/AuthProvider'
-
 // Mystyles
 import "@styles/main.scss"
 
@@ -54,109 +51,107 @@ createRoot(document.getElementById('root')).render(
         
         <Route path='/forgot' element={<ForgotContents />}/>  
 
-        <AuthProvider>
-          <Route path="/app" element={<App />}>
-            <Route 
-              index 
-              path='landing'
-              element={
-                <>
-                  <Hero /> 
-                  
-                  <NewsLetter /> 
-                  
-                  <Contact />
-                </>
-              } />
-            <Route
-              path='skills'
-              element={
-                <>
-                  <Header 
-                    key="skills-header"
-                    type="skills"
-                  />
+        <Route path="/app" element={<App />}>
+          <Route 
+            index 
+            path='landing'
+            element={
+              <>
+                <Hero /> 
+                
+                <NewsLetter /> 
+                
+                <Contact />
+              </>
+            } />
+          <Route
+            path='skills'
+            element={
+              <>
+                <Header 
+                  key="skills-header"
+                  type="skills"
+                />
 
-                  <SkillsStacks />
+                <SkillsStacks />
 
-                  <Portfolio />
-                </>
-              } />
-            <Route 
-              path='workout'
-              element={
-                <>
-                  <Header 
-                    key="workout-header"
-                    type="workout"
-                  />
+                <Portfolio />
+              </>
+            } />
+          <Route 
+            path='workout'
+            element={
+              <>
+                <Header 
+                  key="workout-header"
+                  type="workout"
+                />
 
-                  <WorkoutContents />
+                <WorkoutContents />
 
-                  <Blog 
-                    key="workout-blog"
-                    type="workout"
-                    dropdownItems={["Title", "Content", "Title + Content"]}
-                  />
-                </>
-              }
-            />
-            <Route 
-              path='books'
-              element={
-                <>
-                  <Header 
-                    key="books-header"
-                    type="books"
-                  />
+                <Blog 
+                  key="workout-blog"
+                  type="workout"
+                  dropdownItems={["Title", "Content", "Title + Content"]}
+                />
+              </>
+            }
+          />
+          <Route 
+            path='books'
+            element={
+              <>
+                <Header 
+                  key="books-header"
+                  type="books"
+                />
 
-                  <BooksContent />
+                <BooksContent />
 
-                  <Blog 
-                    key="books-blog"
-                    type="books"
-                    dropdownItems={["Any", "Novel", "Humanities", "Philosophy"]}
-                  />
-                </>
-              }
-            />
-            <Route 
-              path='thoughts'
-              element={
-                <>
-                  <Header 
-                    key="thoughts-header"
-                    type="thoughts"
-                  />
+                <Blog 
+                  key="books-blog"
+                  type="books"
+                  dropdownItems={["Any", "Novel", "Humanities", "Philosophy"]}
+                />
+              </>
+            }
+          />
+          <Route 
+            path='thoughts'
+            element={
+              <>
+                <Header 
+                  key="thoughts-header"
+                  type="thoughts"
+                />
 
-                  <ThoughtsContent />
+                <ThoughtsContent />
 
-                  <Blog 
-                    key="thoughts-blog"
-                    type="thoughts"
-                    dropdownItems={["Title", "Content", "Title + Content"]}
-                  />
-                </>
-              }
-            />
-            <Route 
-              path='profile'
-              element={
-                <>
-                  <MottoSpace />
-                  
-                  <Introuduce />
-                </>
-              }
-            />
-            <Route 
-              path='singleblog'
-              element={
-                <SingleBlog />
-              }
-            />
-          </Route>
-        </AuthProvider>
+                <Blog 
+                  key="thoughts-blog"
+                  type="thoughts"
+                  dropdownItems={["Title", "Content", "Title + Content"]}
+                />
+              </>
+            }
+          />
+          <Route 
+            path='profile'
+            element={
+              <>
+                <MottoSpace />
+                
+                <Introuduce />
+              </>
+            }
+          />
+          <Route 
+            path='singleblog'
+            element={
+              <SingleBlog />
+            }
+          />
+        </Route>
 
       </Routes>
     </BrowserRouter>
