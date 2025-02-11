@@ -2,13 +2,16 @@ import { useState } from "react";
 import { Link } from "react-router";
 import emailjs from "@emailjs/browser"
 
-import { getUserByFilter } from "@services/fetchUserDatas";
+
 import InputField from "../InputField";
 import { getElement } from "@utils/utils";
+
+import useAxiosPrivate from "@hooks/useAxiosPrivate";
 
 export default function ForgotContents() {
   const [isOverlayEnable, setIsOverlayEnabled] = useState(false)
   const [email, setEmail] = useState("")
+  const axiosPrivate = useAxiosPrivate()
 
   return (
     <div id="login-root">
@@ -28,19 +31,24 @@ export default function ForgotContents() {
           iconName="mail-outline"
         />
         <p className="email-error">something is wrong text</p>
-        <button className="forgot-submit-btn" onClick={(e) => forgotSubmitClick(e, email, setIsOverlayEnabled)}>Submit</button>
+        <button className="forgot-submit-btn" onClick={(e) => forgotSubmitClick(e, email, setIsOverlayEnabled, axiosPrivate)}>Submit</button>
       </form>
       {isOverlayEnable && <div className="overlay"></div>}
     </div>
   )
 }
 
-async function forgotSubmitClick(e, email, setIsOverlayEnabled) {
+async function forgotSubmitClick(e, email, setIsOverlayEnabled, axiosPrivate) {
   e.preventDefault()
 
   const errorText = getElement(".email-error")
-  const data = await getUserByFilter("email", email)
-  const userData = data.userData
+  const controller = new AbortController()
+
+  const res = await axiosPrivate.post(`/user/getUserByFilter`, {
+    filterType: filterType,
+    filterValue: filterValue
+  })
+  const userData = res.data.userData
 
   if(userData) {
     const userPasswordLength = userData.password.length

@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react"
 import { Outlet } from "react-router"
 
-import AuthContext from "@contexts/AuthContext"
-
 // Contexts
 import WindowContext from "@contexts/WindowContext"
 import UserContext from "@contexts/UserContext"
@@ -10,11 +8,9 @@ import UserContext from "@contexts/UserContext"
 // Utils
 import { queryStringToObject } from "@utils/utils"
 
-// Services
-import { getUserByFilter } from "@services/fetchUserDatas"
-
 // Hooks
 import useWindow from "@hooks/useWindow.js"
+import useAxiosPrivate from "@/hooks/useAxiosPrivate"
 
 // Common Componenets
 import Navbar from "@components/Navbar"
@@ -28,18 +24,37 @@ function App() {
   })
   const [userLoading, setUserLoading] = useState(true)
   const [userData, setUserData] = useState({})
-  const [auth, setAuth] = useState({})
+  const axiosPrivate = useAxiosPrivate()
   const url = new URL(`${window.location.href}`)
   const queryObject = queryStringToObject(url)
-
-  const getUser = async() => {
-    let data = await getUserByFilter("id", queryObject.userId)
-    setUserLoading(false)
-    setUserData(data.userData)
-  } 
   
   useEffect(() => {
+    let isMounted = true
+    // request를 캔슬시킬 수 있음. 
+    const controller = new AbortController()
+
+    const getUser = async() => {
+      try {
+        const res = await axiosPrivate.post(`/user/getUserByFilter`, {
+          filterType: "id",
+          filterValue: queryObject.userId,
+          signal: controller.signal
+        })
+        const data = res.data
+        console.log(data)
+        isMounted && setUserData(data.userData)
+        setUserLoading(false)
+      } catch(error) {
+        console.log(error) 
+      } 
+    } 
+
     getUser()
+
+    return () => {
+      isMounted = false
+      controller.abort()
+    }
   }, [])
 
   useWindow(windowSize, setWindowSize)
@@ -54,19 +69,17 @@ function App() {
   return (
     <>
       <div id="app-root">
-        <AuthContext.Provider value={{ auth, setAuth }}>
-          <WindowContext.Provider value={windowSize.innerWidth}>
-            <UserContext.Provider value={userData}>
-              <Navbar />
-              
-              <Sidebar />
+        <WindowContext.Provider value={windowSize.innerWidth}>
+          <UserContext.Provider value={userData}>
+            <Navbar />
+            
+            <Sidebar />
 
-              <Outlet />
+            <Outlet />
 
-              <Footer />
-            </UserContext.Provider>
-          </WindowContext.Provider>
-        </AuthContext.Provider>
+            <Footer />
+          </UserContext.Provider>
+        </WindowContext.Provider>
       </div>
     </>
   )

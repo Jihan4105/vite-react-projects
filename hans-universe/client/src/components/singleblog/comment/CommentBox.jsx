@@ -3,12 +3,13 @@ import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
 
 import { isEllipsisActive } from "@utils/utils"
-import { getUserByFilter } from "@services/fetchUserDatas"
 import { deleteComment } from "@/services/fetchComment"
 import CommentInput from "./CommentInput"
+import CommentEditInput from "./CommentEditInput"
 
 import UserContext from "@contexts/UserContext"
-import CommentEditInput from "./CommentEditInput"
+
+import useAxiosPrivate from "@hooks/useAxiosPrivate"
 
 export default function CommentBox({ type, blogType, commentItem, commentIndex, isReplyExist, blogItem, setBlogItem, isExpandEnabled = undefined, setIsExpandEnabled = undefined }) {
   const logginedUser = useContext(UserContext)
@@ -19,12 +20,8 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
   const [isReplyBtnClicked, setIsReplyBtnClicked] = useState(false)
   const [isEditModeEnabled, setIsEditModeEnabled] = useState(false)
   const [isDetailBtnClicked, setIsDetailBtnClicked] = useState(false)
-
-  const getUser = async () => {
-    const data = await getUserByFilter("id", commentItem.userId)
-    setLoading(false)
-    setUser(data.userData)
-  }
+  const axiosPrivate = useAxiosPrivate()
+  const controller = new AbortController()
 
   useEffect(() => {
     if(loading === false) {
@@ -50,7 +47,28 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
   }, [user])
   
   useEffect(() => {
-    getUser()
+    let isMounted = true
+    const controller = new AbortController()
+
+    const getUser = async () => {
+      try {
+        const res = await axiosPrivate.post(`/user/getUserByFilter`, {
+          filterType: filterType,
+          filterValue: filterValue,
+          signal: controller.signal()
+        })
+        const data = res.data
+        isMounted && setUser(res.data.userData)
+        setLoading(false)
+      } catch(error) {
+        console.log(error.message)
+      }
+    }
+
+    return () => {
+      isMounted = false
+      controller.abort()
+    }
   }, [])
   
 

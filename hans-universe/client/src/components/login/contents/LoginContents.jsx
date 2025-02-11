@@ -1,5 +1,4 @@
 import { useState, useContext } from "react"
-import axios from "@api/api.js"
 import { Link } from "react-router"
 import InputField from "../InputField.jsx"
 
@@ -29,9 +28,7 @@ export default function LoginContents() {
     })
     const data = await res.json()
 
-    const accessToken = data?.accessToken
-
-    setAuth({ userId: userId, accessToken: accessToken})
+    setAuth({ userId: data.userId, accessToken: data.accessToken})
     
     switch(data.status) {
       case "no such user" :
