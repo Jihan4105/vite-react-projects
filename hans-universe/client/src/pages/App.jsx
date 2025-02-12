@@ -40,11 +40,10 @@ function App() {
           signal: controller.signal
         })
         const data = res.data
-        console.log(data)
         isMounted && setUserData(data.userData)
         setUserLoading(false)
       } catch(error) {
-        console.log(error) 
+        console.log(error)
       } 
     } 
 

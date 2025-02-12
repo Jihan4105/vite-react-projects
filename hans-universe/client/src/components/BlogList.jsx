@@ -8,6 +8,7 @@ import UserContext from "@contexts/UserContext"
 import { initPageScroll } from "@utils/utils"
 
 import { getBlogDatas } from "@services/fetchBlog"
+import { axiosPrivate } from "@/api/api"
 
 export default function BlogList({ type, searchValue, filterValue}) {
   const [selectedPage, setSelectedPage] = useState("1")
@@ -18,14 +19,28 @@ export default function BlogList({ type, searchValue, filterValue}) {
   const navigate = useNavigate()
   let filteredDatas
   
-  const fetchBlogDatas = async () => {
-    const data = await getBlogDatas(type)
-    setLoading(false)
-    setBlogDatas(data)
-  }
-  
   useEffect(() => {
-    fetchBlogDatas()
+    let isMounted = true
+    const controller = new AbortController()
+
+    const getBlogDatas = async () => {
+      try {
+        const res = await axiosPrivate.post("/blog/getBlogDatas", {
+          blogType: type
+        }) 
+        isMounted && setBlogDatas(res.data)
+        setLoading(false)
+      } catch(error) {
+        console.log(error.message)
+      }
+    }
+
+    getBlogDatas()
+
+    return () => {
+      isMounted = false
+      controller.abort()
+    }
   }, [])
 
   if(!loading) {

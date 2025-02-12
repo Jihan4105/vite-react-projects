@@ -7,7 +7,6 @@ const useRefreshToken = () => {
 
   const refresh = async () => {
     const response = await axios.get("/refresh/getNewAccessToken", {
-      //쿠키를 request와 같이 보낼 수 있게 해주는 옵션
       withCredentials: true
     })
     setAuth(prev => {
@@ -16,7 +15,7 @@ const useRefreshToken = () => {
       return { ...prev, accessToken: response.data.accesToken}
     })
   }
-  
+
   return refresh
 }
 
