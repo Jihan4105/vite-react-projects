@@ -1,9 +1,7 @@
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-import fsPromises from "fs/promises"
-import path from "path"
 
-
+import RefreshTokenModel from "../models/RefreshTokenModel.js"
 import UserModel from "../models/UserModel.js"
 import { generateAccesToken } from "../utils/utils.js"
 
@@ -13,9 +11,14 @@ const login = async (req,res) => {
     let correctUser = fetchedData[0]
     if(fetchedData.length === 0) {res.json({ status: "no such user"}) }
     else if(await bcrypt.compare(req.body.password, correctUser.password)) {
+      // Generating New Access Refresh Token
       const accessToken = generateAccesToken({ userId: correctUser._id.toJSON()})
       const refreshToken = jwt.sign({ userId: correctUser._id.toJSON()}, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "1d"})
-      res.cookie("refresh", refreshToken, { httpOnly: true, sameSite: "None", maxAage: 24 * 60 * 60 * 1000 })
+
+      // Saving RefreshToken in MongoDB
+      await RefreshTokenModel.findOneAndUpdate({ userId: correctUser._id.toString() }, { userId: correctUser._id.toString(), refreshToken: refreshToken}, { upsert: true})
+
+      res.cookie("jwt", refreshToken, { httpOnly: true, sameSite: "None", maxAage: 24 * 60 * 60 * 1000 })
       res.json({ status: "success", userId: correctUser._id, accessToken: accessToken, refreshToken: refreshToken })
     } 
     else { 

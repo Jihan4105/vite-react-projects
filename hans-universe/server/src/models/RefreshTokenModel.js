@@ -5,5 +5,5 @@ const refreshTokenSchema = new mongoose.Schema({
   refreshToken: String,
 })
 
-const UserModel = mongoose.model("refreshtoken", userDatasSchema)
-export default UserModel
+const RefreshTokensModel = mongoose.model("refreshtoken", refreshTokenSchema)
+export default RefreshTokensModel
