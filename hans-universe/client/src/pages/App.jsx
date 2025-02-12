@@ -30,7 +30,6 @@ function App() {
   
   useEffect(() => {
     let isMounted = true
-    // request를 캔슬시킬 수 있음. 
     const controller = new AbortController()
 
     const getUser = async() => {

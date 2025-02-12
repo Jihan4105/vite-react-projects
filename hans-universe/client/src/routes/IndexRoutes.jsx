@@ -42,7 +42,7 @@ export default function IndexRoutes() {
   const [auth, setAuth] = useState({})
 
   return(
-    <AuthContext.Provider value={{ auth, setAuth}}>
+    <AuthContext.Provider value={{ auth, setAuth }}>
       <Routes>
         <Route index path='/' element={<LoginContents />}/>   
       

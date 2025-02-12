@@ -2,19 +2,20 @@ import jwt from "jsonwebtoken"
 import RefreshTokensModel from "../models/RefreshTokenModel.js"
 import { generateAccesToken } from "../utils/utils.js"
 
-const getNewAccessToken = (req, res) => {
+const getNewAccessToken = async (req, res) => {
   const cookies = req.cookies
   if(!cookies?.jwt) { return res.sendStatus(401) }
   const refreshToken = cookies.jwt;
 
-  const fetchedUser = RefreshTokensModel.find({ refreshToken: refreshToken })
-  if(!fetchedUser) { return res.sendStatus(403) }
+  const fetchedUser = await RefreshTokensModel.find({ refreshToken: refreshToken })
+  const correctRefreshUser = fetchedUser[0]
+  if(!correctRefreshUser) { return res.sendStatus(403) }
   
   jwt.verify(
     refreshToken,
     process.env.REFRESH_TOKEN_SECRET,
     (error, decoded) => {
-      if(error || fetchedUser.userId !== decoded.userId) { res.sendStatus(403) }
+      if(error || correctRefreshUser.userId !== decoded.userId) { return res.sendStatus(403) }
       const accessToken = generateAccesToken({ userId: decoded.userId })
       res.json({ accessToken })
     }

@@ -1,18 +1,26 @@
-import { useState, useContext } from "react"
-import { Link } from "react-router"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router"
 import InputField from "../InputField.jsx"
 
-import AuthContext from "@/contexts/AuthContext.js"
+import useAuth from "@hooks/useAuth.js"
+import useStateEffect from "@hooks/useStateEffect.js"
 
 export default function LoginContents() {
-  const { setAuth } = useContext(AuthContext)
+  const { setAuth } = useAuth()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [userId, setUserId] = useState("")
   const [whichIsWrong, setWhichIsWrong] = useState("")
+  const [isRedirectTriggerd, setIsRedirectTriggerd] = useState(false)
+  const navigate = useNavigate()
+
+  useStateEffect(() => {
+    navigate(`/app/landing?userId=${userId}`)
+  }, [isRedirectTriggerd])
 
   const loginBtnClicked = async(e) => {
     e.preventDefault()
-    
+
     const hostname = import.meta.env.VITE_SERVER_HOSTNAME
     const port = import.meta.env.VITE_SERVER_PORT
   
@@ -28,7 +36,6 @@ export default function LoginContents() {
     })
     const data = await res.json()
 
-    setAuth({ userId: data.userId, accessToken: data.accessToken})
     
     switch(data.status) {
       case "no such user" :
@@ -38,7 +45,9 @@ export default function LoginContents() {
         setWhichIsWrong("password-wrong")
         break
       case "success" :
-        window.location.href = `/app/landing?userId=${data.userId}`
+        setUserId(data.userId)
+        setAuth({ userId: data.userId, accessToken: data.accessToken})
+        setIsRedirectTriggerd(true)
         break
     }
   }
