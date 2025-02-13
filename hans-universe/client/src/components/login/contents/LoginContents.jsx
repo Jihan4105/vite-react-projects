@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link, useNavigate } from "react-router"
+import { Link, useLocation, useNavigate } from "react-router"
 import InputField from "../InputField.jsx"
 
 import useAuth from "@hooks/useAuth.js"
@@ -13,9 +13,12 @@ export default function LoginContents() {
   const [whichIsWrong, setWhichIsWrong] = useState("")
   const [isRedirectTriggerd, setIsRedirectTriggerd] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || null
 
   useStateEffect(() => {
-    navigate(`/app/landing?userId=${userId}`)
+    const location = from ? `${from}?userId=${userId}` : `/app/landing?userId=${userId}`
+    navigate(location, { replace: true })
   }, [isRedirectTriggerd])
 
   const loginBtnClicked = async(e) => {

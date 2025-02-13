@@ -1,4 +1,6 @@
 import { useContext, useState } from "react"
+import { useLocation, useNavigate } from "react-router"
+
 import UserContext from "@contexts/UserContext"
 import { createComment } from "@services/fetchComment"
 
@@ -10,6 +12,8 @@ export default function CommentInput({ type, blogType, blogItem, setBlogItem, se
   const [focusStatus, setFocusStatus] = useState(false)
   const user = useContext(UserContext)
   const axiosPrivate = useAxiosPrivate()
+  const navigate = useNavigate()
+  const location = useLocation()
   let commentBoxMargin = type === "comment" ? "1rem" : "0"
 
   return(
@@ -35,7 +39,7 @@ export default function CommentInput({ type, blogType, blogItem, setBlogItem, se
             {commentText === "" ? 
               <button className="submit-btn" disabled>Submit</button>
               :
-              <button className="submit-btn" onClick={() => {submitBtnHandler(axiosPrivate, type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus)}}>Submit</button>
+              <button className="submit-btn" onClick={() => {submitBtnHandler(navigate, location, axiosPrivate, type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus)}}>Submit</button>
             }
           </div>
         }
@@ -45,7 +49,7 @@ export default function CommentInput({ type, blogType, blogItem, setBlogItem, se
             {commentText === "" ? 
               <button className="submit-btn" disabled>Submit</button>
               :
-              <button className="submit-btn" onClick={() => {submitBtnHandler(axiosPrivate, type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus, setIsReplyBtnClicked, commentIndex)}}>Submit</button>
+              <button className="submit-btn" onClick={() => {submitBtnHandler(navigate, location, axiosPrivate, type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus, setIsReplyBtnClicked, commentIndex)}}>Submit</button>
             }
           </div>
         }
@@ -66,6 +70,8 @@ function cancelBtnHandler(textArea, setCommentText, setFocusStatus) {
 }
 
 async function submitBtnHandler(
+  navigate,
+  location,
   axiosPrivate, 
   type, 
   blogType, 
@@ -91,7 +97,7 @@ async function submitBtnHandler(
     newComment.replies = []
   }
 
-  const newBlogItem = await createComment(axiosPrivate, blogType, blogItem, newComment, commentIndex)
+  const newBlogItem = await createComment(navigate, location, axiosPrivate, blogType, blogItem, newComment, commentIndex)
 
   if(type == "comment") {
     setCommentText("")

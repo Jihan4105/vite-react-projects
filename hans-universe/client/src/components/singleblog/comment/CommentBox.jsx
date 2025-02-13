@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useContext } from "react"
+import { useLocation, useNavigate } from "react-router"
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
 
@@ -21,6 +22,8 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
   const [isEditModeEnabled, setIsEditModeEnabled] = useState(false)
   const [isDetailBtnClicked, setIsDetailBtnClicked] = useState(false)
   const axiosPrivate = useAxiosPrivate()
+  const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     if(loading === false) {
@@ -168,7 +171,7 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
                 }
                 size="112px"
               >
-                <Dropdown.Item eventKey="1" active={false} onClick={() => {deleteButtonHandler(axiosPrivate, type, blogType, blogItem, commentItem._id, commentIndex, setBlogItem)}}>
+                <Dropdown.Item eventKey="1" active={false} onClick={() => {deleteButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, commentItem._id, commentIndex, setBlogItem)}}>
                   <div className="comment-Delete-group">
                     <ion-icon name="trash-outline"></ion-icon>
                     <span>Delete</span>
@@ -190,8 +193,8 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
   )
 }
 
-async function deleteButtonHandler(axiosPrivate, type, blogType, blogItem, commentId, commentIndex, setBlogItem) {
-  const data = await deleteComment(axiosPrivate, type, blogType, blogItem, commentId, commentIndex)
+async function deleteButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, commentId, commentIndex, setBlogItem) {
+  const data = await deleteComment(navigate, location, axiosPrivate, type, blogType, blogItem, commentId, commentIndex)
 
   setBlogItem(data)
 }

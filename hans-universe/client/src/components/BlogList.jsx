@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { useNavigate } from "react-router"
+import { useLocation, useNavigate } from "react-router"
 import { Pagination } from "@mui/material"
 
 import WindowContext from "@contexts/WindowContext" 
@@ -17,6 +17,7 @@ export default function BlogList({ type, searchValue, filterValue}) {
   const user = useContext(UserContext)
   const axiosPrivate = useAxiosPrivate()
   const navigate = useNavigate()
+  const location = useLocation()
   let filteredDatas
   
   useEffect(() => {
@@ -32,6 +33,8 @@ export default function BlogList({ type, searchValue, filterValue}) {
         setLoading(false)
       } catch(error) {
         console.log(error.message)
+        alert("Please Loginback, your refreshToken Expired")
+        navigate("/", { state: { from: location }, replace: true})
       }
     }
 

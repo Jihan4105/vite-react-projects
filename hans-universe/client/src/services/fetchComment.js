@@ -1,7 +1,7 @@
 const hostname = import.meta.env.VITE_SERVER_HOSTNAME
 const port = import.meta.env.VITE_SERVER_PORT
 
-export async function createComment( axiosPrivate, blogType, blogItem, newComment, commentIndex) {
+export async function createComment( navigate, location, axiosPrivate, blogType, blogItem, newComment, commentIndex) {
   const controller = new AbortController()
 
   try {
@@ -16,11 +16,12 @@ export async function createComment( axiosPrivate, blogType, blogItem, newCommen
     return res.data
   } catch(error) {
     console.log(error.message)
-    return error.message
+    alert("Please Loginback, your refreshToken Expired")
+    navigate("/", { state: { from: location }, replace: true})
   }
 }
 
-export async function editComment( axiosPrivate, type, blogType, blogItem, commentText, commentId, commentIndex, newDate) {
+export async function editComment( navigate, location, axiosPrivate, type, blogType, blogItem, commentText, commentId, commentIndex, newDate) {
   const controller = new AbortController()
 
   try {
@@ -38,11 +39,12 @@ export async function editComment( axiosPrivate, type, blogType, blogItem, comme
     return res.data
   } catch(error) {
     console.log(error.message)
-    return error.message
+    alert("Please Loginback, your refreshToken Expired")
+    navigate("/", { state: { from: location }, replace: true})
   }
 }
 
-export async function deleteComment( axiosPrivate, type, blogType, blogItem, commentId, commentIndex ) {
+export async function deleteComment( navigate, location, axiosPrivate, type, blogType, blogItem, commentId, commentIndex ) {
   const controller = new AbortController()
 
   try {
@@ -58,6 +60,7 @@ export async function deleteComment( axiosPrivate, type, blogType, blogItem, com
     return res.data
   } catch(error) {
     console.log(error.message)
-    return error.message
+    alert("Please Loginback, your refreshToken Expired")
+    navigate("/", { state: { from: location }, replace: true})
   }
 }
