@@ -3,11 +3,13 @@ import UserContext from "@contexts/UserContext"
 import { createComment } from "@services/fetchComment"
 
 import { getFormatedDate } from "@utils/utils.js"
+import useAxiosPrivate from "@hooks/useAxiosPrivate"
 
 export default function CommentInput({ type, blogType, blogItem, setBlogItem, setIsReplyBtnClicked = undefined, commentIndex = undefined }) {
   const [commentText, setCommentText] = useState("")
   const [focusStatus, setFocusStatus] = useState(false)
   const user = useContext(UserContext)
+  const axiosPrivate = useAxiosPrivate()
   let commentBoxMargin = type === "comment" ? "1rem" : "0"
 
   return(
@@ -33,7 +35,7 @@ export default function CommentInput({ type, blogType, blogItem, setBlogItem, se
             {commentText === "" ? 
               <button className="submit-btn" disabled>Submit</button>
               :
-              <button className="submit-btn" onClick={() => {submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus)}}>Submit</button>
+              <button className="submit-btn" onClick={() => {submitBtnHandler(axiosPrivate, type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus)}}>Submit</button>
             }
           </div>
         }
@@ -43,7 +45,7 @@ export default function CommentInput({ type, blogType, blogItem, setBlogItem, se
             {commentText === "" ? 
               <button className="submit-btn" disabled>Submit</button>
               :
-              <button className="submit-btn" onClick={() => {submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus, setIsReplyBtnClicked, commentIndex)}}>Submit</button>
+              <button className="submit-btn" onClick={() => {submitBtnHandler(axiosPrivate, type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus, setIsReplyBtnClicked, commentIndex)}}>Submit</button>
             }
           </div>
         }
@@ -63,7 +65,19 @@ function cancelBtnHandler(textArea, setCommentText, setFocusStatus) {
   setFocusStatus(false)
 }
 
-async function submitBtnHandler(type, blogType, user, commentText, blogItem, setBlogItem, setCommentText, setFocusStatus, setIsReplyBtnClicked, commentIndex = undefined) {
+async function submitBtnHandler(
+  axiosPrivate, 
+  type, 
+  blogType, 
+  user, 
+  commentText, 
+  blogItem, 
+  setBlogItem, 
+  setCommentText, 
+  setFocusStatus, 
+  setIsReplyBtnClicked, 
+  commentIndex = undefined
+) {
   let newComment = {
     userId: user._id,
     date: getFormatedDate(new Date()),
@@ -77,7 +91,7 @@ async function submitBtnHandler(type, blogType, user, commentText, blogItem, set
     newComment.replies = []
   }
 
-  const newBlogItem = await createComment(blogType, blogItem, newComment, commentIndex)
+  const newBlogItem = await createComment(axiosPrivate, blogType, blogItem, newComment, commentIndex)
 
   if(type == "comment") {
     setCommentText("")

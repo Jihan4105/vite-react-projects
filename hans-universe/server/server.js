@@ -17,6 +17,17 @@ import refreshRouter from "./src/routes/refreshRoutes.js"
 import verifyJWT from "./src/middleware/verifyJWT.js"
 
 const app = express()
+
+const headers = (req, res, next) => {
+  if(req.headers.origin === "http://localhost:5173") {
+    res.setHeader('Access-Control-Allow-Credentials', true);
+  }
+  next()
+}
+
+app.use(headers)
+
+app.use(cookieParser())
 app.use(cors({
   origin: "http://localhost:5173", 
   credentials: true,
@@ -24,8 +35,6 @@ app.use(cors({
 }))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-app.use(cookieParser())
-
 app.use("/uploads", express.static("uploads"))
 app.use("/assets", express.static("src/assets"))
 

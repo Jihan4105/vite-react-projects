@@ -1,60 +1,63 @@
 const hostname = import.meta.env.VITE_SERVER_HOSTNAME
 const port = import.meta.env.VITE_SERVER_PORT
 
-export async function createComment( blogType, blogItem, newComment, commentIndex) {
-  const res = await fetch(`http://${hostname}:${port}/comment/create`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
+export async function createComment( axiosPrivate, blogType, blogItem, newComment, commentIndex) {
+  const controller = new AbortController()
+
+  try {
+    const res = await axiosPrivate.post(`/comment/create`, {
       blogType: blogType,
       blogItem: blogItem,
       newComment: newComment,
-      commentIndex: commentIndex
+      commentIndex: commentIndex,
+      signal: controller.signal
     })
-  }) 
-  const data = await res.json()
-  
-  return data
+    controller.abort()
+    return res.data
+  } catch(error) {
+    console.log(error.message)
+    return error.message
+  }
 }
 
-export async function editComment( type, blogType, blogItem, commentText, commentId, commentIndex, newDate) {
-  const res = await fetch(`http://${hostname}:${port}/comment/edit`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json" 
-    },
-    body: JSON.stringify({
+export async function editComment( axiosPrivate, type, blogType, blogItem, commentText, commentId, commentIndex, newDate) {
+  const controller = new AbortController()
+
+  try {
+    const res = await axiosPrivate.post(`/comment/edit`, {
       type: type,
       blogType: blogType,
       blogItem: blogItem,
       commentText: commentText,
       commentId: commentId,
       commentIndex: commentIndex,
-      newDate: newDate
+      newDate: newDate,
+      signal: controller.signal
     })
-  })
-  const data = await res.json()
-
-  return data
+    controller.abort()
+    return res.data
+  } catch(error) {
+    console.log(error.message)
+    return error.message
+  }
 }
 
-export async function deleteComment( type, blogType, blogItem, commentId, commentIndex ) {
-  const res = await fetch(`http://${hostname}:${port}/comment/delete`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
+export async function deleteComment( axiosPrivate, type, blogType, blogItem, commentId, commentIndex ) {
+  const controller = new AbortController()
+
+  try {
+    const res = await axiosPrivate.post(`/comment/delete`, {
       type: type,
       blogType: blogType,
       blogItem: blogItem,
       commentId: commentId,
       commentIndex: commentIndex,
+      signal: controller.signal
     })
-  })
-  const data = await res.json()
-
-  return data
+    controller.abort()
+    return res.data
+  } catch(error) {
+    console.log(error.message)
+    return error.message
+  }
 }

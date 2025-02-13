@@ -18,7 +18,7 @@ const login = async (req,res) => {
       // Saving RefreshToken in MongoDB
       await RefreshTokensModel.findOneAndUpdate({ userId: correctUser._id.toString() }, { userId: correctUser._id.toString(), refreshToken: refreshToken}, { upsert: true})
 
-      res.cookie("jwt", refreshToken, { httpOnly: true, sameSite: "None", maxAage: 24 * 60 * 60 * 1000 })
+      res.cookie("jwt", refreshToken, { httpOnly: true, sameSite: "None", secure: true, maxAage: 24 * 60 * 60 * 1000 })
       res.json({ status: "success", userId: correctUser._id, accessToken: accessToken, refreshToken: refreshToken })
     } 
     else { 
@@ -58,7 +58,7 @@ const logout = async (req, res) => {
 
   try {
     await RefreshTokensModel.findOneAndDelete({ refreshToken: refreshToken })
-    res.clearCookie("jwt", { httpOnly: true, maxAage: 24 * 60 * 60 * 1000 })
+    res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true})
     res.sendStatus(204) 
   } catch(error) {
     res.status(500)

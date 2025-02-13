@@ -3,24 +3,39 @@ import { useState, useEffect } from "react"
 import SingleBlogContent from "./SingleBlogContent"
 import Comment from "./comment/Comment"
 
-import { getBlogItem } from "@services/fetchBlog"
 
 import { queryStringToObject } from "@utils/utils"
+import useAxiosPrivate from "@/hooks/useAxiosPrivate"
 
 export default function SingleBlog() {
   const [loading, setLoading] = useState(true)
   const [blogItem, setBlogItem] = useState({})
+  const axiosPrivate = useAxiosPrivate()
   const url = new URL(`${window.location.href}`)
   const queryObject = queryStringToObject(url)
   const { blogType, blogId } = queryObject
 
-  const fetchBlogItem = async () => {
-    const singleBlogItem = await getBlogItem(blogType, blogId)
-    setLoading(false)
-    setBlogItem(singleBlogItem)
-  }
   useEffect(() => {
-    fetchBlogItem()
+    const controller = new AbortController()
+
+    const  getBlogItem = async () => {
+      try {
+        const res = await axiosPrivate.post("/blog/getBlogItem", {
+          blogType: blogType,
+          blogId: blogId
+        })
+        setBlogItem(res.data)
+        setLoading(false)
+      } catch(error) {
+        console.log(error.message)
+      }
+    }
+
+    getBlogItem()
+
+    return () => {
+      controller.abort()
+    }
   }, [])
 
   if(loading) {

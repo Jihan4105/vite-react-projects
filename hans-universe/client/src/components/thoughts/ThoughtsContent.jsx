@@ -1,29 +1,45 @@
-import thoughtsContentImg from "@assets/thoughts/thoughts-content.jpg"
-import { getBlogDatas } from "@services/fetchBlog"
 import { useState, useEffect } from "react"
+import thoughtsContentImg from "@assets/thoughts/thoughts-content.jpg"
+
+import useAxiosPrivate from "@/hooks/useAxiosPrivate"
 
 export default function ThoughtsContent() {
   
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [sortedDatas, setSortedDats] = useState([])
-  
-  const fetchBlogDatas = async () => {
-    const data = await getBlogDatas("thoughts")
-
-    setSortedDats(
-      data.sort((itemPrevious, itemNext) => {
-        return itemNext.commentsNumber - itemPrevious.commentsNumber
-      }).slice(0, 3)
-    )
-    setLoading(true)
-  }
+  const axiosPrivate = useAxiosPrivate()
 
   useEffect(() => {
-    fetchBlogDatas()
+    const controller = new AbortController()
+    
+    const getBlogDatas = async () => {
+      try {
+        const res = await axiosPrivate.post("/blog/getBlogDatas", {
+          blogType: "thoughts",
+          signal: controller.signal
+        })
+        const data = res.data
+
+        setSortedDats(
+          data.sort((itemPrevious, itemNext) => {
+            return itemNext.commentsNumber - itemPrevious.commentsNumber
+          }).slice(0, 3)
+        )
+        setLoading(false)
+      } catch(error) {
+        console.log(error.message)
+      }
+    }
+
+    getBlogDatas()
+
+    return () => {
+      controller.abort()
+    }
   }, [])
 
 
-  if(!loading) {
+  if(loading) {
     return(
       <div className="loader-container">
         <div className="loader"></div>

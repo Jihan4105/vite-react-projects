@@ -22,7 +22,7 @@ const useAxiosPrivate = () => {
       (error) => Promise.reject(error)
     )
 
-    //response를 받기전, interceptor에서 만약 요청이 성공해서 response가 왔다면 그대로 통과,
+    // response를 받기전, interceptor에서 만약 요청이 성공해서 response가 왔다면 그대로 통과,
     // 요청이 실패했다면 prevRequest를 axios의 error.config API로 받아서
     // 만약 그 요청이 403에러(token expired로 인해)를 받았고, 처음 한한 요청이 라면
     // if문안에서 새로운 accessToken을 받아서 전 요청에다가 Authorization헤더에 새로운 accessToken을
@@ -35,6 +35,7 @@ const useAxiosPrivate = () => {
         if(error?.response?.status === 403 && !prevRequest?.sent) {
           prevRequest.sent = true
           const newAccessToken = await refresh()
+          console.log(newAccessToken)
           prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
           return axiosPrivate(prevRequest)
         } 

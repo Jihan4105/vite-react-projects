@@ -21,7 +21,6 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
   const [isEditModeEnabled, setIsEditModeEnabled] = useState(false)
   const [isDetailBtnClicked, setIsDetailBtnClicked] = useState(false)
   const axiosPrivate = useAxiosPrivate()
-  const controller = new AbortController()
 
   useEffect(() => {
     if(loading === false) {
@@ -47,26 +46,25 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
   }, [user])
   
   useEffect(() => {
-    let isMounted = true
     const controller = new AbortController()
 
     const getUser = async () => {
       try {
         const res = await axiosPrivate.post(`/user/getUserByFilter`, {
-          filterType: filterType,
-          filterValue: filterValue,
-          signal: controller.signal()
+          filterType: "id",
+          filterValue: commentItem.userId,
+          signal: controller.signal
         })
-        const data = res.data
-        isMounted && setUser(res.data.userData)
+        setUser(res.data.userData)
         setLoading(false)
       } catch(error) {
         console.log(error.message)
       }
     }
 
+    getUser()
+
     return () => {
-      isMounted = false
       controller.abort()
     }
   }, [])
@@ -170,7 +168,7 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
                 }
                 size="112px"
               >
-                <Dropdown.Item eventKey="1" active={false} onClick={() => {deleteButtonHandler(type, blogType, blogItem, commentItem._id, commentIndex, setBlogItem)}}>
+                <Dropdown.Item eventKey="1" active={false} onClick={() => {deleteButtonHandler(axiosPrivate, type, blogType, blogItem, commentItem._id, commentIndex, setBlogItem)}}>
                   <div className="comment-Delete-group">
                     <ion-icon name="trash-outline"></ion-icon>
                     <span>Delete</span>
@@ -192,8 +190,8 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
   )
 }
 
-async function deleteButtonHandler(type, blogType, blogItem, commentId, commentIndex, setBlogItem) {
-  const data = await deleteComment(type, blogType, blogItem, commentId, commentIndex)
+async function deleteButtonHandler(axiosPrivate, type, blogType, blogItem, commentId, commentIndex, setBlogItem) {
+  const data = await deleteComment(axiosPrivate, type, blogType, blogItem, commentId, commentIndex)
 
   setBlogItem(data)
 }
