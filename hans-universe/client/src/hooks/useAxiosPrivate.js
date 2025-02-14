@@ -5,7 +5,7 @@ import useAuth from "./useAuth";
 import useRefreshToken from "./useRefreshToken";
 
 const useAxiosPrivate = () => {
-  // refresh함수는 쿠키에 저장된 refreshtoken으로 새로운 accessToken을 set하는 함수다다
+  // refresh함수는 쿠키에 저장된 refreshtoken으로 새로운 accessToken을 return 하는 함수다.
   const refresh = useRefreshToken()
   const { auth } = useAuth()
 
@@ -14,8 +14,8 @@ const useAxiosPrivate = () => {
     //request를 보내기전 interceptor를 추가하여 header에 새로생성된 accessToken을 넣는다다
     const requestIntercept = axiosPrivate.interceptors.request.use(
       config => {
-        if(!config.headers["Authorization"]) {
-          config.headers["Authorization"] = `Bearer ${auth?.accessToken}`
+        if(!config.headers["authorization"]) {
+          config.headers["authorization"] = `Bearer ${auth?.accessToken}`
         }
         return config
       }, 

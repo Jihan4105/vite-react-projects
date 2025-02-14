@@ -55,7 +55,7 @@ export default function Blog({ type, dropdownItems }) {
             />
           </div>
         </div>
-        <BlogList type={type} searchValue={searchValue} filterValue={filterValue} />
+        <BlogList key={`${type}-bloglist`} type={type} searchValue={searchValue} filterValue={filterValue} />
       </div>
     </section>
   )

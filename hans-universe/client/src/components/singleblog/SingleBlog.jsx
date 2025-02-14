@@ -20,7 +20,7 @@ export default function SingleBlog() {
   useEffect(() => {
     const controller = new AbortController()
 
-    const  getBlogItem = async () => {
+    const getBlogItem = async () => {
       try {
         const res = await axiosPrivate.post("/blog/getBlogItem", {
           blogType: blogType,
