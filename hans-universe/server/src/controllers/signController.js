@@ -19,7 +19,7 @@ const login = async (req,res) => {
       await RefreshTokensModel.findOneAndUpdate({ userId: correctUser._id.toString() }, { userId: correctUser._id.toString(), refreshToken: refreshToken}, { upsert: true})
 
       res.cookie("jwt", refreshToken, { httpOnly: true, sameSite: "None", secure: true, maxAage: 24 * 60 * 60 * 1000 })
-      res.json({ status: "success", userId: correctUser._id, accessToken: accessToken, refreshToken: refreshToken })
+      res.json({ status: "success", userId: correctUser._id, accessToken: accessToken })
     } 
     else { 
       res.json({ status: "password wrong"})

@@ -18,15 +18,6 @@ import verifyJWT from "./src/middleware/verifyJWT.js"
 
 const app = express()
 
-const headers = (req, res, next) => {
-  if(req.headers.origin === "http://localhost:5173") {
-    res.setHeader('Access-Control-Allow-Credentials', true);
-  }
-  next()
-}
-
-app.use(headers)
-
 app.use(cookieParser())
 app.use(cors({
   origin: "http://localhost:5173", 

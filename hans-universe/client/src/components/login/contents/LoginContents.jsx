@@ -1,4 +1,5 @@
 import { useState } from "react"
+import axios from "@api/api.js"
 import { Link, useLocation, useNavigate } from "react-router"
 import InputField from "../InputField.jsx"
 
@@ -24,24 +25,12 @@ export default function LoginContents() {
   const loginBtnClicked = async(e) => {
     e.preventDefault()
 
-    const hostname = import.meta.env.VITE_SERVER_HOSTNAME
-    const port = import.meta.env.VITE_SERVER_PORT
-  
-    const res = await fetch(`http://${hostname}:${port}/sign/login`, {
-      method: "POST",
-      headers:  {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
-    })
-    const data = await res.json()
-
+    const res = await axios.post(`/sign/login`, {
+      email: email,
+      password: password
+    }, { withCredentials: true })
     
-    switch(data.status) {
+    switch(res.data.status) {
       case "no such user" :
         setWhichIsWrong("email-wrong")
         break
@@ -49,8 +38,8 @@ export default function LoginContents() {
         setWhichIsWrong("password-wrong")
         break
       case "success" :
-        setUserId(data.userId)
-        setAuth({ userId: data.userId, accessToken: data.accessToken})
+        setUserId(res.data.userId)
+        setAuth({ userId: res.data.userId, accessToken: res.data.accessToken})
         setIsRedirectTriggerd(true)
         break
     }
