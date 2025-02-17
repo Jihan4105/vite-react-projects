@@ -1,4 +1,3 @@
-// import userDatas from "../datas/userDatas.js"
 import UserModel from "../models/UserModel.js"
 
 const getUserByFilter = async (req,res) => {
