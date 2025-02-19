@@ -9,7 +9,7 @@ export default function AppLayout() {
       <nav id="navbar">
         <div className="container">
           <Link to="/" className="logo-wrapper">
-            <img src={Logo} alt="Logo" />
+            <img className="logo" src={Logo} alt="Logo" />
           </Link>
           <ul className="nav-links">
             <li className="nav-link">
@@ -19,9 +19,6 @@ export default function AppLayout() {
               <Link to="/news">News</Link>
             </li>
           </ul>
-          <div className="menu-btn">
-            <i className="fa-solid fa-bars-staggered"></i>
-          </div>
         </div>
       </nav>
 
