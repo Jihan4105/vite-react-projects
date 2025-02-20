@@ -11,7 +11,7 @@ export default function SingleBlogContent({ blogType, blogItem }) {
   return(
     <section id="single-blog">
       <div className="icon-btn return-btn" title="Return to page" onClick={() => { navigate(`/app/${blogType}?userId=${user._id}`); initPageScroll();}}>
-        <ion-icon name="return-down-back-outline"></ion-icon>
+      <ion-icon name="return-down-back"></ion-icon>
       </div>
       <div className="container-jh">
         <h2 className="blog-title">{blogItem.title}</h2>

@@ -7,7 +7,7 @@ import UserContext from "@contexts/UserContext"
 
 import { initPageScroll } from "@utils/utils"
 
-import useAxiosPrivate from "@/hooks/useAxiosPrivate"
+import useAxiosPrivate from "@hooks/useAxiosPrivate"
 
 export default function BlogList({ type, searchValue, filterValue}) {
   const [selectedPage, setSelectedPage] = useState("1")
@@ -19,7 +19,7 @@ export default function BlogList({ type, searchValue, filterValue}) {
   const navigate = useNavigate()
   const location = useLocation()
   let filteredDatas
-  
+
   useEffect(() => {
     const controller = new AbortController()
 
