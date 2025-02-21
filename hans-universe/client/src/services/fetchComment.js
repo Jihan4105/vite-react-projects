@@ -64,3 +64,25 @@ export async function deleteComment( navigate, location, axiosPrivate, type, blo
     navigate("/", { state: { from: location }, replace: true})
   }
 }
+
+export async function thumbsHandler(navigate, location, axiosPrivate, type, blogType, thumbsType, userId, commentIndex, commentId) {
+  const controller = new AbortController()
+
+  try {
+    const res = await axiosPrivate.post("/comment/thumbs", {
+      type: type,
+      blogType: blogType,
+      commentId: commentId,
+      commentIndex: commentIndex,
+      thumbsType: thumbsType,
+      userId: userId,
+      signal: controller.signal
+    })
+    controller.abort()
+    return res.data
+  } catch(error) {
+    console.log(error.message)
+    alert("Please Loginback, your refreshToken Expired")
+    navigate("/", { state: { from: location }, replace: true})
+  }
+}

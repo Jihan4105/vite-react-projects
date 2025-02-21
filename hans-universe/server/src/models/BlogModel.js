@@ -8,8 +8,11 @@ const blogSchema = new mongoose.Schema({
   commentsNumber: Number,
   reaction: {
     like: Number,
+    likePersons: [],
     hmm: Number,
+    hmmPersons: [],
     disagree: Number,
+    disagreePersons: []
   },
   commentTree: [
     {
@@ -17,7 +20,9 @@ const blogSchema = new mongoose.Schema({
       date: String,
       content: String,
       thumbsUp: Number,
+      thumbsUpPersons: [],
       thumbsDown: Number,
+      thumbsDownPersons: [],
       replyNumber: Number,
       replies: [
         {
@@ -25,7 +30,9 @@ const blogSchema = new mongoose.Schema({
           date: String,
           content: String,
           thumbsUp: Number,
+          thumbsUpPerson: [],
           thumbsDown: Number,
+          thumbsDownPerson: [],
         }
       ]
     }
@@ -41,8 +48,11 @@ const booksBlogSchema = new mongoose.Schema({
   commentsNumber: Number,
   reaction: {
     like: Number,
+    likePersons: [],
     hmm: Number,
+    hmmPersons: [],
     disagree: Number,
+    disagreePersons: []
   },
   commentTree: [
     {
@@ -50,7 +60,9 @@ const booksBlogSchema = new mongoose.Schema({
       date: String,
       content: String,
       thumbsUp: Number,
+      thumbsUpPersons: [],
       thumbsDown: Number,
+      thumbsDownPersons: [],
       replyNumber: Number,
       replies: [
         {
@@ -58,7 +70,9 @@ const booksBlogSchema = new mongoose.Schema({
           date: String,
           content: String,
           thumbsUp: Number,
+          thumbsUpPersons: [],
           thumbsDown: Number,
+          thumbsDownPersons: [],
         }
       ]
     }

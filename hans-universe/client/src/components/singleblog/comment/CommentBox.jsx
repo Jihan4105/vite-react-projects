@@ -121,11 +121,11 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
               </>
             }
             <div className="reaction-field">
-              <ion-icon name="thumbs-up-outline"></ion-icon>
+              <ion-icon name="thumbs-up-outline" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, "up", user._id, commentIndex, commentItem._id, setBlogItem)}}></ion-icon>
               {commentItem.thumbsUp != 0 && 
                 <span className="thumbs-up-number">{commentItem.thumbsUp}</span>
               }
-              <ion-icon name="thumbs-down-outline"></ion-icon>
+              <ion-icon name="thumbs-down-outline" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, "down", user._id, commentIndex, commentItem._id, setBlogItem)}}></ion-icon>
               {commentItem.thumbsDown != 0 && 
                 <span className="thumbs-down-number">{commentItem.thumbsDown}</span>
               }
@@ -193,8 +193,35 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
   )
 }
 
-async function deleteButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, commentId, commentIndex, setBlogItem) {
+async function deleteButtonHandler(
+  navigate, 
+  location, 
+  axiosPrivate, 
+  type, 
+  blogType, 
+  blogItem, 
+  commentId, 
+  commentIndex, 
+  setBlogItem
+) {
   const data = await deleteComment(navigate, location, axiosPrivate, type, blogType, blogItem, commentId, commentIndex)
+
+  setBlogItem(data)
+}
+
+async function thumbsButtonHandler(
+  navigate,
+  location,
+  axiosPrivate,
+  type,
+  blogType,
+  thumbsType,
+  userId,
+  commentIndex,
+  commentId,
+  setBlogItem
+) {
+  const data = await thumbsHandler(navigate, location, axiosPrivate, type, blogType, thumbsType, userId, commentIndex, commentId)
 
   setBlogItem(data)
 }
