@@ -39,3 +39,10 @@ Single Blog Page 개발 이어가야함, 구체적으론 댓글기능 먼저 구
 1. MongoDB booksData reaction필드가 없어서 추가해줘야함.
 
 2. SingleBlog의 수정기능 구현해야함.
+
+-----------2025-02-21 
+
+1. DeleteComment오류 수정.
+*commentNumber 수정안되는 오류, 컴포넌트 리렌더링이 전의 컴포넌트의 상태를 가지는 오류.
+
+2. thumbsUP마저 구현 마치기기

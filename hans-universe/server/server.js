@@ -13,6 +13,7 @@ import signRouter from "./src/routes/signRoutes.js"
 import blogRouter from "./src/routes/blogRoutes.js"
 import commentRouter from "./src/routes/commentRoutes.js"
 import refreshRouter from "./src/routes/refreshRoutes.js"
+import reactionRouter from "./src/routes/reactionRoutes.js"
 
 import verifyJWT from "./src/middleware/verifyJWT.js"
 
@@ -50,6 +51,8 @@ app.use("/user", userRouter)
 app.use("/blog", blogRouter)
 
 app.use("/comment", commentRouter)
+
+app.use("/reaction", reactionRouter)
 
 // ------------------------------------------------------
 

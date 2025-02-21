@@ -4,7 +4,8 @@ import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
 
 import { isEllipsisActive } from "@utils/utils"
-import { deleteComment } from "@/services/fetchComment"
+import { deleteComment } from "@services/fetchComment"
+import { thumbsHandler, UndoThumbsHandler } from "@services/fetchReaction"
 import CommentInput from "./CommentInput"
 import CommentEditInput from "./CommentEditInput"
 
@@ -121,11 +122,19 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
               </>
             }
             <div className="reaction-field">
-              <ion-icon name="thumbs-up-outline" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, "up", user._id, commentIndex, commentItem._id, setBlogItem)}}></ion-icon>
+              {commentItem.thumbsUpPersons.find((thumbsUpPerson) => thumbsUpPerson == user._id) ? 
+                <ion-icon name="thumbs-up" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, "up", user._id, commentIndex, commentItem._id, setBlogItem, true)}}></ion-icon> 
+                :
+                <ion-icon name="thumbs-up-outline" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, "up", user._id, commentIndex, commentItem._id, setBlogItem)}}></ion-icon>
+              }
               {commentItem.thumbsUp != 0 && 
                 <span className="thumbs-up-number">{commentItem.thumbsUp}</span>
               }
-              <ion-icon name="thumbs-down-outline" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, "down", user._id, commentIndex, commentItem._id, setBlogItem)}}></ion-icon>
+              {commentItem.thumbsDownPersons.find((thumbsDownPerson) => thumbsDownPerson == user._id) ?
+                <ion-icon name="thumbs-down" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, "up", user._id, commentIndex, commentItem._id, setBlogItem, true)}}></ion-icon>
+                :
+                <ion-icon name="thumbs-down-outline" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, "down", user._id, commentIndex, commentItem._id, setBlogItem)}}></ion-icon>
+              }
               {commentItem.thumbsDown != 0 && 
                 <span className="thumbs-down-number">{commentItem.thumbsDown}</span>
               }
@@ -215,13 +224,21 @@ async function thumbsButtonHandler(
   axiosPrivate,
   type,
   blogType,
+  blogItem,
   thumbsType,
   userId,
   commentIndex,
   commentId,
-  setBlogItem
+  setBlogItem,
+  isUndo = false
 ) {
-  const data = await thumbsHandler(navigate, location, axiosPrivate, type, blogType, thumbsType, userId, commentIndex, commentId)
+  let data
+
+  if(!isUndo) {
+    data = await thumbsHandler(navigate, location, axiosPrivate, type, blogType, blogItem, thumbsType, userId, commentIndex, commentId)
+  } else {
+    data = await UndoThumbsHandler(navigate, location, axiosPrivate, type, blogType, blogItem, thumbsType, userId, commentIndex, commentId)
+  }
 
   setBlogItem(data)
 }
