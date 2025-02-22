@@ -2,9 +2,6 @@ import CommentInput from "./CommentInput"
 import CommentWrapper from "./CommentWrapper"
 
 export default function Comment({ blogType, blogItem, setBlogItem }) {
-
-  console.log(blogItem)
-
   return(
     <section id="comment">
       <div className="container-jh">

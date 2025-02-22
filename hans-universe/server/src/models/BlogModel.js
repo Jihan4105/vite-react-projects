@@ -30,9 +30,9 @@ const blogSchema = new mongoose.Schema({
           date: String,
           content: String,
           thumbsUp: Number,
-          thumbsUpPerson: [],
+          thumbsUpPersons: [],
           thumbsDown: Number,
-          thumbsDownPerson: [],
+          thumbsDownPersons: [],
         }
       ]
     }

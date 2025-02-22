@@ -65,11 +65,14 @@ const deleteComment = async (req, res) => {
   let newBlogItem = {...blogItem}
 
   if( type === "comment" ) {
+    newBlogItem.commentsNumber -= 1 + newBlogItem.commentTree[commentIndex].replyNumber
     newBlogItem.commentTree.splice(commentIndex, 1)
   } else {
     let replyIndex
     newBlogItem.commentTree[commentIndex].replies.forEach((replyItem, index) => {
       if(replyItem._id === commentId) {
+        newBlogItem.commentsNumber -= 1
+        replyItem.replyNumber -= 1 
         replyIndex = index
         return;
       }
