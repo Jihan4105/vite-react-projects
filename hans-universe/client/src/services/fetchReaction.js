@@ -2,7 +2,7 @@ export async function thumbsHandler(navigate, location, axiosPrivate, type, blog
   const controller = new AbortController()
 
   try {
-    const res = await axiosPrivate.post("/thumbsAdd", {
+    const res = await axiosPrivate.post("/reaction/thumbsAdd", {
       type: type,
       blogType: blogType,
       blogItem: blogItem,
@@ -25,7 +25,7 @@ export async function UndoThumbsHandler(navigate, location, axiosPrivate, type, 
   const controller = new AbortController()
 
   try {
-    const res = await axiosPrivate.post("/thumbsUndo", {
+    const res = await axiosPrivate.post("/reaction/thumbsUndo", {
       type: type,
       blogType: blogType,
       blogItem: blogItem,

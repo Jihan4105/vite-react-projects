@@ -72,7 +72,6 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
       controller.abort()
     }
   }, [])
-  
 
   if(loading) {
     return (
@@ -122,21 +121,21 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
               </>
             }
             <div className="reaction-field">
-              {commentItem.thumbsUpPersons.find((thumbsUpPerson) => thumbsUpPerson == user._id) ? 
-                <ion-icon name="thumbs-up" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, "up", user._id, commentIndex, commentItem._id, setBlogItem, true)}}></ion-icon> 
+              {commentItem.thumbsUpPersons.find((thumbsUpPerson) => thumbsUpPerson == logginedUser._id) ? 
+                <ion-icon key="thumbs-up-btn" name="thumbs-up" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, "up", logginedUser._id, commentIndex, commentItem._id, setBlogItem, true)}}></ion-icon> 
                 :
-                <ion-icon name="thumbs-up-outline" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, "up", user._id, commentIndex, commentItem._id, setBlogItem)}}></ion-icon>
+                <ion-icon key="thumbs-up-undo-btn" name="thumbs-up-outline" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, "up", logginedUser._id, commentIndex, commentItem._id, setBlogItem)}}></ion-icon>
               }
               {commentItem.thumbsUp != 0 && 
-                <span className="thumbs-up-number">{commentItem.thumbsUp}</span>
+                <span key="thumbs-up-number" className="thumbs-up-number">{commentItem.thumbsUp}</span>
               }
-              {commentItem.thumbsDownPersons.find((thumbsDownPerson) => thumbsDownPerson == user._id) ?
-                <ion-icon name="thumbs-down" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, "up", user._id, commentIndex, commentItem._id, setBlogItem, true)}}></ion-icon>
+              {commentItem.thumbsDownPersons.find((thumbsDownPerson) => thumbsDownPerson == logginedUser._id) ?
+                <ion-icon key="thumbs-down-btn" name="thumbs-down" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, "down", logginedUser._id, commentIndex, commentItem._id, setBlogItem, true)}}></ion-icon>
                 :
-                <ion-icon name="thumbs-down-outline" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, "down", user._id, commentIndex, commentItem._id, setBlogItem)}}></ion-icon>
+                <ion-icon key="thumbs-down-undo-btn" name="thumbs-down-outline" onClick={() => { thumbsButtonHandler(navigate, location, axiosPrivate, type, blogType, blogItem, "down", logginedUser._id, commentIndex, commentItem._id, setBlogItem)}}></ion-icon>
               }
               {commentItem.thumbsDown != 0 && 
-                <span className="thumbs-down-number">{commentItem.thumbsDown}</span>
+                <span key="thumbs-down-umber" className="thumbs-down-number">{commentItem.thumbsDown}</span>
               }
               <button className="reply-btn" onClick={() => {setIsReplyBtnClicked(true)}}>Reply</button>
             </div>

@@ -9,15 +9,40 @@ const thumbsAdd = async (req, res) => {
     if(thumbsType === "up") {
       newBlogItem.commentTree[commentIndex].thumbsUp += 1
       newBlogItem.commentTree[commentIndex].thumbsUpPersons.push(userId)
+      if(newBlogItem.commentTree[commentIndex].thumbsDownPersons.indexOf(userId) !== -1) {
+        const findedIndex = newBlogItem.commentTree[commentIndex].thumbsDownPersons.indexOf(userId)
+        newBlogItem.commentTree[commentIndex].thumbsDown -= 1;
+        newBlogItem.commentTree[commentIndex].thumbsDownPersons.splice(findedIndex, 1)
+      } 
     } else {
       newBlogItem.commentTree[commentIndex].thumbsDown += 1
       newBlogItem.commentTree[commentIndex].thumbsDownPersons.push(userId)
+      if(newBlogItem.commentTree[commentIndex].thumbsUpPersons.indexOf(userId) !== -1) {
+        const findedIndex = newBlogItem.commentTree[commentIndex].thumbsUpPersons.indexOf(userId)
+        newBlogItem.commentTree[commentIndex].thumbsUp -= 1;
+        newBlogItem.commentTree[commentIndex].thumbsUpPersons.splice(findedIndex, 1)
+      } 
     }
   } else {
     newBlogItem.commentTree[commentIndex].replies.forEach((replyItem) => {
       if(replyItem._id === commentId) {
-        thumbsType === "up" ? replyItem.thumbsUp += 1 : replyItem.thumbsDown += 1
-        thumbsType === "up" ? replyItem.thumbsUpPersons.push(userId) : replyItem.thumbsDownPersons.push(userId)
+        if(thumbsType === "up") {
+          replyItem.thumbsUp += 1
+          replyItem.thumbsUpPersons.push(userId)
+          if(replyItem.thumbsDownPersons.indexOf(userId) !== -1) {
+            const findedIndex = replyItem.thumbsDownPersons.indexOf(userId)
+            replyItem.thumbsDown -= 1;
+            replyItem.thumbsDownPersons.splice(findedIndex, 1)
+          } 
+        } else {
+          replyItem.thumbsDown += 1
+          replyItem.thumbsDownPersons.push(userId)
+          if(replyItem.thumbsUpPersons.indexOf(userId) !== -1) {
+            const findedIndex = replyItem.thumbsUpPersons.indexOf(userId)
+            replyItem.thumbsUp -= 1;
+            replyItem.thumbsUpPersons.splice(findedIndex, 1)
+          } 
+        }
       }
     })
   }
@@ -45,11 +70,11 @@ const thumbsUndo = async (req, res) => {
   if(type === "comment") {
     if(thumbsType === "up") {
       newBlogItem.commentTree[commentIndex].thumbsUp -= 1
-      const findedIndex = newBlogItem.commentTree[commentIndex].thumbsUpPersons.IndexOf(userId)
+      const findedIndex = newBlogItem.commentTree[commentIndex].thumbsUpPersons.indexOf(userId)
       newBlogItem.commentTree[commentIndex].thumbsUpPersons.splice(findedIndex, 1)
     } else {
       newBlogItem.commentTree[commentIndex].thumbsDown -= 1
-      const findedIndex = newBlogItem.commentTree[commentIndex].thumbsDownPersons.IndexOf(userId)
+      const findedIndex = newBlogItem.commentTree[commentIndex].thumbsDownPersons.indexOf(userId)
       newBlogItem.commentTree[commentIndex].thumbsDownPersons.splice(findedIndex, 1)
     }
   } else {
