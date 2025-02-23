@@ -15,13 +15,12 @@ export async function thumbsHandler(navigate, location, axiosPrivate, type, blog
     controller.abort()
     return res.data
   } catch(error) {
-    console.log(error.message)
     alert("Please Loginback, your refreshToken Expired")
     navigate("/", { state: { from: location }, replace: true})
   }
 }
 
-export async function UndoThumbsHandler(navigate, location, axiosPrivate, type, blogType, blogItem, thumbsType, userId, commentIndex, commentId) {
+export async function undoThumbsHandler(navigate, location, axiosPrivate, type, blogType, blogItem, thumbsType, userId, commentIndex, commentId) {
   const controller = new AbortController()
 
   try {
@@ -38,8 +37,61 @@ export async function UndoThumbsHandler(navigate, location, axiosPrivate, type, 
     controller.abort()
     return res.data
   } catch(error) {
-    console.log(error.message)
     alert("Please Loginback, your refreshToken Expired")
     navigate("/", { state: { from: location }, replace: true})
   }
 }
+
+export async function likeHandler(navigate, location, axiosPrivate, blogType, blogItem, userId) {
+  const controller = new AbortController()
+
+  try {
+    const res = await axiosPrivate.post("/reaction/likeThisBlog", {
+      blogType: blogType,
+      blogItem: blogItem,
+      userId: userId,
+      signal: controller.signal
+    })
+    controller.abort()
+    return res.data
+  } catch(error) {
+    alert("Please Loginback, your refreshToken Expired")
+    navigate("/", { state: { from: location }, replace: true})
+  }
+} 
+
+export async function hmmHandler(navigate, location, axiosPrivate, blogType, blogItem, userId) {
+  const controller = new AbortController()
+
+  try {
+    const res = await axiosPrivate.post("/reaction/hmmThisBlog", {
+      blogType: blogType,
+      blogItem: blogItem,
+      userId: userId,
+      signal: controller.signal
+    })
+    controller.abort()
+    return res.data
+  } catch(error) {
+    alert("Please Loginback, your refreshToken Expired")
+    navigate("/", { state: { from: location }, replace: true})
+  }
+}
+
+export async function disagreeHandler(navigate, location, axiosPrivate, blogType, blogItem, userId) {
+  const controller = new AbortController()
+
+  try {
+    const res = await axiosPrivate.post("/reaction/disagreeThisBlog", {
+      blogType: blogType,
+      blogItem: blogItem,
+      userId: userId,
+      signal: controller.signal
+    })
+    controller.abort()
+    return res.data
+  } catch(error) {
+    alert("Please Loginback, your refreshToken Expired")
+    navigate("/", { state: { from: location }, replace: true})
+  }
+} 

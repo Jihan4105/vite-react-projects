@@ -29,7 +29,6 @@ export default function SingleBlog() {
         setBlogItem(res.data)
         setLoading(false)
       } catch(error) {
-        console.log(error.message)
         alert("Please Loginback, your refreshToken Expired")
         navigate("/", { state: { from: location }, replace: true})
       }
@@ -54,6 +53,7 @@ export default function SingleBlog() {
       <SingleBlogContent
         blogType={blogType}
         blogItem={blogItem}
+        setBlogItem={setBlogItem}
         />
             
       <Comment 

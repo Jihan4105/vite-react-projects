@@ -32,7 +32,6 @@ export default function BlogList({ type, searchValue, filterValue}) {
         setBlogDatas(res.data)
         setLoading(false)
       } catch(error) {
-        console.log(error.message)
         alert("Please Loginback, your refreshToken Expired")
         navigate("/", { state: { from: location }, replace: true})
       }

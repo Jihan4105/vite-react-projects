@@ -46,7 +46,6 @@ function App() {
         isMounted && setUserData(data.userData)
         setUserLoading(false)
       } catch(error) {
-        console.log(error)
         // refreshToken이 만료되어서 튕길때, 튕기기전 위치를 기억하고, 로그인으로 튕겨나가게 함,
         // replace를 true로 설정하면 이동한후에 로그인 뒤, 브라우저 히스토리에 
         // login대신 원래 작업하던 히스토리로 replace 시킬 수 있음.

@@ -5,7 +5,7 @@ import DropdownButton from "react-bootstrap/DropdownButton"
 
 import { isEllipsisActive } from "@utils/utils"
 import { deleteComment } from "@services/fetchComment"
-import { thumbsHandler, UndoThumbsHandler } from "@services/fetchReaction"
+import { thumbsHandler, undoThumbsHandler } from "@services/fetchReaction"
 import CommentInput from "./CommentInput"
 import CommentEditInput from "./CommentEditInput"
 
@@ -62,7 +62,8 @@ export default function CommentBox({ type, blogType, commentItem, commentIndex, 
         setUser(res.data.userData)
         setLoading(false)
       } catch(error) {
-        console.log(error.message)
+        alert("Please Loginback, your refreshToken Expired")
+        navigate("/", { state: { from: location }, replace: true})
       }
     }
 
@@ -236,7 +237,7 @@ async function thumbsButtonHandler(
   if(!isUndo) {
     data = await thumbsHandler(navigate, location, axiosPrivate, type, blogType, blogItem, thumbsType, userId, commentIndex, commentId)
   } else {
-    data = await UndoThumbsHandler(navigate, location, axiosPrivate, type, blogType, blogItem, thumbsType, userId, commentIndex, commentId)
+    data = await undoThumbsHandler(navigate, location, axiosPrivate, type, blogType, blogItem, thumbsType, userId, commentIndex, commentId)
   }
 
   setBlogItem(data)

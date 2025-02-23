@@ -12,7 +12,6 @@ export async function createComment( navigate, location, axiosPrivate, blogType,
     controller.abort()
     return res.data
   } catch(error) {
-    console.log(error.message)
     alert("Please Loginback, your refreshToken Expired")
     navigate("/", { state: { from: location }, replace: true})
   }
@@ -35,7 +34,6 @@ export async function editComment( navigate, location, axiosPrivate, type, blogT
     controller.abort()
     return res.data
   } catch(error) {
-    console.log(error.message)
     alert("Please Loginback, your refreshToken Expired")
     navigate("/", { state: { from: location }, replace: true})
   }
@@ -56,7 +54,6 @@ export async function deleteComment( navigate, location, axiosPrivate, type, blo
     controller.abort()
     return res.data
   } catch(error) {
-    console.log(error.message)
     alert("Please Loginback, your refreshToken Expired")
     navigate("/", { state: { from: location }, replace: true})
   }

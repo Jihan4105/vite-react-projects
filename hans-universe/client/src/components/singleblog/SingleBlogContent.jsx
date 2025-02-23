@@ -1,12 +1,17 @@
 import { useContext } from "react"
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 
 import UserContext from "@contexts/UserContext";
 import { initPageScroll } from "@utils/utils"
 
-export default function SingleBlogContent({ blogType, blogItem }) {
+import useAxiosPrivate from "@hooks/useAxiosPrivate";
+import { likeHandler, hmmHandler, disagreeHandler } from "@services/fetchReaction";
+
+export default function SingleBlogContent({ blogType, blogItem, setBlogItem }) {
   const user = useContext(UserContext)
   const navigate = useNavigate()
+  const location = useLocation()
+  const axiosPrivate = useAxiosPrivate()
 
   return(
     <section id="single-blog">
@@ -30,17 +35,17 @@ export default function SingleBlogContent({ blogType, blogItem }) {
         </div>
         <div className="reaction-box">
           <div className="likeit-group">
-            <div className="likeit-emoji">🥰</div>
+            <div className="likeit-emoji" onClick={() => {likeButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, user._id, setBlogItem)}}>🥰</div>
             <span>Like it!</span>
             <span>{blogItem.reaction.like}</span>
           </div>
           <div className="hmm-group">
-            <div className="hmm-emoji">🤔</div>
+            <div className="hmm-emoji" onClick={() => {hmmButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, user._id, setBlogItem)}}>🤔</div>
             <span>Hmm..</span>
             <span>{blogItem.reaction.hmm}</span>
           </div>
           <div className="disagree-group">
-            <div className="disagree-emoji">😒</div>
+            <div className="disagree-emoji" onClick={() => {disagreeButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, user._id, setBlogItem)}}>😒</div>
             <span>What?</span>
             <span>{blogItem.reaction.disagree}</span>
           </div>
@@ -49,3 +54,22 @@ export default function SingleBlogContent({ blogType, blogItem }) {
     </section>
   )
 }
+
+async function likeButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, userId, setBlogItem) {
+  const res = await likeHandler(navigate, location, axiosPrivate, blogType, blogItem, userId)
+
+  setBlogItem(res)
+}
+
+async function hmmButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, userId, setBlogItem) {
+  const res = await hmmHandler(navigate, location, axiosPrivate, blogType, blogItem, userId)
+
+  setBlogItem(res)
+}
+
+async function disagreeButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, userId, setBlogItem) {
+  const res = await disagreeHandler(navigate, location, axiosPrivate, blogType, blogItem, userId)
+
+  setBlogItem(res)
+}
+

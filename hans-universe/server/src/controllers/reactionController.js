@@ -47,8 +47,6 @@ const thumbsAdd = async (req, res) => {
     })
   }
 
-  console.log(newBlogItem)
-
   try {
     const fetchedBlogItem = await BlogModel.findByIdAndUpdate(blogItem._id, newBlogItem, {
       returnDocument: "after"
@@ -87,7 +85,119 @@ const thumbsUndo = async (req, res) => {
     })
   }
 
-  console.log(newBlogItem)
+  try {
+    const fetchedBlogItem = await BlogModel.findByIdAndUpdate(blogItem._id, newBlogItem, {
+      returnDocument: "after"
+    })
+
+    res.status(200)
+    res.json(fetchedBlogItem)
+  } catch(error) {
+    res.status(500)
+    res.json({ message: error.message })
+  }
+}
+
+const likeThisBlog = async (req, res) => {
+  const { blogItem, userId } = req.body
+  const BlogModel = switchBlogModel(req.body.blogType)
+  let newBlogItem = {...blogItem}
+
+  if(newBlogItem.reaction.likePersons.indexOf(userId) === -1) {
+    newBlogItem.reaction.like += 1
+    newBlogItem.reaction.likePersons.push(userId)
+    if(newBlogItem.reaction.hmmPersons.indexOf(userId) !== -1) {
+      const findedIndex = newBlogItem.reaction.hmmPersons.indexOf(userId)
+      newBlogItem.reaction.hmm -= 1
+      newBlogItem.reaction.hmmPersons.splice(findedIndex, 1)
+    }
+    else if(newBlogItem.reaction.disagreePersons.indexOf(userId) !== -1) {
+      const findedIndex = newBlogItem.reaction.disagreePersons.indexOf(userId)
+      newBlogItem.reaction.disagree -= 1
+      newBlogItem.reaction.disagreePersons.splice(findedIndex, 1)
+    }
+  } else {
+    const findedIndex = newBlogItem.reaction.likePersons.indexOf(userId)
+    newBlogItem.reaction.like -= 1
+    newBlogItem.reaction.likePersons.splice(findedIndex, 1)
+  }
+
+
+  try {
+    const fetchedBlogItem = await BlogModel.findByIdAndUpdate(blogItem._id, newBlogItem, {
+      returnDocument: "after"
+    })
+
+    res.status(200)
+    res.json(fetchedBlogItem)
+  } catch(error) {
+    res.status(500)
+    res.json({ message: error.message })
+  }
+}
+
+const hmmThisBlog = async (req, res) => {
+  const { blogItem, userId } = req.body
+  const BlogModel = switchBlogModel(req.body.blogType)
+  let newBlogItem = {...blogItem}
+
+  if (newBlogItem.reaction.hmmPersons.indexOf(userId) === -1) {
+    newBlogItem.reaction.hmm += 1
+    newBlogItem.reaction.hmmPersons.push(userId)
+
+    if(newBlogItem.reaction.likePersons.indexOf(userId) !== -1) {
+      const findedIndex = newBlogItem.reaction.likePersons.indexOf(userId)
+      newBlogItem.reaction.like -= 1
+      newBlogItem.reaction.likePersons.splice(findedIndex, 1)
+    }
+    else if(newBlogItem.reaction.disagreePersons.indexOf(userId) !== -1) {
+      const findedIndex = newBlogItem.reaction.disagreePersons.indexOf(userId)
+      newBlogItem.reaction.disagree -= 1
+      newBlogItem.reaction.disagreePersons.splice(findedIndex, 1)
+    }
+  }else {
+    const findedIndex = newBlogItem.reaction.hmmPersons.indexOf(userId)
+    newBlogItem.reaction.hmm -= 1
+    newBlogItem.reaction.hmmPersons.splice(findedIndex, 1)
+  }
+
+  try {
+    const fetchedBlogItem = await BlogModel.findByIdAndUpdate(blogItem._id, newBlogItem, {
+      returnDocument: "after"
+    })
+
+    res.status(200)
+    res.json(fetchedBlogItem)
+  } catch(error) {
+    res.status(500)
+    res.json({ message: error.message })
+  }
+}
+
+const disagreeThisBlog = async (req, res) => {
+  const { blogItem, userId } = req.body
+  const BlogModel = switchBlogModel(req.body.blogType)
+  let newBlogItem = {...blogItem}
+
+  if (newBlogItem.reaction.disagreePersons.indexOf(userId) === -1) { 
+    newBlogItem.reaction.disagree += 1
+    newBlogItem.reaction.disagreePersons.push(userId)
+    if(newBlogItem.reaction.likePersons.indexOf(userId) !== -1) {
+      const findedIndex = newBlogItem.reaction.likePersons.indexOf(userId)
+      newBlogItem.reaction.like -= 1
+      newBlogItem.reaction.likePersons.splice(findedIndex, 1)
+    }
+    else if(newBlogItem.reaction.hmmPersons.indexOf(userId) !== -1) {
+      const findedIndex = newBlogItem.reaction.hmmPersons.indexOf(userId)
+      newBlogItem.reaction.hmm -= 1
+      newBlogItem.reaction.hmmPersons.splice(findedIndex, 1)
+    }
+  } else {
+    const findedIndex = newBlogItem.reaction.disagreePersons.indexOf(userId)
+    newBlogItem.reaction.disagree -= 1
+    newBlogItem.reaction.disagreePersons.splice(findedIndex, 1)
+  }
+
 
   try {
     const fetchedBlogItem = await BlogModel.findByIdAndUpdate(blogItem._id, newBlogItem, {
@@ -104,7 +214,10 @@ const thumbsUndo = async (req, res) => {
 
 const thumbsController = {
   thumbsAdd,
-  thumbsUndo
+  thumbsUndo,
+  likeThisBlog,
+  hmmThisBlog,
+  disagreeThisBlog
 }
 
 export default thumbsController
