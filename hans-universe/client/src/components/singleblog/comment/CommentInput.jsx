@@ -45,7 +45,7 @@ export default function CommentInput({ type, blogType, blogItem, setBlogItem, se
         }
         {type === "reply" &&
           <div className="button-group">
-            {setIsReplyBtnClicked && <button className="cancel-btn" onClick={(e) => {setIsReplyBtnClicked(false)}}>Cancel</button>}
+            {setIsReplyBtnClicked && <button className="cancel-btn" onClick={() => {setIsReplyBtnClicked(false)}}>Cancel</button>}
             {commentText === "" ? 
               <button className="submit-btn" disabled>Submit</button>
               :
