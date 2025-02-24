@@ -88,9 +88,24 @@
 
         div{
           font-size: 40px;
+          cursor: pointer;
 
           @media(max-width: 576px) {
             font-size: 35px;
+          }
+        }
+
+        picture {
+          padding-inline: 4.5px;
+
+          img {
+            width: 46px;
+            height: auto;
+            margin-bottom: 8px;
+
+            @media(max-width: 576px) {
+              width: 41px;
+            }
           }
         }
       }

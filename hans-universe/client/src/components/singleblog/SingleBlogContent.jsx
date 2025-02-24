@@ -35,17 +35,44 @@ export default function SingleBlogContent({ blogType, blogItem, setBlogItem }) {
         </div>
         <div className="reaction-box">
           <div className="likeit-group">
-            <div className="likeit-emoji" onClick={() => {likeButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, user._id, setBlogItem)}}>🥰</div>
+            {blogItem.reaction.likePersons.find((likePerson) => likePerson === user._id) ? 
+              <div onClick={() => {likeButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, user._id, setBlogItem)}}>
+                <picture>
+                  <source srcSet="https://fonts.gstatic.com/s/e/notoemoji/latest/1f970/512.webp" type="image/webp" />
+                  <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f970/512.gif" alt="🥰" width="32" height="32" />
+                </picture>
+              </div>
+              :
+              <div className="likeit-emoji" onClick={() => {likeButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, user._id, setBlogItem)}}>🥰</div>
+            }
             <span>Like it!</span>
             <span>{blogItem.reaction.like}</span>
           </div>
           <div className="hmm-group">
-            <div className="hmm-emoji" onClick={() => {hmmButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, user._id, setBlogItem)}}>🤔</div>
+            {blogItem.reaction.hmmPersons.find((hmmPerson) => hmmPerson === user._id) ? 
+              <div onClick={() => {hmmButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, user._id, setBlogItem)}}>
+                <picture>
+                  <source srcSet="https://fonts.gstatic.com/s/e/notoemoji/latest/1f914/512.webp" type="image/webp" />
+                  <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f914/512.gif" alt="🤔" width="32" height="32" />
+                </picture>
+              </div>
+              :
+              <div className="hmm-emoji" onClick={() => {hmmButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, user._id, setBlogItem)}}>🤔</div>
+            }
             <span>Hmm..</span>
             <span>{blogItem.reaction.hmm}</span>
           </div>
           <div className="disagree-group">
-            <div className="disagree-emoji" onClick={() => {disagreeButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, user._id, setBlogItem)}}>😒</div>
+            {blogItem.reaction.disagreePersons.find((disagreePerson) => disagreePerson === user._id) ?
+              <div onClick={() => {disagreeButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, user._id, setBlogItem)}}>
+                <picture>
+                  <source srcSet="https://fonts.gstatic.com/s/e/notoemoji/latest/1f612/512.webp" type="image/webp" />
+                  <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f612/512.gif" alt="😒" width="32" height="32" />
+                </picture>
+              </div>
+              :
+              <div className="disagree-emoji" onClick={() => {disagreeButtonHandler(navigate, location, axiosPrivate, blogType, blogItem, user._id, setBlogItem)}}>😒</div>
+            }
             <span>What?</span>
             <span>{blogItem.reaction.disagree}</span>
           </div>

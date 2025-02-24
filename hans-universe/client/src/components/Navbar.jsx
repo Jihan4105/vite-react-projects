@@ -1,14 +1,24 @@
-import { useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 
 import logoImage from "@assets/logo-black.png"
 import { sidebarToggle, initPageScroll } from "@utils/utils.js"
 import UserContext from "@contexts/UserContext"
+import AuthContext from "@contexts/AuthContext"
+import axios from "@api/api.js"
+import useStateEffect from "@hooks/useStateEffect"
 
 export default function Navbar() {
+  const navigate = useNavigate()
   const user = useContext(UserContext)
+  const { setAuth } = useContext(AuthContext)
+  const [isLogoutTriggered, setIsLogoutTriggered] = useState(false)
+
+  useStateEffect(() => {
+    navigate("/", { replace: true })
+  }, [isLogoutTriggered])
 
   return (
     <nav id="nav">
@@ -94,10 +104,10 @@ export default function Navbar() {
               </div>
             }
           >
-            <Dropdown.Item eventKey="1">
+            <Dropdown.Item eventKey="1" onClick={() => {logoutButtonHandler(setAuth, setIsLogoutTriggered)}}>
               <div className="user-logout-group">
                 <ion-icon name="log-out-outline"></ion-icon>
-                <span>Log out</span>
+                <span>Sign Out</span>
               </div>
             </Dropdown.Item>
             <Dropdown.Divider />
@@ -116,4 +126,19 @@ export default function Navbar() {
       </div>
     </nav>
   )
+}
+
+async function logoutButtonHandler(setAuth, setIsLogoutTriggered) {
+  try {
+    const res = await axios.get("/sign/logout", { withCredentials: true })
+
+    console.log(res.status)
+
+    if(res.status === 204) {
+      setAuth({})
+      setIsLogoutTriggered(true)
+    }
+  } catch(error) {
+    alert(`Server Can't response by ${error.message}`)
+  }
 }
